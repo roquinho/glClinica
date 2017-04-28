@@ -26,7 +26,6 @@ public class Consultas implements Serializable {
     private Pacientes paciente;
     private Medicos medico;
     private TiposConsultas tipoConsulta;
-    private Convenios convenio;
     
     public Consultas() {
         
@@ -46,7 +45,6 @@ public class Consultas implements Serializable {
         hash = 29 * hash + Objects.hashCode(this.paciente);
         hash = 29 * hash + Objects.hashCode(this.medico);
         hash = 29 * hash + Objects.hashCode(this.tipoConsulta);
-        hash = 29 * hash + Objects.hashCode(this.convenio);
         return hash;
     }
 
@@ -80,16 +78,14 @@ public class Consultas implements Serializable {
         if (!Objects.equals(this.tipoConsulta, other.tipoConsulta)) {
             return false;
         }
-        if (!Objects.equals(this.convenio, other.convenio)) {
-            return false;
-        }
         return true;
     }
 
     @Override
     public String toString() {
-        return "Consultas{" + "codigoConsulta=" + codigoConsulta + ", dataConsulta=" + dataConsulta + ", horaConsulta=" + horaConsulta + ", paciente=" + paciente + ", medico=" + medico + ", tipoConsulta=" + tipoConsulta + ", convenio=" + convenio + '}';
+        return "Consultas{" + "codigoConsulta=" + codigoConsulta + ", dataConsulta=" + dataConsulta + ", horaConsulta=" + horaConsulta + ", paciente=" + paciente + ", medico=" + medico + ", tipoConsulta=" + tipoConsulta + '}';
     }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public int getCodigoConsulta() {
@@ -142,13 +138,6 @@ public class Consultas implements Serializable {
     public void setTipoConsulta(TiposConsultas tipoConsulta) {
         this.tipoConsulta = tipoConsulta;
     }
-    @ManyToOne(fetch = FetchType.EAGER)
-    public Convenios getConvenio() {
-        return convenio;
-    }
 
-    public void setConvenio(Convenios convenio) {
-        this.convenio = convenio;
-    }
     
 }

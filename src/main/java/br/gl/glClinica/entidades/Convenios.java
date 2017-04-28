@@ -12,7 +12,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -29,7 +28,7 @@ public class Convenios implements Serializable {
     private String regioesCobertas;
     private List<Pacientes> pacientes;
     //private List<Clinica> clinicas;
-    private List<Consultas> consultas;
+    
     
       public Convenios() {
           
@@ -50,7 +49,6 @@ public class Convenios implements Serializable {
         hash = 79 * hash + Objects.hashCode(this.regioesCobertas);
         hash = 79 * hash + Objects.hashCode(this.pacientes);
         //hash = 79 * hash + Objects.hashCode(this.clinicas);
-        hash = 79 * hash + Objects.hashCode(this.consultas);
         return hash;
     }
 
@@ -84,15 +82,12 @@ public class Convenios implements Serializable {
        /* if (!Objects.equals(this.clinicas, other.clinicas)) {
             return false;
         }*/
-        if (!Objects.equals(this.consultas, other.consultas)) {
-            return false;
-        }
         return true;
     }
 
     @Override
     public String toString() {
-        return "Convenios{" + "codigoConvenio=" + codigoConvenio + ", nomeConvenio=" + nomeConvenio + ", dataInicio=" + dataInicio + ", regioesCobertas=" + regioesCobertas + ", pacientes=" + pacientes + ", consultas=" + consultas + '}';
+        return "Convenios{" + "codigoConvenio=" + codigoConvenio + ", nomeConvenio=" + nomeConvenio + ", dataInicio=" + dataInicio + ", regioesCobertas=" + regioesCobertas + ", pacientes=" + pacientes + '}';
     }
 
     @Id
@@ -136,15 +131,6 @@ public class Convenios implements Serializable {
 
     public void setPacientes(List<Pacientes> pacientes) {
         this.pacientes = pacientes;
-    }
-
-    @OneToMany(fetch = FetchType.EAGER,mappedBy="convenio",cascade = CascadeType.REMOVE)
-    public List<Consultas> getConsultas() {
-        return consultas;
-    }
-
-    public void setConsultas(List<Consultas> consultas) {
-        this.consultas = consultas;
     }
 
   /*  public List<Clinica> getClinicas() {
