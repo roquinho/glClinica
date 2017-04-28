@@ -12,4 +12,6 @@ public interface InterfaceRepositorioProntuarios extends CrudRepository<Prontuar
     
     public Prontuarios findByCodigoProntuario(int codigoProntuario);
     
+    
+    
 }

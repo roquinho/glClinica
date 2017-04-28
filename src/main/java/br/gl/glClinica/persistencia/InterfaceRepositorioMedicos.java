@@ -16,5 +16,8 @@ public interface InterfaceRepositorioMedicos extends CrudRepository<Medicos, Lon
    public List<Medicos> findByNomeStartingWith(String nome);
    
    public Medicos findByNomeUsuarioAndSenhaAcesso(String nomeUsuario, String senhaAcesso);
+   
+   @Override
+   public List<Medicos> findAll();
     
 }

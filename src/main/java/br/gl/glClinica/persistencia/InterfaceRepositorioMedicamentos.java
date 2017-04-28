@@ -11,11 +11,14 @@ import org.springframework.data.repository.CrudRepository;
  */
 public interface InterfaceRepositorioMedicamentos extends CrudRepository<Medicamentos, Integer> {
 
-     public Medicamentos findByCodigoMedicamento(int codigoMedicamento);
+    public Medicamentos findByCodigoMedicamento(int codigoMedicamento);
      
-     public List<Medicamentos> findByNomeMedicamentoStartingWith(String nomeMedicamento);
-     
-      public List<Medicamentos> findByNomeLaboratorioStartingWith(String nomeLaboratorio);
+    public List<Medicamentos> findByNomeMedicamentoStartingWith(String nomeMedicamento);
+    
+    public List<Medicamentos> findByNomeLaboratorioStartingWith(String nomeLaboratorio);
+      
+    @Override
+    public List<Medicamentos> findAll();
       
       
 }

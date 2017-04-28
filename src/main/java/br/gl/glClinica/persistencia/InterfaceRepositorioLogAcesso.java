@@ -20,4 +20,7 @@ public interface InterfaceRepositorioLogAcesso extends CrudRepository<LogAcesso,
     
     public List<LogAcesso> findByCodigoUsuario(Long codigoUsuario);
     
+    @Override
+    public List<LogAcesso> findAll();
+    
 }

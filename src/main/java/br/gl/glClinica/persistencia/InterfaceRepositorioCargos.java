@@ -14,4 +14,7 @@ public interface InterfaceRepositorioCargos extends CrudRepository<Cargos,Intege
     public Cargos findByCodigoCargo(int codigoCargo);
     
     public List<Cargos> findByNomeCargoStartingWith(String nomeCargo);
+    
+    @Override
+    public List<Cargos> findAll();
 }

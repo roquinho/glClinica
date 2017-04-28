@@ -17,5 +17,8 @@ public interface InterfaceRepositorioFuncionarios extends CrudRepository<Funcion
     
     public Funcionarios findByNomeUsuarioAndSenha(String nomeUsuario, String senha);
     
+    @Override
+    public List<Funcionarios> findAll();
+    
     
 }

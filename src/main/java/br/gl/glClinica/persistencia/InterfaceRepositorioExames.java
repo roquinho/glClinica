@@ -15,4 +15,7 @@ public interface InterfaceRepositorioExames extends CrudRepository<Exames, Integ
     
     public List<Exames> findByNomeExameStartingWith(String nomeExame);
     
+    @Override
+    public List<Exames> findAll();
+    
 }

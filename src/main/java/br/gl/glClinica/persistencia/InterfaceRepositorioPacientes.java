@@ -17,5 +17,8 @@ public interface InterfaceRepositorioPacientes extends CrudRepository<Pacientes,
     
     public Pacientes findByLoginNomeAndSenha(String loginNome,String senha);
     
+    @Override
+    public List<Pacientes> findAll();
+    
    
 }

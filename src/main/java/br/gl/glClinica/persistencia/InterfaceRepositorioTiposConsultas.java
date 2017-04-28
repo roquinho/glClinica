@@ -14,4 +14,7 @@ public interface InterfaceRepositorioTiposConsultas extends CrudRepository<Tipos
     public TiposConsultas findByCodigoTipoConsulta(int codigoTipoConsulta);
     
     public List<TiposConsultas> findByNomeTipoConsultaStartingWith(String nomeTipoConsulta);
+    
+    @Override
+    public List<TiposConsultas> findAll();
 }

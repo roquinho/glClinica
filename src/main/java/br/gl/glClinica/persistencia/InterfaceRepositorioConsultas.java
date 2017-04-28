@@ -16,4 +16,7 @@ public interface InterfaceRepositorioConsultas extends CrudRepository<Consultas,
     
     public List<Consultas> findByDataConsultaStartingWithOrderByDataConsulta(Date dataConsulta);
     
+    @Override
+    public List<Consultas> findAll();
+    
 }

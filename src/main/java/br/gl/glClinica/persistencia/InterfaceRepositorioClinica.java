@@ -15,4 +15,7 @@ public interface InterfaceRepositorioClinica extends CrudRepository<Clinica, Lon
     
     public List<Clinica> findByNomeStartingWith(String nome);
     
+    @Override
+    public List<Clinica> findAll();
+    
 }

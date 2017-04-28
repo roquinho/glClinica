@@ -16,4 +16,6 @@ public interface InterfaceRepositorioLaudos extends CrudRepository<Laudos, Integ
     
     public List<Laudos> findByDataLaudo(Date dataLaudo);
     
+
+    
 }

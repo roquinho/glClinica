@@ -15,4 +15,7 @@ public interface InterfaceRepositorioConvenios extends CrudRepository<Convenios,
     
     public List<Convenios> findByNomeConvenioStartingWith(String nomeConvenio);
     
+    @Override
+    public List<Convenios> findAll();
+    
 }
