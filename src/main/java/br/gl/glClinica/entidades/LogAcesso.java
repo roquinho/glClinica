@@ -17,7 +17,7 @@ import javax.persistence.TemporalType;
  */
 @Entity
 public class LogAcesso implements Serializable {
-   
+
     private int codigoAcesso;
     private Long codigoUsuario;
     private Date diaAcesso;

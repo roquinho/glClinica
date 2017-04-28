@@ -23,6 +23,8 @@ public interface InterfaceRegraNegocioMedicos extends Serializable {
     
     public List<Medicos> filtrarMedicoNome(String nome)throws ExceptionMedicosLeitura;
     
+    public List<Medicos> filtrarMedicoEspecialidade(String especialidade)throws ExceptionMedicosLeitura;
+    
     public Medicos filtrarMedicoCpf(Long cpf)throws ExceptionMedicosLeitura;
     
     public Medicos filtrarMedicoUsuarioSenha(String usuario, String senha)throws ExceptionMedicosLeitura;

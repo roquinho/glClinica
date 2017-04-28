@@ -27,4 +27,11 @@ public interface InterfaceRegraNegocioPacientes extends Serializable {
      
      public Pacientes filtrarPacientesCpf(Long cpf)throws ExceptionPacientesLeitura;
      
+     public void receitarMedicamentoPaciente(Long cpfPaciente,int codigoMedicamento)throws ExceptionPacientesEscrita;
+     
+     public void marcarExamePaciente(Long cpfPaciente,int codigoExame)throws ExceptionPacientesEscrita;
+     
+     public void InserirConvenioPaciente(Long cpfPaciente, int codigoConvenio)throws ExceptionPacientesEscrita;
+     
+     
 }
