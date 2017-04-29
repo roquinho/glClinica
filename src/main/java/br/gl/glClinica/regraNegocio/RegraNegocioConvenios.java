@@ -18,37 +18,99 @@ public class RegraNegocioConvenios implements InterfaceRegraNegocioConvenios {
 
     @Autowired
     private InterfaceRepositorioConvenios repositorioConvenios;
+
+
     
     @Override
     public void cadastrarConvenio(Convenios convenio) throws ExceptionConveniosEscrita {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+      
+        if(convenio == null) {
+            throw new ExceptionConveniosEscrita();
+        }
+        if(convenio.getNomeConvenio()==null) {
+            throw new ExceptionConveniosEscrita();
+        }
+        if(convenio.getRegioesCobertas() == null) {
+            throw new ExceptionConveniosEscrita();
+        }
+        else {
+            this.repositorioConvenios.save(convenio);
+        }
     }
 
     @Override
     public void atualizarConvenio(Convenios convenio) throws ExceptionConveniosEscrita {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+       
+        if(convenio == null) {
+            throw new ExceptionConveniosEscrita();
+        }
+        if(convenio.getCodigoConvenio() == 0) {
+            throw new ExceptionConveniosEscrita();
+        }
+        if(convenio.getNomeConvenio()==null) {
+            throw new ExceptionConveniosEscrita();
+        }
+        if(convenio.getRegioesCobertas() == null) {
+            throw new ExceptionConveniosEscrita();
+        }
+        if(this.repositorioConvenios.exists(convenio.getCodigoConvenio())==false) {
+            throw new ExceptionConveniosEscrita();
+        }
+        else {
+            Convenios novoConvenio = this.repositorioConvenios.findByCodigoConvenio(convenio.getCodigoConvenio());
+               
+               novoConvenio.setDataInicio(convenio.getDataInicio());
+               novoConvenio.setNomeConvenio(convenio.getNomeConvenio());
+               novoConvenio.setRegioesCobertas(convenio.getRegioesCobertas());
+                         
+                  this.repositorioConvenios.save(novoConvenio);
+        } 
     }
 
     @Override
     public void deletarConvenio(int codigoConvenio) throws ExceptionConveniosEscrita {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
+        if(codigoConvenio == 0) {
+            throw new ExceptionConveniosEscrita();
+        }
+        if(this.repositorioConvenios.exists(codigoConvenio)==false) {
+            throw new ExceptionConveniosEscrita();
+        }
+        else {
+            this.repositorioConvenios.delete(codigoConvenio);
+        }
     }
 
     @Override
     public List<Convenios> listarConvenios() throws ExceptionConveniosLeitura {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
+        return this.repositorioConvenios.findAll();
     }
 
     @Override
     public List<Convenios> filtrarConvenioNome(String nomeConvenio) throws ExceptionConveniosLeitura {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+       
+        if(nomeConvenio == null) {
+            throw new ExceptionConveniosLeitura();
+        }
+        else {
+            return this.repositorioConvenios.findByNomeConvenioStartingWith(nomeConvenio);
+        }
     }
 
     @Override
     public Convenios filtrarConvenioCodigo(int codigoConvenio) throws ExceptionConveniosLeitura {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
+        if(codigoConvenio == 0) {
+            throw new ExceptionConveniosLeitura();
+        }
+        else {
+            return this.repositorioConvenios.findByCodigoConvenio(codigoConvenio);
+        }
     }
 
+    
+    
     public InterfaceRepositorioConvenios getRepositorioConvenios() {
         return repositorioConvenios;
     }

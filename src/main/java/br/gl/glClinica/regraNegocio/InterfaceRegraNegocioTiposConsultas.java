@@ -24,4 +24,5 @@ public interface InterfaceRegraNegocioTiposConsultas extends Serializable {
     public List<TiposConsultas> filtrarTipoConsultaNome(String nome)throws ExceptionTiposConsultasLeitura;
     
     public TiposConsultas filtrarTipoConsultaCodigo(int codigoTipoConsulta)throws ExceptionTiposConsultasLeitura;
+
 }

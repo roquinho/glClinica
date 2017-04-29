@@ -26,4 +26,5 @@ public interface InterfaceRegraNegocioMedicamentos extends Serializable {
     public List<Medicamentos> filtrarMedicamentosLaboratorio(String nomeLaboratorio)throws ExceptionMedicamentosLeitura;
     
     public Medicamentos filtrarMedicamentoCodigo(int codigoMedicamento)throws ExceptionMedicamentosLeitura;
+
 }

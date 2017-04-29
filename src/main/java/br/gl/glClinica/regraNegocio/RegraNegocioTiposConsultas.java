@@ -18,37 +18,99 @@ public class RegraNegocioTiposConsultas implements InterfaceRegraNegocioTiposCon
 
     @Autowired
     private InterfaceRepositorioTiposConsultas repositorioTiposConsultas;
+
+
     
     @Override
     public void cadastrarTipoConsulta(TiposConsultas tipoConsulta) throws ExceptionTiposConsultasEscrita {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+       
+        if(tipoConsulta == null) {
+            throw new ExceptionTiposConsultasEscrita();
+        }
+        if(tipoConsulta.getNomeTipoConsulta()== null) {
+            throw new ExceptionTiposConsultasEscrita();
+        }
+        if(tipoConsulta.getValorTipoConsulta() <0) {
+           throw new ExceptionTiposConsultasEscrita();
+        }
+        else {
+            this.repositorioTiposConsultas.save(tipoConsulta);
+        }
     }
+    
 
     @Override
     public void atualizarTipoConsulta(TiposConsultas tiposConsulta) throws ExceptionTiposConsultasEscrita {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                
+        if(tiposConsulta == null) {
+            throw new ExceptionTiposConsultasEscrita();
+        }
+        if(tiposConsulta.getCodigoTipoConsulta() == 0) {
+            throw new ExceptionTiposConsultasEscrita();
+        }
+        if(tiposConsulta.getNomeTipoConsulta()== null) {
+            throw new ExceptionTiposConsultasEscrita();
+        }
+        if(tiposConsulta.getValorTipoConsulta() <0) {
+           throw new ExceptionTiposConsultasEscrita();
+        }
+        if(this.repositorioTiposConsultas.exists(tiposConsulta.getCodigoTipoConsulta())==false) {
+            throw new ExceptionTiposConsultasEscrita();
+        }
+        else {
+            TiposConsultas novoTiposConsultas = this.repositorioTiposConsultas.findByCodigoTipoConsulta(tiposConsulta.getCodigoTipoConsulta());
+              
+               novoTiposConsultas.setNomeTipoConsulta(tiposConsulta.getNomeTipoConsulta());
+               novoTiposConsultas.setValorTipoConsulta(tiposConsulta.getValorTipoConsulta());
+               
+                  this.repositorioTiposConsultas.save(novoTiposConsultas);
+        }      
     }
 
     @Override
     public void deletarTipoConsulta(int codigoTipoConsulta) throws ExceptionTiposConsultasEscrita {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+       
+        if(codigoTipoConsulta == 0) {
+            throw new ExceptionTiposConsultasEscrita();
+        }
+        if(this.repositorioTiposConsultas.exists(codigoTipoConsulta)==false){
+            throw new ExceptionTiposConsultasEscrita();
+        }
+        else {
+            this.repositorioTiposConsultas.delete(codigoTipoConsulta);
+        }
     }
 
     @Override
     public List<TiposConsultas> listarTiposConsulta() throws ExceptionTiposConsultasLeitura {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+      
+        return this.repositorioTiposConsultas.findAll();
     }
 
     @Override
     public List<TiposConsultas> filtrarTipoConsultaNome(String nome) throws ExceptionTiposConsultasLeitura {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+       
+        if(nome == null) {
+            throw new ExceptionTiposConsultasLeitura();
+        }
+        else {
+            return this.repositorioTiposConsultas.findByNomeTipoConsultaStartingWith(nome);
+        }
     }
 
     @Override
     public TiposConsultas filtrarTipoConsultaCodigo(int codigoTipoConsulta) throws ExceptionTiposConsultasLeitura {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+      
+        if(codigoTipoConsulta == 0) {
+            throw new ExceptionTiposConsultasLeitura();
+        }
+        else {
+           return this.repositorioTiposConsultas.findByCodigoTipoConsulta(codigoTipoConsulta);
+        }
     }
 
+    
+    
     public InterfaceRepositorioTiposConsultas getRepositorioTiposConsultas() {
         return repositorioTiposConsultas;
     }

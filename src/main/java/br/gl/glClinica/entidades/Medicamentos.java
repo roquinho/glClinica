@@ -21,7 +21,7 @@ import javax.persistence.OneToMany;
 public class Medicamentos implements Serializable{
     
     private int codigoMedicamento;
-    private int nomeMedicamento;
+    private String nomeMedicamento;
     private String substanciaAtiva;
     private String posologiaIndicada;
     private String nomeLaboratorio;
@@ -36,7 +36,7 @@ public class Medicamentos implements Serializable{
         
     }
 
-    public Medicamentos(int nomeMedicamento, String substanciaAtiva, String posologiaIndicada, String nomeLaboratorio, String contraIndicacoes, String generico) {
+    public Medicamentos(String nomeMedicamento, String substanciaAtiva, String posologiaIndicada, String nomeLaboratorio, String contraIndicacoes, String generico) {
         this.nomeMedicamento = nomeMedicamento;
         this.substanciaAtiva = substanciaAtiva;
         this.posologiaIndicada = posologiaIndicada;
@@ -47,18 +47,17 @@ public class Medicamentos implements Serializable{
 
     @Override
     public int hashCode() {
-        int hash = 5;
-        hash = 97 * hash + this.codigoMedicamento;
-        hash = 97 * hash + this.nomeMedicamento;
-        hash = 97 * hash + Objects.hashCode(this.substanciaAtiva);
-        hash = 97 * hash + Objects.hashCode(this.posologiaIndicada);
-        hash = 97 * hash + Objects.hashCode(this.nomeLaboratorio);
-        hash = 97 * hash + Objects.hashCode(this.contraIndicacoes);
-        hash = 97 * hash + Objects.hashCode(this.generico);
-        //hash = 97 * hash + Objects.hashCode(this.clinicas);
-        hash = 97 * hash + Objects.hashCode(this.prontuarios);
-        hash = 97 * hash + Objects.hashCode(this.receitas);
-        hash = 97 * hash + Objects.hashCode(this.pacientes);
+        int hash = 7;
+        hash = 53 * hash + this.codigoMedicamento;
+        hash = 53 * hash + Objects.hashCode(this.nomeMedicamento);
+        hash = 53 * hash + Objects.hashCode(this.substanciaAtiva);
+        hash = 53 * hash + Objects.hashCode(this.posologiaIndicada);
+        hash = 53 * hash + Objects.hashCode(this.nomeLaboratorio);
+        hash = 53 * hash + Objects.hashCode(this.contraIndicacoes);
+        hash = 53 * hash + Objects.hashCode(this.generico);
+        hash = 53 * hash + Objects.hashCode(this.prontuarios);
+        hash = 53 * hash + Objects.hashCode(this.receitas);
+        hash = 53 * hash + Objects.hashCode(this.pacientes);
         return hash;
     }
 
@@ -77,7 +76,7 @@ public class Medicamentos implements Serializable{
         if (this.codigoMedicamento != other.codigoMedicamento) {
             return false;
         }
-        if (this.nomeMedicamento != other.nomeMedicamento) {
+        if (!Objects.equals(this.nomeMedicamento, other.nomeMedicamento)) {
             return false;
         }
         if (!Objects.equals(this.substanciaAtiva, other.substanciaAtiva)) {
@@ -95,12 +94,9 @@ public class Medicamentos implements Serializable{
         if (!Objects.equals(this.generico, other.generico)) {
             return false;
         }
-        /*if (!Objects.equals(this.clinicas, other.clinicas)) {
-            return false;
-        }
         if (!Objects.equals(this.prontuarios, other.prontuarios)) {
             return false;
-        }*/
+        }
         if (!Objects.equals(this.receitas, other.receitas)) {
             return false;
         }
@@ -109,6 +105,7 @@ public class Medicamentos implements Serializable{
         }
         return true;
     }
+
     @Override
     public String toString() {
         return "Medicamentos{" + "codigoMedicamento=" + codigoMedicamento + ", nomeMedicamento=" + nomeMedicamento + ", substanciaAtiva=" + substanciaAtiva + ", posologiaIndicada=" + posologiaIndicada + ", nomeLaboratorio=" + nomeLaboratorio + ", contraIndicacoes=" + contraIndicacoes + ", generico=" + generico + ", prontuarios=" + prontuarios + ", receitas=" + receitas + ", pacientes=" + pacientes + '}';
@@ -124,11 +121,11 @@ public class Medicamentos implements Serializable{
         this.codigoMedicamento = codigoMedicamento;
     }
 
-    public int getNomeMedicamento() {
+    public String getNomeMedicamento() {
         return nomeMedicamento;
     }
 
-    public void setNomeMedicamento(int nomeMedicamento) {
+    public void setNomeMedicamento(String nomeMedicamento) {
         this.nomeMedicamento = nomeMedicamento;
     }
 

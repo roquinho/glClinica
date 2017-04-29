@@ -6,6 +6,8 @@ import br.gl.glClinica.persistencia.InterfaceRepositorioCargos;
 import br.gl.glClinica.regraNegocioException.ExceptionCargosEscrita;
 import br.gl.glClinica.regraNegocioException.ExceptionCargosLeitura;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,36 +19,98 @@ import org.springframework.stereotype.Service;
 public class RegraNegocioCargos implements InterfaceRegraNegocioCargos {
 
     @Autowired
-    private InterfaceRepositorioCargos repositorioCargos;
+    private InterfaceRepositorioCargos repositorioCargos;    
+  
     
     @Override
     public void cadastrarCargo(Cargos cargo) throws ExceptionCargosEscrita {
+        
+        if(cargo == null) {
+            throw new ExceptionCargosEscrita();
+        }
+        if(cargo.getNomeCargo() == null) {
+            throw new ExceptionCargosEscrita();
+        }
+        if(cargo.getDescricaoCargo() == null) {
+            throw new ExceptionCargosEscrita();
+        }
+        else {
+            this.repositorioCargos.save(cargo);
+        }     
         
     }
 
     @Override
     public void atualizarCargo(Cargos cargo) throws ExceptionCargosEscrita {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
+        if(cargo == null) {
+            throw new ExceptionCargosEscrita();
+        }
+        if(cargo.getNomeCargo() == null) {
+            throw new ExceptionCargosEscrita();
+        }
+        if(cargo.getDescricaoCargo() == null) {
+            throw new ExceptionCargosEscrita();
+        }
+        if(cargo.getCodigoCargo() == 0) {
+            throw new ExceptionCargosEscrita();
+        }
+        if(this.repositorioCargos.exists(cargo.getCodigoCargo())==false) {
+            throw new ExceptionCargosEscrita();
+        }
+        else {            
+         Cargos novoCargo = this.repositorioCargos.findByCodigoCargo(cargo.getCodigoCargo());
+            
+            novoCargo.setDescricaoCargo(cargo.getDescricaoCargo());
+            novoCargo.setNomeCargo(cargo.getNomeCargo());
+            
+               this.repositorioCargos.save(novoCargo);
+        }
     }
 
     @Override
     public void deletarCargo(int codigoCargo) throws ExceptionCargosEscrita {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+       
+        if(codigoCargo == 0){
+            throw new ExceptionCargosEscrita();
+        }
+        if(this.repositorioCargos.exists(codigoCargo)==false) {
+            throw new ExceptionCargosEscrita();
+        }
+        else {
+            this.repositorioCargos.delete(codigoCargo);
+        }
+           
     }
 
     @Override
     public List<Cargos> listarCargos() throws ExceptionCargosLeitura {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
+       return this.repositorioCargos.findAll();
     }
 
     @Override
     public Cargos filtrarCargoCodigo(int codigoCargo) throws ExceptionCargosLeitura {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+       
+        if(codigoCargo == 0) {
+            throw new ExceptionCargosLeitura();
+        }
+        else {
+          return this.repositorioCargos.findByCodigoCargo(codigoCargo);
+        }
+        
     }
 
     @Override
     public List<Cargos> filtrarCargoNome(String nomeCargo) throws ExceptionCargosLeitura {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
+        if(nomeCargo == null) {
+            throw new ExceptionCargosLeitura();
+        }
+        else {
+            return this.repositorioCargos.findByNomeCargoStartingWith(nomeCargo);
+        }
+        
     }
 
     public InterfaceRepositorioCargos getRepositorioCargos() {

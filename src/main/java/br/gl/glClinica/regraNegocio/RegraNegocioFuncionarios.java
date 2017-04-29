@@ -7,6 +7,8 @@ import br.gl.glClinica.persistencia.InterfaceRepositorioFuncionarios;
 import br.gl.glClinica.regraNegocioException.ExceptionFuncionariosEscrita;
 import br.gl.glClinica.regraNegocioException.ExceptionFuncionariosLeitura;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,37 +26,161 @@ public class RegraNegocioFuncionarios implements InterfaceRegraNegocioFuncionari
     
     @Override
     public void cadastrarFuncionario(Funcionarios funcionario, int codigoCargo) throws ExceptionFuncionariosEscrita {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+      
+        if(codigoCargo == 0) {
+            throw new ExceptionFuncionariosEscrita();
+        }
+        else {
+            funcionario.setCargo(this.repositorioCargos.findByCodigoCargo(codigoCargo));
+        }
+        if(funcionario.getCargo() == null) {
+            throw new ExceptionFuncionariosEscrita();
+        }
+        if(funcionario == null) {
+            throw new ExceptionFuncionariosEscrita();
+        }
+        if(funcionario.getCpf() == null) {
+            throw new ExceptionFuncionariosEscrita();
+        }
+        if(funcionario.getCpf() == 0) {
+            throw new ExceptionFuncionariosEscrita();
+        }
+        if(funcionario.getEndereco() == null) {
+            throw new ExceptionFuncionariosEscrita();
+        }
+        if(funcionario.getNome() == null) {
+            throw new ExceptionFuncionariosEscrita();
+        }
+        if(funcionario.getNomeUsuario() == null) {
+            throw new ExceptionFuncionariosEscrita();
+        }
+        if(funcionario.getSenha() == null) {
+            throw new ExceptionFuncionariosEscrita();
+        }
+        if(funcionario.getRg() == null) {
+            throw new ExceptionFuncionariosEscrita();
+        }
+        if(this.repositorioFuncionarios.exists(funcionario.getCpf())==true) {
+            throw new ExceptionFuncionariosEscrita();
+        }
+        else {
+            this.repositorioFuncionarios.save(funcionario);             
+        }
     }
 
     @Override
     public void atualizarFuncionario(Funcionarios funcionario) throws ExceptionFuncionariosEscrita {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
+        
+        if(funcionario.getCargo() == null) {
+            throw new ExceptionFuncionariosEscrita();
+        }
+        if(funcionario == null) {
+            throw new ExceptionFuncionariosEscrita();
+        }
+        if(funcionario.getCpf() == null) {
+            throw new ExceptionFuncionariosEscrita();
+        }
+        if(funcionario.getCpf() == 0) {
+            throw new ExceptionFuncionariosEscrita();
+        }
+        if(funcionario.getEndereco() == null) {
+            throw new ExceptionFuncionariosEscrita();
+        }
+        if(funcionario.getNome() == null) {
+            throw new ExceptionFuncionariosEscrita();
+        }
+        if(funcionario.getNomeUsuario() == null) {
+            throw new ExceptionFuncionariosEscrita();
+        }
+        if(funcionario.getSenha() == null) {
+            throw new ExceptionFuncionariosEscrita();
+        }
+        if(funcionario.getRg() == null) {
+            throw new ExceptionFuncionariosEscrita();
+        }
+        if(this.repositorioFuncionarios.exists(funcionario.getCpf())==false) {
+            throw new ExceptionFuncionariosEscrita();
+        }
+        else {
+            this.repositorioFuncionarios.save(funcionario);
+        }
+        
     }
 
     @Override
     public void deletarFuncionario(Long cpf) throws ExceptionFuncionariosEscrita {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
+        if(cpf == null) {
+            throw new ExceptionFuncionariosEscrita();
+        }
+        if(cpf == 0) {
+            throw new ExceptionFuncionariosEscrita();
+        }
+        if(this.repositorioFuncionarios.exists(cpf)==false) {
+            throw new ExceptionFuncionariosEscrita();
+        }
+        else {
+           this.repositorioFuncionarios.delete(cpf);
+        }
     }
 
     @Override
     public List<Funcionarios> listarFuncionarios() throws ExceptionFuncionariosLeitura {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+         
+        return this.repositorioFuncionarios.findAll();
     }
 
     @Override
     public List<Funcionarios> filtrarFuncionariosNome(String nome) throws ExceptionFuncionariosLeitura {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
+        if(nome == null) {
+            throw new ExceptionFuncionariosLeitura();
+        }
+        else {
+           return this.repositorioFuncionarios.findByNomeStartingWith(nome);
+        }
     }
 
     @Override
     public Funcionarios filtrarFuncionarioCpf(Long cpf) throws ExceptionFuncionariosLeitura {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
+        if(cpf == null) {
+            throw new ExceptionFuncionariosLeitura();
+        }
+        if(cpf == 0) {
+            throw new ExceptionFuncionariosLeitura();
+        }
+        else {
+            return this.repositorioFuncionarios.findByCpf(cpf);
+        }
+        
     }
 
     @Override
     public Funcionarios filtrarFuncionarioNomeUsuarioAndSenha(String nomeUsuario, String senha) throws ExceptionFuncionariosLeitura {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+       
+        Funcionarios funcionario;
+        
+        if(nomeUsuario == null) {
+            throw new ExceptionFuncionariosLeitura();
+        }
+        if(senha == null) {
+            throw new ExceptionFuncionariosLeitura();
+        }
+        else {
+           funcionario = this.repositorioFuncionarios.findByNomeUsuarioAndSenha(nomeUsuario, senha);
+             if(funcionario != null) {
+               try {
+                   funcionario.setContadorAcesso(funcionario.getContadorAcesso()+1);
+                     this.atualizarFuncionario(funcionario);
+               } catch (ExceptionFuncionariosEscrita ex) {
+                   Logger.getLogger(RegraNegocioFuncionarios.class.getName()).log(Level.SEVERE, null, ex);
+               }
+             }
+              
+        }
+        return funcionario;        
     }
 
     public InterfaceRepositorioFuncionarios getRepositorioFuncionarios() {

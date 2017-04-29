@@ -18,42 +18,133 @@ public class RegraNegocioMedicamentos implements InterfaceRegraNegocioMedicament
 
     @Autowired
     private InterfaceRepositorioMedicamentos repositorioMedicamentos;
+   
+    
     
     @Override
     public void cadastrarMedicamento(Medicamentos medicamento) throws ExceptionMedicamentosEscrita {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+      
+        if(medicamento == null) {
+            throw new ExceptionMedicamentosEscrita();
+        }
+        if(medicamento.getContraIndicacoes()==null) {
+            throw new ExceptionMedicamentosEscrita();
+        }
+        if(medicamento.getNomeLaboratorio() == null) {
+            throw new ExceptionMedicamentosEscrita();
+        }
+        if(medicamento.getNomeMedicamento() == null) {
+            throw new ExceptionMedicamentosEscrita();
+        }
+        if(medicamento.getPosologiaIndicada() == null) {
+            throw new ExceptionMedicamentosEscrita();
+        }
+        if(medicamento.getSubstanciaAtiva() == null) {
+            throw new ExceptionMedicamentosEscrita();
+        }
+        else {
+            this.repositorioMedicamentos.save(medicamento);
+        }
     }
 
     @Override
     public void atualizarMedcicamento(Medicamentos medicamento) throws ExceptionMedicamentosEscrita {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
+        
+        if(medicamento == null) {
+            throw new ExceptionMedicamentosEscrita();
+        }
+        if(medicamento.getCodigoMedicamento() == 0) {
+            throw new ExceptionMedicamentosEscrita();
+        }
+        if(medicamento.getContraIndicacoes()==null) {
+            throw new ExceptionMedicamentosEscrita();
+        }
+        if(medicamento.getNomeLaboratorio() == null) {
+            throw new ExceptionMedicamentosEscrita();
+        }
+        if(medicamento.getNomeMedicamento() == null) {
+            throw new ExceptionMedicamentosEscrita();
+        }
+        if(medicamento.getPosologiaIndicada() == null) {
+            throw new ExceptionMedicamentosEscrita();
+        }
+        if(medicamento.getSubstanciaAtiva() == null) {
+            throw new ExceptionMedicamentosEscrita();
+        }
+        if(this.repositorioMedicamentos.exists(medicamento.getCodigoMedicamento())==false) {
+            throw new ExceptionMedicamentosEscrita();
+        }
+        else {
+            Medicamentos novoMedicamento = this.repositorioMedicamentos.findByCodigoMedicamento(medicamento.getCodigoMedicamento());
+               
+                novoMedicamento.setContraIndicacoes(medicamento.getContraIndicacoes());
+                novoMedicamento.setGenerico(medicamento.getGenerico());
+                novoMedicamento.setNomeLaboratorio(medicamento.getNomeLaboratorio());
+                novoMedicamento.setNomeMedicamento(medicamento.getNomeMedicamento());
+                novoMedicamento.setPosologiaIndicada(medicamento.getPosologiaIndicada());
+                novoMedicamento.setSubstanciaAtiva(medicamento.getSubstanciaAtiva());
+                
+                   this.repositorioMedicamentos.save(novoMedicamento);
+        }
+        
     }
 
     @Override
     public void deletarMedicamento(int codigoMedicamento) throws ExceptionMedicamentosEscrita {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+       
+        if(codigoMedicamento == 0) {
+            throw new ExceptionMedicamentosEscrita();
+        }
+        if(this.repositorioMedicamentos.exists(codigoMedicamento)==false) {
+            throw new ExceptionMedicamentosEscrita();
+        }
+        else {
+            this.repositorioMedicamentos.delete(codigoMedicamento);
+        }
     }
 
     @Override
     public List<Medicamentos> listarMedicamentos() throws ExceptionMedicamentosLeitura {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+       
+        return this.repositorioMedicamentos.findAll();
     }
 
     @Override
     public List<Medicamentos> filtrarMedicamentoNome(String nomeMedicamento) throws ExceptionMedicamentosLeitura {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+       
+        if(nomeMedicamento == null) {
+            throw new ExceptionMedicamentosLeitura();
+        }
+        else {
+            return this.repositorioMedicamentos.findByNomeMedicamentoStartingWith(nomeMedicamento);
+        }
     }
 
     @Override
     public List<Medicamentos> filtrarMedicamentosLaboratorio(String nomeLaboratorio) throws ExceptionMedicamentosLeitura {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+       
+        if(nomeLaboratorio == null) {
+            throw new ExceptionMedicamentosLeitura();
+        }
+        else {
+            return this.repositorioMedicamentos.findByNomeLaboratorioStartingWith(nomeLaboratorio);
+        }
     }
 
     @Override
     public Medicamentos filtrarMedicamentoCodigo(int codigoMedicamento) throws ExceptionMedicamentosLeitura {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
+        if(codigoMedicamento == 0) {
+            throw new ExceptionMedicamentosLeitura();
+        }
+        else {
+            return this.repositorioMedicamentos.findByCodigoMedicamento(codigoMedicamento);
+        }
     }
 
+    
+    
     public InterfaceRepositorioMedicamentos getRepositorioMedicamentos() {
         return repositorioMedicamentos;
     }
