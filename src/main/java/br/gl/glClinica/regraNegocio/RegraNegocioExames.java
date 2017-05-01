@@ -42,7 +42,7 @@ public class RegraNegocioExames implements InterfaceRegraNegocioExames {
         if(exame == null) {
             throw new ExceptionExamesEscrita();
         }
-        if(exame.getCodigoExame() == 0) {
+        if(exame.getCodigoExame() <= 0) {
             throw new ExceptionExamesEscrita();
         }
         if(exame.getNomeExame()==null) {
@@ -64,7 +64,7 @@ public class RegraNegocioExames implements InterfaceRegraNegocioExames {
     @Override
     public void deletarExame(int codigoExame) throws ExceptionExamesEscrita {
        
-        if(codigoExame == 0) {
+        if(codigoExame <= 0) {
             throw new ExceptionExamesEscrita();
         }
         if(this.repositorioExames.exists(codigoExame)==false) {
@@ -94,7 +94,7 @@ public class RegraNegocioExames implements InterfaceRegraNegocioExames {
     @Override
     public Exames filtrarExameCodigo(int codigoExame) throws ExceptionExamesLeitura {
         
-        if(codigoExame == 0) {
+        if(codigoExame <= 0) {
             throw new ExceptionExamesLeitura();
         }
         else {

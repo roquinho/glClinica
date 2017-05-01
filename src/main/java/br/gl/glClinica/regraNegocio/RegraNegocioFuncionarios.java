@@ -27,7 +27,10 @@ public class RegraNegocioFuncionarios implements InterfaceRegraNegocioFuncionari
     @Override
     public void cadastrarFuncionario(Funcionarios funcionario, int codigoCargo) throws ExceptionFuncionariosEscrita {
       
-        if(codigoCargo == 0) {
+        if(funcionario == null) {
+            throw new ExceptionFuncionariosEscrita();
+        }
+        if(codigoCargo <= 0) {
             throw new ExceptionFuncionariosEscrita();
         }
         else {
@@ -35,14 +38,11 @@ public class RegraNegocioFuncionarios implements InterfaceRegraNegocioFuncionari
         }
         if(funcionario.getCargo() == null) {
             throw new ExceptionFuncionariosEscrita();
-        }
-        if(funcionario == null) {
-            throw new ExceptionFuncionariosEscrita();
-        }
+        }        
         if(funcionario.getCpf() == null) {
             throw new ExceptionFuncionariosEscrita();
         }
-        if(funcionario.getCpf() == 0) {
+        if(funcionario.getCpf() <= 0) {
             throw new ExceptionFuncionariosEscrita();
         }
         if(funcionario.getEndereco() == null) {
@@ -81,7 +81,7 @@ public class RegraNegocioFuncionarios implements InterfaceRegraNegocioFuncionari
         if(funcionario.getCpf() == null) {
             throw new ExceptionFuncionariosEscrita();
         }
-        if(funcionario.getCpf() == 0) {
+        if(funcionario.getCpf() <= 0) {
             throw new ExceptionFuncionariosEscrita();
         }
         if(funcionario.getEndereco() == null) {
@@ -114,7 +114,7 @@ public class RegraNegocioFuncionarios implements InterfaceRegraNegocioFuncionari
         if(cpf == null) {
             throw new ExceptionFuncionariosEscrita();
         }
-        if(cpf == 0) {
+        if(cpf <= 0) {
             throw new ExceptionFuncionariosEscrita();
         }
         if(this.repositorioFuncionarios.exists(cpf)==false) {
@@ -148,7 +148,7 @@ public class RegraNegocioFuncionarios implements InterfaceRegraNegocioFuncionari
         if(cpf == null) {
             throw new ExceptionFuncionariosLeitura();
         }
-        if(cpf == 0) {
+        if(cpf <= 0) {
             throw new ExceptionFuncionariosLeitura();
         }
         else {

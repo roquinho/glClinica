@@ -6,8 +6,6 @@ import br.gl.glClinica.persistencia.InterfaceRepositorioCargos;
 import br.gl.glClinica.regraNegocioException.ExceptionCargosEscrita;
 import br.gl.glClinica.regraNegocioException.ExceptionCargosLeitura;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -52,7 +50,7 @@ public class RegraNegocioCargos implements InterfaceRegraNegocioCargos {
         if(cargo.getDescricaoCargo() == null) {
             throw new ExceptionCargosEscrita();
         }
-        if(cargo.getCodigoCargo() == 0) {
+        if(cargo.getCodigoCargo() <= 0) {
             throw new ExceptionCargosEscrita();
         }
         if(this.repositorioCargos.exists(cargo.getCodigoCargo())==false) {
@@ -71,7 +69,7 @@ public class RegraNegocioCargos implements InterfaceRegraNegocioCargos {
     @Override
     public void deletarCargo(int codigoCargo) throws ExceptionCargosEscrita {
        
-        if(codigoCargo == 0){
+        if(codigoCargo <= 0){
             throw new ExceptionCargosEscrita();
         }
         if(this.repositorioCargos.exists(codigoCargo)==false) {
@@ -92,7 +90,7 @@ public class RegraNegocioCargos implements InterfaceRegraNegocioCargos {
     @Override
     public Cargos filtrarCargoCodigo(int codigoCargo) throws ExceptionCargosLeitura {
        
-        if(codigoCargo == 0) {
+        if(codigoCargo <= 0) {
             throw new ExceptionCargosLeitura();
         }
         else {

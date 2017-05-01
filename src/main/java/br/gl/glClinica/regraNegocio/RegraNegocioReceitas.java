@@ -32,22 +32,87 @@ public class RegraNegocioReceitas implements InterfaceRegraNegocioReceitas {
     
     @Override
     public void gerarReceita(Receitas receita, Long cpfMedico, Long cpfPaciente) throws ExceptionReceitasEscrita {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+       
+        if(receita == null) {
+            throw new ExceptionReceitasEscrita();
+        }
+        if(cpfMedico == null) {
+            throw new ExceptionReceitasEscrita();
+        }
+        if(cpfMedico<=0) {
+            throw new ExceptionReceitasEscrita();
+        }
+        if(cpfPaciente == null) {
+            throw new ExceptionReceitasEscrita();
+        }
+        if(cpfPaciente <=0) {
+            throw new ExceptionReceitasEscrita();
+        }
+        else {
+           receita.setMedico(this.repositorioMedicos.findByCpf(cpfMedico));
+           receita.setPaciente(this.repositorioPacientes.findByCpf(cpfPaciente));
+        }
+        if(receita.getMedico() == null) {
+            throw new ExceptionReceitasEscrita();
+        }
+        if(receita.getPaciente() == null) {
+            throw new ExceptionReceitasEscrita();
+        }
+        if(receita.getDataReceita() == null) {
+            throw new ExceptionReceitasEscrita();
+        }
+        else {
+            this.repositorioReceitas.save(receita);
+        }
     }
 
     @Override
     public void atualizarReceita(Receitas receita) throws ExceptionReceitasEscrita {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
+        if(receita == null) {
+            throw new ExceptionReceitasEscrita();
+        }
+        if(receita.getDataReceita() == null) {
+            throw new ExceptionReceitasEscrita();
+        }
+        if(receita.getCodigoReceita()<=0) {
+            throw new ExceptionReceitasEscrita();
+        }
+        if(this.repositorioReceitas.exists(receita.getCodigoReceita())==false) {
+            throw new ExceptionReceitasEscrita();
+        }
+        else {
+            Receitas novoReceita = this.repositorioReceitas.findByCodigoReceita(receita.getCodigoReceita());
+            
+               novoReceita.setDataReceita(receita.getDataReceita());
+               
+                  this.repositorioReceitas.save(novoReceita);
+        }
     }
 
     @Override
     public void deletarReceita(int codigoReceita) throws ExceptionReceitasEscrita {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
+        if(codigoReceita <= 0) {
+            throw new ExceptionReceitasEscrita();
+        }
+        if(this.repositorioReceitas.exists(codigoReceita)==false) {
+            throw new ExceptionReceitasEscrita();
+        }
+        else {
+          this.repositorioReceitas.delete(codigoReceita);
+        }
     }
 
     @Override
     public Receitas filtrarReceitaCodigo(int codigoReceita) throws ExceptionReceitasLeitura {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
+       if(codigoReceita <= 0 ) {
+           throw new ExceptionReceitasLeitura();
+       }
+       else {
+           return this.repositorioReceitas.findByCodigoReceita(codigoReceita);
+       }
     }
 
     @Override

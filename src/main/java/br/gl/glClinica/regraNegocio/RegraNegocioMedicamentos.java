@@ -54,7 +54,7 @@ public class RegraNegocioMedicamentos implements InterfaceRegraNegocioMedicament
         if(medicamento == null) {
             throw new ExceptionMedicamentosEscrita();
         }
-        if(medicamento.getCodigoMedicamento() == 0) {
+        if(medicamento.getCodigoMedicamento() <= 0) {
             throw new ExceptionMedicamentosEscrita();
         }
         if(medicamento.getContraIndicacoes()==null) {
@@ -93,7 +93,7 @@ public class RegraNegocioMedicamentos implements InterfaceRegraNegocioMedicament
     @Override
     public void deletarMedicamento(int codigoMedicamento) throws ExceptionMedicamentosEscrita {
        
-        if(codigoMedicamento == 0) {
+        if(codigoMedicamento <= 0) {
             throw new ExceptionMedicamentosEscrita();
         }
         if(this.repositorioMedicamentos.exists(codigoMedicamento)==false) {
@@ -135,7 +135,7 @@ public class RegraNegocioMedicamentos implements InterfaceRegraNegocioMedicament
     @Override
     public Medicamentos filtrarMedicamentoCodigo(int codigoMedicamento) throws ExceptionMedicamentosLeitura {
         
-        if(codigoMedicamento == 0) {
+        if(codigoMedicamento <= 0) {
             throw new ExceptionMedicamentosLeitura();
         }
         else {

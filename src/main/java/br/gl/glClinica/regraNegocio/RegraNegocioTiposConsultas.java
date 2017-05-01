@@ -45,7 +45,7 @@ public class RegraNegocioTiposConsultas implements InterfaceRegraNegocioTiposCon
         if(tiposConsulta == null) {
             throw new ExceptionTiposConsultasEscrita();
         }
-        if(tiposConsulta.getCodigoTipoConsulta() == 0) {
+        if(tiposConsulta.getCodigoTipoConsulta() <= 0) {
             throw new ExceptionTiposConsultasEscrita();
         }
         if(tiposConsulta.getNomeTipoConsulta()== null) {
@@ -70,7 +70,7 @@ public class RegraNegocioTiposConsultas implements InterfaceRegraNegocioTiposCon
     @Override
     public void deletarTipoConsulta(int codigoTipoConsulta) throws ExceptionTiposConsultasEscrita {
        
-        if(codigoTipoConsulta == 0) {
+        if(codigoTipoConsulta <= 0) {
             throw new ExceptionTiposConsultasEscrita();
         }
         if(this.repositorioTiposConsultas.exists(codigoTipoConsulta)==false){
@@ -101,7 +101,7 @@ public class RegraNegocioTiposConsultas implements InterfaceRegraNegocioTiposCon
     @Override
     public TiposConsultas filtrarTipoConsultaCodigo(int codigoTipoConsulta) throws ExceptionTiposConsultasLeitura {
       
-        if(codigoTipoConsulta == 0) {
+        if(codigoTipoConsulta <= 0) {
             throw new ExceptionTiposConsultasLeitura();
         }
         else {

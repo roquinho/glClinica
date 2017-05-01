@@ -26,29 +26,116 @@ public class RegraNegocioLaudos implements InterfaceRegraNegocioLaudos {
     @Autowired
     private InterfaceRepositorioMedicos repositorioMedicos;
     
+    
+    
     @Override
     public void gerarLaudo(Laudos laudo, Long cpfMedico, Long cpfPaciente) throws ExceptionLaudosEscrita {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
+        if(laudo == null) {
+            throw new ExceptionLaudosEscrita();
+        }
+        if(cpfMedico == null) {
+            throw new ExceptionLaudosEscrita();
+        }
+        if(cpfMedico<=0) {
+            throw new ExceptionLaudosEscrita();
+        }
+        if(cpfPaciente == null) {
+            throw new ExceptionLaudosEscrita();
+        }
+        if(cpfPaciente<=0) {
+            throw new ExceptionLaudosEscrita();
+        }
+        else {
+            laudo.setMedico(this.repositorioMedicos.findByCpf(cpfMedico));
+            laudo.setPaciente(this.repositorioPacientes.findByCpf(cpfPaciente));
+            
+        }
+        if(laudo.getMedico() == null) {
+            throw new ExceptionLaudosEscrita();
+        }
+        if(laudo.getPaciente() == null) {
+            throw new ExceptionLaudosEscrita();
+        }
+        if(laudo.getDataLaudo() == null) {
+            throw new ExceptionLaudosEscrita();
+        }
+        if(laudo.getDescricaoLaudo() == null) {
+            throw new ExceptionLaudosEscrita();
+        }
+        else {
+            this.repositorioLaudos.save(laudo);
+        }
     }
 
     @Override
     public void atualizarLaudo(Laudos laudo) throws ExceptionLaudosEscrita {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+       
+        if(laudo == null) {
+            throw new ExceptionLaudosEscrita();
+        }
+        if(laudo.getCodigoLaudo()<=0) {
+            throw new ExceptionLaudosEscrita();
+        }
+        if(laudo.getMedico() == null) {
+            throw new ExceptionLaudosEscrita();
+        }
+        if(laudo.getPaciente() == null) {
+            throw new ExceptionLaudosEscrita();
+        }
+        if(laudo.getDataLaudo() == null) {
+            throw new ExceptionLaudosEscrita();
+        }
+        if(laudo.getDescricaoLaudo() == null) {
+            throw new ExceptionLaudosEscrita();
+        }
+        if(this.repositorioLaudos.exists(laudo.getCodigoLaudo())== false) {
+            throw new ExceptionLaudosEscrita();
+        }
+        else {
+            Laudos novoLaudo = this.repositorioLaudos.findByCodigoLaudo(laudo.getCodigoLaudo());
+            
+               novoLaudo.setDescricaoLaudo(laudo.getDescricaoLaudo());
+                
+                  this.repositorioLaudos.save(novoLaudo);
+        }
+ 
     }
 
     @Override
     public void deletarLaudo(int codigoLaudo) throws ExceptionLaudosEscrita {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
+        if(codigoLaudo <= 0) {
+            throw new ExceptionLaudosEscrita();
+        }
+        if(this.repositorioLaudos.exists(codigoLaudo)==false ){
+            throw new ExceptionLaudosEscrita();
+        }
+        else {
+            this.repositorioLaudos.delete(codigoLaudo);
+        }
     }
 
     @Override
     public List<Laudos> filtrarLaudoData(Date dataLaudo) throws ExceptionLaudosLeitura {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
+        if(dataLaudo == null) {
+            throw new ExceptionLaudosLeitura();
+        }
+        else {
+            return this.repositorioLaudos.findByDataLaudo(dataLaudo);
+        }
     }
 
     @Override
     public Laudos filtrarLaudoCodigo(int codigoLaudo) throws ExceptionLaudosLeitura {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
+        if(codigoLaudo <= 0) {
+            throw new ExceptionLaudosLeitura();
+        }
+        else {
+            return this.filtrarLaudoCodigo(codigoLaudo);
+        }
     }
 
     public InterfaceRepositorioLaudos getRepositorioLaudos() {

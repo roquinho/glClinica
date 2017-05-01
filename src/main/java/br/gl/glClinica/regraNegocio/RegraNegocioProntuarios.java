@@ -6,8 +6,8 @@ import br.gl.glClinica.persistencia.InterfaceRepositorioExames;
 import br.gl.glClinica.persistencia.InterfaceRepositorioMedicamentos;
 import br.gl.glClinica.persistencia.InterfaceRepositorioPacientes;
 import br.gl.glClinica.persistencia.InterfaceRepositorioProntuarios;
-import br.gl.glClinica.regraNegocioException.ExceptionMedicamentosEscrita;
-import br.gl.glClinica.regraNegocioException.ExceptionMedicamentosLeitura;
+import br.gl.glClinica.regraNegocioException.ExceptionProntuariosEscrita;
+import br.gl.glClinica.regraNegocioException.ExceptionProntuariosLeitura;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -27,26 +27,125 @@ public class RegraNegocioProntuarios implements InterfaceRegraNegocioProntuarios
     @Autowired
     private InterfaceRepositorioMedicamentos repositorioMedicamentos;
     
+    
+    
     @Override
-    public void gerarProntuario(Prontuarios prontuario, int codigoExame, Long cpfPaciente, int codigoMedicamento) throws ExceptionMedicamentosEscrita {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void gerarProntuario(Prontuarios prontuario, int codigoExame, Long cpfPaciente, int codigoMedicamento) throws ExceptionProntuariosEscrita {
+       
+        if(prontuario == null) {
+            throw new ExceptionProntuariosEscrita();
+        }
+        if(codigoExame <=0) {
+            throw new ExceptionProntuariosEscrita();
+        }
+        if(cpfPaciente == null) {
+            throw new ExceptionProntuariosEscrita();
+        }
+        if(cpfPaciente <= 0) {
+            throw new ExceptionProntuariosEscrita();
+        }
+        if(codigoMedicamento <= 0 ) {
+            throw new ExceptionProntuariosEscrita();
+        }
+        else {
+            prontuario.setExame(this.repositorioExames.findByCodigoExame(codigoExame));
+            prontuario.setMedicamento(this.repositorioMedicamentos.findByCodigoMedicamento(codigoMedicamento));
+            prontuario.setPaciente(this.repositorioPacientes.findByCpf(cpfPaciente));
+        }
+        if(prontuario.getExame() == null) {
+            throw new ExceptionProntuariosEscrita();
+        }
+        if(prontuario.getMedicamento() == null) {
+            throw new ExceptionProntuariosEscrita();
+        }
+        if(prontuario.getPaciente() == null) {
+            throw new ExceptionProntuariosEscrita();
+        }
+        if(prontuario.getDataExame() == null) {
+            throw new ExceptionProntuariosEscrita();
+        }
+        if(prontuario.getDataInicioTratamento() == null) {
+            throw new ExceptionProntuariosEscrita();
+        }
+        if(prontuario.getPosologiaReceitada() == null) {
+            throw new ExceptionProntuariosEscrita();
+        }
+        else {
+            this.repositorioProntuarios.save(prontuario);
+        }
     }
+    
+    @Override
+    public void atualizarProntuario(Prontuarios prontuarios) throws ExceptionProntuariosEscrita {
+       
+        if(prontuarios == null) {
+            throw new ExceptionProntuariosEscrita();
+        }
+        if(prontuarios.getCodigoProntuario()<=0) {
+            throw new ExceptionProntuariosEscrita();
+        }
+        if(prontuarios.getExame() == null) {
+            throw new ExceptionProntuariosEscrita();
+        }
+        if(prontuarios.getMedicamento() == null) {
+            throw new ExceptionProntuariosEscrita();
+        }
+        if(prontuarios.getPaciente() == null) {
+            throw new ExceptionProntuariosEscrita();
+        }
+        if(prontuarios.getDataExame() == null) {
+            throw new ExceptionProntuariosEscrita();
+        }
+        if(prontuarios.getDataInicioTratamento() == null) {
+            throw new ExceptionProntuariosEscrita();
+        }
+        if(prontuarios.getPosologiaReceitada() == null) {
+            throw new ExceptionProntuariosEscrita();
+        }
+        if(this.repositorioProntuarios.exists(prontuarios.getCodigoProntuario())==false) {
+            throw new ExceptionProntuariosEscrita();
+        }
+        else {
+            Prontuarios novoProntuario = this.repositorioProntuarios.findByCodigoProntuario(prontuarios.getCodigoProntuario());
+              
+                novoProntuario.setDataExame(prontuarios.getDataExame());
+                novoProntuario.setDataFimTratamento(prontuarios.getDataFimTratamento());
+                novoProntuario.setDataInicioTratamento(prontuarios.getDataInicioTratamento());
+                novoProntuario.setPosologiaReceitada(prontuarios.getObservacoes());
+                novoProntuario.setResultadoExame(prontuarios.getResultadoExame());
+                
+                   this.repositorioProntuarios.save(novoProntuario);
+                
+        }
+    } 
+    
 
     @Override
-    public void atualizarProntuario(Prontuarios prontuarios) throws ExceptionMedicamentosEscrita {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void deletarProntuario(int codigoProntuario) throws ExceptionProntuariosEscrita {
+        
+        if(codigoProntuario<=0) {
+            throw new ExceptionProntuariosEscrita();
+        }
+        if(this.repositorioProntuarios.exists(codigoProntuario) == false) {
+            throw new ExceptionProntuariosEscrita();
+        }
+        else {
+            this.repositorioProntuarios.delete(codigoProntuario);
+        }
     }
-
     @Override
-    public void deletarProntuario(int codigoProntuario) throws ExceptionMedicamentosEscrita {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Prontuarios filtrarProntuarioCodigo(int codigoProntuario) throws ExceptionProntuariosLeitura {
+         
+        if(codigoProntuario <= 0 ){
+            throw new ExceptionProntuariosLeitura();
+        }
+        else {
+            return this.repositorioProntuarios.findByCodigoProntuario(codigoProntuario);
+        }
     }
-
-    @Override
-    public Prontuarios filtrarProntuarioCodigo(int codigoProntuario) throws ExceptionMedicamentosLeitura {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
+    
+    
+    
     public InterfaceRepositorioProntuarios getRepositorioProntuarios() {
         return repositorioProntuarios;
     }
@@ -78,5 +177,9 @@ public class RegraNegocioProntuarios implements InterfaceRegraNegocioProntuarios
     public void setRepositorioMedicamentos(InterfaceRepositorioMedicamentos repositorioMedicamentos) {
         this.repositorioMedicamentos = repositorioMedicamentos;
     }
+
+    
+
+    
     
 }

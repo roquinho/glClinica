@@ -44,7 +44,7 @@ public class RegraNegocioConvenios implements InterfaceRegraNegocioConvenios {
         if(convenio == null) {
             throw new ExceptionConveniosEscrita();
         }
-        if(convenio.getCodigoConvenio() == 0) {
+        if(convenio.getCodigoConvenio() <= 0) {
             throw new ExceptionConveniosEscrita();
         }
         if(convenio.getNomeConvenio()==null) {
@@ -70,7 +70,7 @@ public class RegraNegocioConvenios implements InterfaceRegraNegocioConvenios {
     @Override
     public void deletarConvenio(int codigoConvenio) throws ExceptionConveniosEscrita {
         
-        if(codigoConvenio == 0) {
+        if(codigoConvenio <= 0) {
             throw new ExceptionConveniosEscrita();
         }
         if(this.repositorioConvenios.exists(codigoConvenio)==false) {
@@ -101,7 +101,7 @@ public class RegraNegocioConvenios implements InterfaceRegraNegocioConvenios {
     @Override
     public Convenios filtrarConvenioCodigo(int codigoConvenio) throws ExceptionConveniosLeitura {
         
-        if(codigoConvenio == 0) {
+        if(codigoConvenio <= 0) {
             throw new ExceptionConveniosLeitura();
         }
         else {

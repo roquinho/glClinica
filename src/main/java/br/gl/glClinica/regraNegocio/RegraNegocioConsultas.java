@@ -29,6 +29,8 @@ public class RegraNegocioConsultas implements InterfaceRegraNegocioConsultas {
     @Autowired
     private InterfaceRepositorioTiposConsultas repositorioTiposConsultas;
     
+    
+    
     @Override
     public void marcarConsulta(Consultas consulta, Long cpfMedico, Long cpfPaciente, int tipoConsulta) throws ExceptionConsultasEscrita {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.

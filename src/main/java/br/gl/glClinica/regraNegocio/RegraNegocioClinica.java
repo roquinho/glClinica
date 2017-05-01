@@ -6,8 +6,6 @@ import br.gl.glClinica.persistencia.InterfaceRepositorioClinica;
 import br.gl.glClinica.regraNegocioException.ExceptionClinicaEscrita;
 import br.gl.glClinica.regraNegocioException.ExceptionClinicaLeitura;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -30,7 +28,7 @@ public class RegraNegocioClinica implements InterfaceRegraNegocioClinica {
         if(clinica.getCnpj()==null) {
             throw new ExceptionClinicaEscrita();
         }
-        if(clinica.getCnpj() == 0) {
+        if(clinica.getCnpj() <= 0) {
             throw new ExceptionClinicaEscrita();
         }
         if(clinica.getEndereco()==null) {
@@ -56,7 +54,7 @@ public class RegraNegocioClinica implements InterfaceRegraNegocioClinica {
         if(clinica.getCnpj()==null) {
             throw new ExceptionClinicaEscrita();
         }
-        if(clinica.getCnpj() == 0) {
+        if(clinica.getCnpj() <= 0) {
             throw new ExceptionClinicaEscrita();
         }
         if(clinica.getEndereco()==null) {
@@ -87,7 +85,7 @@ public class RegraNegocioClinica implements InterfaceRegraNegocioClinica {
         if(cnpj == null) {
             throw new ExceptionClinicaEscrita();
         }       
-        if(cnpj == 0) {
+        if(cnpj <= 0) {
             throw new ExceptionClinicaEscrita();
         }
         if(this.repositorioClinica.exists(cnpj)==false) {
@@ -121,7 +119,7 @@ public class RegraNegocioClinica implements InterfaceRegraNegocioClinica {
         if(cnpj == null) {
             throw new ExceptionClinicaLeitura();
         }
-        if(cnpj == 0) {
+        if(cnpj <= 0) {
             throw new ExceptionClinicaLeitura();
         }
         else {
