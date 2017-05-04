@@ -20,34 +20,85 @@ public class RegraNegocioLogAcesso implements InterfaceRegraNegocioLogAcesso {
     @Autowired
     private InterfaceRepositorioLogAcesso repositorioLogAcesso;
     
+    
+    
     @Override
     public void gerarLogAcesso(LogAcesso logAcesso) throws ExceptionLogAcessoEscrita {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+       
+        if(logAcesso == null) {
+            throw new ExceptionLogAcessoEscrita();
+        }
+        if(logAcesso.getCodigoUsuario()<=0) {
+            throw new ExceptionLogAcessoEscrita();
+        }
+        if(logAcesso.getCodigoUsuario() == null) {
+            throw new ExceptionLogAcessoEscrita();
+        }
+        if(logAcesso.getDiaAcesso() == null) {
+            throw new ExceptionLogAcessoEscrita();
+        }
+        if(logAcesso.getHoraAcesso() == null) {
+            throw new ExceptionLogAcessoEscrita();
+        }
+        else {
+            this.repositorioLogAcesso.save(logAcesso);
+        }
     }
 
     @Override
     public List<LogAcesso> listarLogsAcesso() throws ExceptionLogAcessoLeitura {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
+        return this.repositorioLogAcesso.findAll();
     }
 
     @Override
     public List<LogAcesso> filtrarLogAcessoCodigoUsuario(Long codigoUsuario) throws ExceptionLogAcessoLeitura {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+      
+        if(codigoUsuario == null) {
+            throw new ExceptionLogAcessoLeitura();
+        }
+        if(codigoUsuario<=0) {
+            throw new ExceptionLogAcessoLeitura();
+        }
+        else {
+            return this.repositorioLogAcesso.findByCodigoUsuario(codigoUsuario);
+        }
     }
 
     @Override
     public LogAcesso filtrarLogAcessoDataAndHoraAcesso(Date diaAcesso, Date horaAcesso) throws ExceptionLogAcessoLeitura {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
+        if(diaAcesso == null) {
+            throw new ExceptionLogAcessoLeitura();
+        }
+        if(horaAcesso == null) {
+            throw new ExceptionLogAcessoLeitura();
+        }
+        else {
+            return this.repositorioLogAcesso.findBydiaAcessoAndHoraAcesso(diaAcesso, horaAcesso);
+        }
     }
 
     @Override
     public List<LogAcesso> filtrarLogAcessoData(Date diaAcesso) throws ExceptionLogAcessoLeitura {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
+        if(diaAcesso == null) {
+            throw new ExceptionLogAcessoLeitura();
+        }
+        else {
+            return this.repositorioLogAcesso.findByDiaAcesso(diaAcesso);
+        }
     }
 
     @Override
     public LogAcesso filtrarLogAcessoCodigo(int codigoLogAcesso) throws ExceptionLogAcessoLeitura {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
+        if(codigoLogAcesso<=0) {
+            throw new ExceptionLogAcessoLeitura();
+        }
+        else {
+            return this.repositorioLogAcesso.findByCodigoAcesso(codigoLogAcesso);
+        }
     }
 
     public InterfaceRepositorioLogAcesso getRepositorioLogAcesso() {

@@ -33,39 +33,147 @@ public class RegraNegocioConsultas implements InterfaceRegraNegocioConsultas {
     
     @Override
     public void marcarConsulta(Consultas consulta, Long cpfMedico, Long cpfPaciente, int tipoConsulta) throws ExceptionConsultasEscrita {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
+        if(consulta == null) {
+            throw new ExceptionConsultasEscrita();
+        }
+        if(cpfMedico == null) {
+            throw new ExceptionConsultasEscrita();
+        }
+        if(cpfMedico<=0) {
+            throw new ExceptionConsultasEscrita();
+        }
+        if(cpfPaciente == null) {
+            throw new ExceptionConsultasEscrita();
+        }
+        if(cpfPaciente<=0) {
+            throw new ExceptionConsultasEscrita();
+        }
+        if(tipoConsulta<=0) {
+            throw new ExceptionConsultasEscrita();
+        }
+        else {
+            consulta.setMedico(this.repositorioMedicos.findByCpf(cpfMedico));
+            consulta.setPaciente(this.repositorioPacientes.findByCpf(cpfPaciente));
+            consulta.setTipoConsulta(this.repositorioTiposConsultas.findByCodigoTipoConsulta(tipoConsulta));
+            
+        }
+        if(consulta.getMedico() == null) {
+            throw new ExceptionConsultasEscrita();
+        }
+        if(consulta.getPaciente() == null) {
+            throw new ExceptionConsultasEscrita();
+        }
+        if(consulta.getTipoConsulta() == null) {
+            throw new ExceptionConsultasEscrita();
+        }
+        if(consulta.getDataConsulta() == null) {
+            throw new ExceptionConsultasEscrita();
+        }
+        if(consulta.getHoraConsulta() == null) {
+            throw new ExceptionConsultasEscrita();
+        }
+        
+        else {
+            this.repositorioConsultas.save(consulta);
+        }
     }
 
     @Override
     public void atualizarConsulta(Consultas consulta) throws ExceptionConsultasEscrita {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
+        if(consulta == null) {
+            throw new ExceptionConsultasEscrita();
+        }
+        if(consulta.getCodigoConsulta()<=0) {
+            throw new ExceptionConsultasEscrita();
+        }
+        if(consulta.getMedico() == null) {
+            throw new ExceptionConsultasEscrita();
+        }
+        if(consulta.getPaciente() == null) {
+            throw new ExceptionConsultasEscrita();
+        }
+        if(consulta.getTipoConsulta() == null) {
+            throw new ExceptionConsultasEscrita();
+        }
+        if(consulta.getDataConsulta() == null) {
+            throw new ExceptionConsultasEscrita();
+        }
+        if(consulta.getHoraConsulta() == null) {
+            throw new ExceptionConsultasEscrita();
+        }
+        if(this.repositorioConsultas.exists(consulta.getCodigoConsulta()) == false) {
+            throw new ExceptionConsultasEscrita();
+        }
+        else  {
+            Consultas novaConsulta = this.repositorioConsultas.findByCodigoConsulta(consulta.getCodigoConsulta());
+            
+              novaConsulta.setDataConsulta(consulta.getDataConsulta());
+              novaConsulta.setHoraConsulta(consulta.getHoraConsulta());
+              
+                 this.repositorioConsultas.save(novaConsulta);
+        }
+
     }
 
     @Override
     public void desmarcarConsulta(int codigoConsulta) throws ExceptionConsultasEscrita {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
+        if(codigoConsulta<=0) {
+            throw new ExceptionConsultasEscrita();
+        }
+        if(this.repositorioConsultas.exists(codigoConsulta)==false) {
+            throw new ExceptionConsultasEscrita();
+        }
+        else {
+            this.repositorioConsultas.delete(codigoConsulta);
+        }
     }
 
     @Override
     public List<Consultas> listarConsultas() throws ExceptionConsultasLeitura {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
+        return this.repositorioConsultas.findAll();
     }
 
     @Override
     public List<Consultas> filtrarConsultaDataConsulta(Date dataConsulta) throws ExceptionConsultasLeitura {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+       
+        if(dataConsulta == null) {
+            throw new ExceptionConsultasLeitura();
+        }
+        else {
+            return this.repositorioConsultas.findByDataConsultaStartingWithOrderByDataConsulta(dataConsulta);
+        }
     }
 
     @Override
     public Consultas filtrarConsultaCodigo(int codigoConsulta) throws ExceptionConsultasLeitura {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
+        if(codigoConsulta<=0) {
+            throw new ExceptionConsultasLeitura();
+        }
+        else {
+            return this.repositorioConsultas.findByCodigoConsulta(codigoConsulta);
+        }
     }
 
     @Override
     public Consultas filtrarConsultaDataAndHoraConsulta(Date dataConsulta, Date horaConsulta) throws ExceptionConsultasLeitura {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
+        if(dataConsulta == null) {
+            throw new ExceptionConsultasLeitura();
+        }  
+        if(horaConsulta == null) {
+            throw new ExceptionConsultasLeitura();
+        }
+        else {
+            return this.repositorioConsultas.findByDataConsultaAndHoraConsultaStartingWithOrderByDataConsulta(dataConsulta, horaConsulta);
+        }
     }
 
+    
     public InterfaceRepositorioConsultas getRepositorioConsultas() {
         return repositorioConsultas;
     }

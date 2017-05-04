@@ -78,6 +78,12 @@ public class RegraNegocioReceitas implements InterfaceRegraNegocioReceitas {
         if(receita.getCodigoReceita()<=0) {
             throw new ExceptionReceitasEscrita();
         }
+        if(receita.getMedico() == null) {
+            throw new ExceptionReceitasEscrita();
+        }
+        if(receita.getPaciente() == null) {
+            throw new ExceptionReceitasEscrita();
+        }
         if(this.repositorioReceitas.exists(receita.getCodigoReceita())==false) {
             throw new ExceptionReceitasEscrita();
         }
