@@ -1,6 +1,8 @@
 
 package br.gl.glClinica.regraNegocio;
 
+import br.gl.glClinica.entidades.Exames;
+import br.gl.glClinica.entidades.Medicamentos;
 import br.gl.glClinica.entidades.Receitas;
 import br.gl.glClinica.persistencia.InterfaceRepositorioExames;
 import br.gl.glClinica.persistencia.InterfaceRepositorioMedicamentos;
@@ -9,6 +11,8 @@ import br.gl.glClinica.persistencia.InterfaceRepositorioPacientes;
 import br.gl.glClinica.persistencia.InterfaceRepositorioReceitas;
 import br.gl.glClinica.regraNegocioException.ExceptionReceitasEscrita;
 import br.gl.glClinica.regraNegocioException.ExceptionReceitasLeitura;
+import java.util.ArrayList;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -123,12 +127,61 @@ public class RegraNegocioReceitas implements InterfaceRegraNegocioReceitas {
 
     @Override
     public void inserirExameReceita(int codigoReceita, int codigoExame) throws ExceptionReceitasEscrita {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
+        if(codigoReceita <= 0 ) {
+            throw new ExceptionReceitasEscrita();
+        }
+        if(codigoExame <= 0 ) {
+            throw new ExceptionReceitasEscrita();
+        }
+        Receitas receita = this.repositorioReceitas.findByCodigoReceita(codigoReceita);
+        
+        if(receita == null) {
+            throw new ExceptionReceitasEscrita();
+        }
+        Exames exame = this.repositorioExames.findByCodigoExame(codigoExame);
+        
+        if(exame == null) {
+            throw new ExceptionReceitasEscrita();
+        }        
+        else {
+          List<Exames> listaExames = new ArrayList<>();
+           listaExames.add(exame);
+             receita.setExames(listaExames);
+          
+                 this.repositorioReceitas.save(receita);
+        }
     }
 
     @Override
     public void inserirMedicamentoReceita(int codigoReceita, int codigoMedicamento) throws ExceptionReceitasEscrita {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
+        if(codigoReceita <=0) {
+            throw new ExceptionReceitasEscrita();
+        }
+        if(codigoMedicamento<=0) {
+            throw new ExceptionReceitasEscrita();
+        }
+        
+        Receitas receita = this.repositorioReceitas.findByCodigoReceita(codigoReceita);
+        
+        if(receita == null) {
+            throw new ExceptionReceitasEscrita();
+        }
+        
+        Medicamentos medicamento = this.repositorioMedicamentos.findByCodigoMedicamento(codigoMedicamento);
+        
+        if(medicamento == null) {
+            throw new ExceptionReceitasEscrita();
+        }
+        else {
+            List<Medicamentos> listaMedicamentos = new ArrayList<>();
+             listaMedicamentos.add(medicamento);
+               receita.setMedicamentos(listaMedicamentos);
+                 
+                   this.repositorioReceitas.save(receita);
+        }
+        
     }
 
     public InterfaceRepositorioReceitas getRepositorioReceitas() {
