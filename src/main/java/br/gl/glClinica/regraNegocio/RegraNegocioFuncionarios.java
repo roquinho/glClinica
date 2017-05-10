@@ -2,10 +2,13 @@
 package br.gl.glClinica.regraNegocio;
 
 import br.gl.glClinica.entidades.Funcionarios;
+import br.gl.glClinica.entidades.LogAcesso;
 import br.gl.glClinica.persistencia.InterfaceRepositorioCargos;
 import br.gl.glClinica.persistencia.InterfaceRepositorioFuncionarios;
 import br.gl.glClinica.regraNegocioException.ExceptionFuncionariosEscrita;
 import br.gl.glClinica.regraNegocioException.ExceptionFuncionariosLeitura;
+import br.gl.glClinica.regraNegocioException.ExceptionLogAcessoEscrita;
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -23,6 +26,11 @@ public class RegraNegocioFuncionarios implements InterfaceRegraNegocioFuncionari
     private InterfaceRepositorioFuncionarios repositorioFuncionarios;
     @Autowired
     private InterfaceRepositorioCargos repositorioCargos;
+    
+    @Autowired
+    private InterfaceRegraNegocioLogAcesso regraNegocioLogAcesso;
+    
+    
     
     @Override
     public void cadastrarFuncionario(Funcionarios funcionario, int codigoCargo) throws ExceptionFuncionariosEscrita {
@@ -103,7 +111,19 @@ public class RegraNegocioFuncionarios implements InterfaceRegraNegocioFuncionari
             throw new ExceptionFuncionariosEscrita();
         }
         else {
-            this.repositorioFuncionarios.save(funcionario);
+            
+            Funcionarios novoFuncionario = this.repositorioFuncionarios.findByCpf(funcionario.getCpf());
+            
+               novoFuncionario.setContadorAcesso(funcionario.getContadorAcesso());
+               novoFuncionario.setEndereco(funcionario.getEndereco());
+               novoFuncionario.setNome(funcionario.getNome());
+               novoFuncionario.setNomeUsuario(funcionario.getNomeUsuario());
+               novoFuncionario.setRg(funcionario.getRg());
+               novoFuncionario.setSenha(funcionario.getSenha());
+               novoFuncionario.setTelefoneCelular(funcionario.getTelefoneCelular());
+               novoFuncionario.setTelefoneFixo(funcionario.getTelefoneFixo());
+               
+                    this.repositorioFuncionarios.save(funcionario);
         }
         
     }
@@ -171,12 +191,23 @@ public class RegraNegocioFuncionarios implements InterfaceRegraNegocioFuncionari
         else {
            funcionario = this.repositorioFuncionarios.findByNomeUsuarioAndSenha(nomeUsuario, senha);
              if(funcionario != null) {
-               try {
-                   funcionario.setContadorAcesso(funcionario.getContadorAcesso()+1);
+                 
+               funcionario.setContadorAcesso(funcionario.getContadorAcesso()+1);
+               
+                 try {                   
                      this.atualizarFuncionario(funcionario);
                } catch (ExceptionFuncionariosEscrita ex) {
                    Logger.getLogger(RegraNegocioFuncionarios.class.getName()).log(Level.SEVERE, null, ex);
                }
+               
+            LogAcesso logAcesso = new LogAcesso(new Date(), new Date(), funcionario.getCpf());
+            
+               try {
+                   this.regraNegocioLogAcesso.gerarLogAcesso(logAcesso);
+               } catch (ExceptionLogAcessoEscrita ex) {
+                   Logger.getLogger(RegraNegocioFuncionarios.class.getName()).log(Level.SEVERE, null, ex);
+               }
+                    
              }
               
         }
@@ -197,6 +228,14 @@ public class RegraNegocioFuncionarios implements InterfaceRegraNegocioFuncionari
 
     public void setRepositorioCargos(InterfaceRepositorioCargos repositorioCargos) {
         this.repositorioCargos = repositorioCargos;
+    }
+
+    public InterfaceRegraNegocioLogAcesso getRegraNegocioLogAcesso() {
+        return regraNegocioLogAcesso;
+    }
+
+    public void setRegraNegocioLogAcesso(InterfaceRegraNegocioLogAcesso regraNegocioLogAcesso) {
+        this.regraNegocioLogAcesso = regraNegocioLogAcesso;
     }
     
 }

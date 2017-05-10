@@ -23,11 +23,11 @@ public interface InterfaceRegraNegocioPacientes extends Serializable {
      
      public List<Pacientes> filtrarPacientesNome(String nome)throws ExceptionPacientesLeitura;
      
-     public List<Pacientes> filtrarPacientesLoginNomeSenha(String loginNome, String senha)throws ExceptionPacientesLeitura;
+     public Pacientes filtrarPacientesLoginNomeAndSenha(String loginNome, String senha)throws ExceptionPacientesLeitura;
      
      public Pacientes filtrarPacientesCpf(Long cpf)throws ExceptionPacientesLeitura;
      
-     public void receitarMedicamentoPaciente(Long cpfPaciente,int codigoMedicamento)throws ExceptionPacientesEscrita;
+     public void receitarMedicamentoPaciente(Long cpfPaciente,int codigoMedcicamento)throws ExceptionPacientesEscrita;
      
      public void marcarExamePaciente(Long cpfPaciente,int codigoExame)throws ExceptionPacientesEscrita;
      

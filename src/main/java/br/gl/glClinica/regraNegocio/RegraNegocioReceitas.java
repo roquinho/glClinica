@@ -128,33 +128,36 @@ public class RegraNegocioReceitas implements InterfaceRegraNegocioReceitas {
     @Override
     public void inserirExameReceita(int codigoReceita, int codigoExame) throws ExceptionReceitasEscrita {
         
+        Receitas receita;
+        Exames exame;
+        
         if(codigoReceita <= 0 ) {
             throw new ExceptionReceitasEscrita();
         }
         if(codigoExame <= 0 ) {
             throw new ExceptionReceitasEscrita();
         }
-        Receitas receita = this.repositorioReceitas.findByCodigoReceita(codigoReceita);
-        
+        else {
+            receita = this.repositorioReceitas.findByCodigoReceita(codigoReceita);
+            exame = this.repositorioExames.findByCodigoExame(codigoExame);          
+        }
         if(receita == null) {
             throw new ExceptionReceitasEscrita();
-        }
-        Exames exame = this.repositorioExames.findByCodigoExame(codigoExame);
-        
+        }       
         if(exame == null) {
             throw new ExceptionReceitasEscrita();
         }        
         else {
-          List<Exames> listaExames = new ArrayList<>();
-           listaExames.add(exame);
-             receita.setExames(listaExames);
-          
-                 this.repositorioReceitas.save(receita);
+             receita.getExames().add(exame);
+               this.atualizarReceita(receita);
         }
     }
 
     @Override
     public void inserirMedicamentoReceita(int codigoReceita, int codigoMedicamento) throws ExceptionReceitasEscrita {
+        
+        Receitas receita;
+        Medicamentos medicamento;
         
         if(codigoReceita <=0) {
             throw new ExceptionReceitasEscrita();
@@ -162,26 +165,20 @@ public class RegraNegocioReceitas implements InterfaceRegraNegocioReceitas {
         if(codigoMedicamento<=0) {
             throw new ExceptionReceitasEscrita();
         }
-        
-        Receitas receita = this.repositorioReceitas.findByCodigoReceita(codigoReceita);
-        
+        else {
+           receita = this.repositorioReceitas.findByCodigoReceita(codigoReceita);
+           medicamento = this.repositorioMedicamentos.findByCodigoMedicamento(codigoMedicamento);
+        }        
         if(receita == null) {
             throw new ExceptionReceitasEscrita();
-        }
-        
-        Medicamentos medicamento = this.repositorioMedicamentos.findByCodigoMedicamento(codigoMedicamento);
-        
+        }        
         if(medicamento == null) {
             throw new ExceptionReceitasEscrita();
         }
         else {
-            List<Medicamentos> listaMedicamentos = new ArrayList<>();
-             listaMedicamentos.add(medicamento);
-               receita.setMedicamentos(listaMedicamentos);
-                 
-                   this.repositorioReceitas.save(receita);
-        }
-        
+            receita.getMedicamentos().add(medicamento);                 
+               this.repositorioReceitas.save(receita);
+        }        
     }
 
     public InterfaceRepositorioReceitas getRepositorioReceitas() {

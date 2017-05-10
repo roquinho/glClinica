@@ -1,10 +1,13 @@
 
 package br.gl.glClinica.regraNegocio;
 
+import br.gl.glClinica.entidades.LogAcesso;
 import br.gl.glClinica.entidades.Medicos;
 import br.gl.glClinica.persistencia.InterfaceRepositorioMedicos;
+import br.gl.glClinica.regraNegocioException.ExceptionLogAcessoEscrita;
 import br.gl.glClinica.regraNegocioException.ExceptionMedicosEscrita;
 import br.gl.glClinica.regraNegocioException.ExceptionMedicosLeitura;
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -21,7 +24,8 @@ public class RegraNegocioMedicos implements InterfaceRegraNegocioMedicos {
     @Autowired
     private InterfaceRepositorioMedicos repositorioMedicos;
     
-    
+    @Autowired
+    private InterfaceRegraNegocioLogAcesso regraNegocioLogAcesso;
     
     
     @Override
@@ -102,6 +106,7 @@ public class RegraNegocioMedicos implements InterfaceRegraNegocioMedicos {
                 novoMedico.setSenhaAcesso(medico.getSenhaAcesso());
                 novoMedico.setTelefone(medico.getTelefone());
                 novoMedico.setTelefoneResidencial(medico.getTelefoneResidencial());
+                novoMedico.setContadorAcessos(medico.getContadorAcessos());
                 
                   this.repositorioMedicos.save(novoMedico);
                         
@@ -187,9 +192,33 @@ public class RegraNegocioMedicos implements InterfaceRegraNegocioMedicos {
                 } catch (ExceptionMedicosEscrita ex) {
                     Logger.getLogger(RegraNegocioMedicos.class.getName()).log(Level.SEVERE, null, ex);
                 }
+                
+                LogAcesso logAcesso = new LogAcesso(new Date(), new Date(), medico.getCpf());
+                
+                try {
+                    this.regraNegocioLogAcesso.gerarLogAcesso(logAcesso);
+                } catch (ExceptionLogAcessoEscrita ex) {
+                    Logger.getLogger(RegraNegocioMedicos.class.getName()).log(Level.SEVERE, null, ex);
+                }
               }
         }
         return medico;
+    }
+
+    public InterfaceRepositorioMedicos getRepositorioMedicos() {
+        return repositorioMedicos;
+    }
+
+    public void setRepositorioMedicos(InterfaceRepositorioMedicos repositorioMedicos) {
+        this.repositorioMedicos = repositorioMedicos;
+    }
+
+    public InterfaceRegraNegocioLogAcesso getRegraNegocioLogAcesso() {
+        return regraNegocioLogAcesso;
+    }
+
+    public void setRegraNegocioLogAcesso(InterfaceRegraNegocioLogAcesso regraNegocioLogAcesso) {
+        this.regraNegocioLogAcesso = regraNegocioLogAcesso;
     }
     
     
