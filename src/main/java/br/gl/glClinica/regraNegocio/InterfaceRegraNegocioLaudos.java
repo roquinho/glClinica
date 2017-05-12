@@ -23,4 +23,5 @@ public interface InterfaceRegraNegocioLaudos extends Serializable {
    public List<Laudos> filtrarLaudoData(Date dataLaudo)throws ExceptionLaudosLeitura;
    
    public Laudos filtrarLaudoCodigo(int codigoLaudo)throws ExceptionLaudosLeitura;
+
 }

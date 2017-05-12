@@ -11,8 +11,6 @@ import br.gl.glClinica.persistencia.InterfaceRepositorioPacientes;
 import br.gl.glClinica.persistencia.InterfaceRepositorioReceitas;
 import br.gl.glClinica.regraNegocioException.ExceptionReceitasEscrita;
 import br.gl.glClinica.regraNegocioException.ExceptionReceitasLeitura;
-import java.util.ArrayList;
-import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

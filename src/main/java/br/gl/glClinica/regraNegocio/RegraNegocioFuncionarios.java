@@ -200,13 +200,13 @@ public class RegraNegocioFuncionarios implements InterfaceRegraNegocioFuncionari
                    Logger.getLogger(RegraNegocioFuncionarios.class.getName()).log(Level.SEVERE, null, ex);
                }
                
-            LogAcesso logAcesso = new LogAcesso(new Date(), new Date(), funcionario.getCpf());
+            /*LogAcesso logAcesso = new LogAcesso(new Date(), new Date(), funcionario.getCpf());
             
                try {
                    this.regraNegocioLogAcesso.gerarLogAcesso(logAcesso);
                } catch (ExceptionLogAcessoEscrita ex) {
                    Logger.getLogger(RegraNegocioFuncionarios.class.getName()).log(Level.SEVERE, null, ex);
-               }
+               }*/
                     
              }
               

@@ -8,7 +8,7 @@ import java.io.Serializable;
 import java.util.List;
 
 /**
- *
+ *S
  * @author manoel
  */
 public interface InterfaceRegraNegocioConvenios extends Serializable {
@@ -24,4 +24,5 @@ public interface InterfaceRegraNegocioConvenios extends Serializable {
     public List<Convenios> filtrarConvenioNome(String nomeConvenio)throws ExceptionConveniosLeitura;
     
     public Convenios filtrarConvenioCodigo(int codigoConvenio)throws ExceptionConveniosLeitura;
+
 }

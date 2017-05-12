@@ -193,13 +193,13 @@ public class RegraNegocioMedicos implements InterfaceRegraNegocioMedicos {
                     Logger.getLogger(RegraNegocioMedicos.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 
-                LogAcesso logAcesso = new LogAcesso(new Date(), new Date(), medico.getCpf());
+                /*LogAcesso logAcesso = new LogAcesso(new Date(), new Date(), medico.getCpf());
                 
                 try {
                     this.regraNegocioLogAcesso.gerarLogAcesso(logAcesso);
                 } catch (ExceptionLogAcessoEscrita ex) {
                     Logger.getLogger(RegraNegocioMedicos.class.getName()).log(Level.SEVERE, null, ex);
-                }
+                }*/
               }
         }
         return medico;

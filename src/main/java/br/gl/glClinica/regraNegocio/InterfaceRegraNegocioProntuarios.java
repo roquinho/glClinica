@@ -19,6 +19,7 @@ public interface InterfaceRegraNegocioProntuarios extends Serializable {
   public void deletarProntuario(int codigoProntuario)throws ExceptionProntuariosEscrita;
   
   public Prontuarios filtrarProntuarioCodigo(int codigoProntuario)throws ExceptionProntuariosLeitura;
+
 }
 
 

@@ -13,7 +13,6 @@ import br.gl.glClinica.persistencia.InterfaceRepositorioPacientes;
 import br.gl.glClinica.regraNegocioException.ExceptionLogAcessoEscrita;
 import br.gl.glClinica.regraNegocioException.ExceptionPacientesEscrita;
 import br.gl.glClinica.regraNegocioException.ExceptionPacientesLeitura;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
@@ -189,13 +188,13 @@ public class RegraNegocioPacientes implements InterfaceRegraNegocioPacientes {
                     Logger.getLogger(RegraNegocioPacientes.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 
-                 LogAcesso logAcesso = new LogAcesso(new Date(), new Date(), paciente.getCpf());
+                /* LogAcesso logAcesso = new LogAcesso(new Date(), new Date(), paciente.getCpf());
                  
                 try {
                     this.regraNegocioLogAcesso.gerarLogAcesso(logAcesso);
                 } catch (ExceptionLogAcessoEscrita ex) {
                     Logger.getLogger(RegraNegocioPacientes.class.getName()).log(Level.SEVERE, null, ex);
-                }
+                }*/
              }
          }
          return paciente;

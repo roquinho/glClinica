@@ -25,4 +25,5 @@ public interface InterfaceRegraNegocioLogAcesso extends Serializable {
     public List<LogAcesso> filtrarLogAcessoData(Date diaAcesso)throws ExceptionLogAcessoLeitura;
     
     public LogAcesso filtrarLogAcessoCodigo(int codigoLogAcesso)throws ExceptionLogAcessoLeitura;
+
 }
