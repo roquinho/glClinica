@@ -3,17 +3,14 @@ package br.gl.glClinica.regraNegocio;
 
 import br.gl.glClinica.entidades.Convenios;
 import br.gl.glClinica.entidades.Exames;
-import br.gl.glClinica.entidades.LogAcesso;
 import br.gl.glClinica.entidades.Medicamentos;
 import br.gl.glClinica.entidades.Pacientes;
 import br.gl.glClinica.persistencia.InterfaceRepositorioConvenios;
 import br.gl.glClinica.persistencia.InterfaceRepositorioExames;
 import br.gl.glClinica.persistencia.InterfaceRepositorioMedicamentos;
 import br.gl.glClinica.persistencia.InterfaceRepositorioPacientes;
-import br.gl.glClinica.regraNegocioException.ExceptionLogAcessoEscrita;
 import br.gl.glClinica.regraNegocioException.ExceptionPacientesEscrita;
 import br.gl.glClinica.regraNegocioException.ExceptionPacientesLeitura;
-import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
