@@ -1,10 +1,8 @@
 
 package br.gl.glClinica.ui;
 
-import br.gl.glClinica.entidades.Cargos;
 import br.gl.glClinica.entidades.Consultas;
 import br.gl.glClinica.regraNegocio.Fachada;
-import br.gl.glClinica.regraNegocioException.ExceptionCargosLeitura;
 import br.gl.glClinica.regraNegocioException.ExceptionConsultasLeitura;
 import java.util.Date;
 import java.util.List;
@@ -86,7 +84,7 @@ public class ControllerConsultas {
     }
     
     @RequestMapping(value = "/filtrarData", produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<Consultas> filtrarConsultaDataConsulta(Date dataConsulta) {
+    public List<Consultas> filtrarConsultaDataConsulta(@RequestParam Date dataConsulta) {
         List<Consultas> consulta = null;
         try {
             consulta = this.fachada.filtrarConsultaDataConsulta(dataConsulta);
