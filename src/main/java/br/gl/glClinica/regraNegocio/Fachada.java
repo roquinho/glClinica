@@ -71,13 +71,13 @@ public interface Fachada extends Serializable {
     
     public void atualizarClinica(Clinica clinica)throws ExceptionClinicaEscrita;
     
-    public void deletarClinica(Long cnpj)throws ExceptionClinicaEscrita;
+    public void deletarClinica(String cnpj)throws ExceptionClinicaEscrita;
     
     public List<Clinica> listarClinicas()throws ExceptionClinicaLeitura;
     
     public List<Clinica> filtrarClinicaNome(String nome)throws ExceptionClinicaLeitura;
     
-    public Clinica filtrarClinicaCnpj(Long cnpj)throws ExceptionClinicaLeitura;
+    public Clinica filtrarClinicaCnpj(String cnpj)throws ExceptionClinicaLeitura;
     
     
     

@@ -9,9 +9,9 @@ import org.springframework.data.repository.CrudRepository;
  *
  * @author manoel
  */
-public interface InterfaceRepositorioClinica extends CrudRepository<Clinica, Long> {
+public interface InterfaceRepositorioClinica extends CrudRepository<Clinica, String> {
     
-    public Clinica findByCnpj(Long cnpj);
+    public Clinica findByCnpj(String cnpj);
     
     public List<Clinica> findByNomeStartingWith(String nome);
     

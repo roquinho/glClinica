@@ -50,7 +50,7 @@ public class ControllerClinica {
     }
     
     @RequestMapping("/deletar")
-    public ResponseEntity<?> deletarCLinica(@RequestParam Long cnpj) {
+    public ResponseEntity<?> deletarCLinica(@RequestParam String cnpj) {
         try {
             this.fachada.deletarClinica(cnpj);
         } catch (Exception e) {
@@ -72,7 +72,7 @@ public class ControllerClinica {
     }
  
     @RequestMapping(value = "/filtrarCnpj", produces = MediaType.APPLICATION_JSON_VALUE)
-    public Clinica filtrarClinicaCnpj(@RequestParam Long cnpj) {
+    public Clinica filtrarClinicaCnpj(@RequestParam String cnpj) {
         Clinica clinica = null;
         try {
             clinica = this.fachada.filtrarClinicaCnpj(cnpj);

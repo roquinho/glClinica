@@ -127,7 +127,7 @@ public class FachadaImplementa implements Fachada {
     }
 
     @Override
-    public void deletarClinica(Long cnpj) throws ExceptionClinicaEscrita {
+    public void deletarClinica(String cnpj) throws ExceptionClinicaEscrita {
         this.regraNegocioClinica.deletarClinica(cnpj);
     }
 
@@ -142,7 +142,7 @@ public class FachadaImplementa implements Fachada {
     }
 
     @Override
-    public Clinica filtrarClinicaCnpj(Long cnpj) throws ExceptionClinicaLeitura {
+    public Clinica filtrarClinicaCnpj(String cnpj) throws ExceptionClinicaLeitura {
        return this.regraNegocioClinica.filtrarClinicaCnpj(cnpj);
     }
 

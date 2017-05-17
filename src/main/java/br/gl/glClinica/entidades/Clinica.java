@@ -13,7 +13,7 @@ import javax.persistence.Id;
 @Entity
 public class Clinica implements Serializable {
     
-    private Long cnpj;
+    private String cnpj;
     private String nome;
     private String especialidades;
     private String endereco;
@@ -31,7 +31,7 @@ public class Clinica implements Serializable {
         
     }
 
-    public Clinica(Long cnpj, String nome, String especialidades, String endereco, String telefone, String email) {
+    public Clinica(String cnpj, String nome, String especialidades, String endereco, String telefone, String email) {
         this.cnpj = cnpj;
         this.nome = nome;
         this.especialidades = especialidades;
@@ -119,11 +119,11 @@ public class Clinica implements Serializable {
     }
 
     @Id
-    public Long getCnpj() {
+    public String getCnpj() {
         return cnpj;
     }
 
-    public void setCnpj(Long cnpj) {
+    public void setCnpj(String cnpj) {
         this.cnpj = cnpj;
     }
 

@@ -28,9 +28,6 @@ public class RegraNegocioClinica implements InterfaceRegraNegocioClinica {
         if(clinica.getCnpj()==null) {
             throw new ExceptionClinicaEscrita();
         }
-        if(clinica.getCnpj() <= 0) {
-            throw new ExceptionClinicaEscrita();
-        }
         if(clinica.getEndereco()==null) {
             throw new ExceptionClinicaEscrita();
         }
@@ -52,9 +49,6 @@ public class RegraNegocioClinica implements InterfaceRegraNegocioClinica {
             throw new ExceptionClinicaEscrita();
         }
         if(clinica.getCnpj()==null) {
-            throw new ExceptionClinicaEscrita();
-        }
-        if(clinica.getCnpj() <= 0) {
             throw new ExceptionClinicaEscrita();
         }
         if(clinica.getEndereco()==null) {
@@ -80,14 +74,11 @@ public class RegraNegocioClinica implements InterfaceRegraNegocioClinica {
     }
 
     @Override
-    public void deletarClinica(Long cnpj) throws ExceptionClinicaEscrita {
+    public void deletarClinica(String cnpj) throws ExceptionClinicaEscrita {
         
         if(cnpj == null) {
             throw new ExceptionClinicaEscrita();
         }       
-        if(cnpj <= 0) {
-            throw new ExceptionClinicaEscrita();
-        }
         if(this.repositorioClinica.exists(cnpj)==false) {
             throw new ExceptionClinicaEscrita();
         }
@@ -114,12 +105,9 @@ public class RegraNegocioClinica implements InterfaceRegraNegocioClinica {
     }
 
     @Override
-    public Clinica filtrarClinicaCnpj(Long cnpj) throws ExceptionClinicaLeitura {
+    public Clinica filtrarClinicaCnpj(String cnpj) throws ExceptionClinicaLeitura {
         
         if(cnpj == null) {
-            throw new ExceptionClinicaLeitura();
-        }
-        if(cnpj <= 0) {
             throw new ExceptionClinicaLeitura();
         }
         else {
