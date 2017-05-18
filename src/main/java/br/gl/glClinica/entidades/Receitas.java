@@ -106,7 +106,7 @@ public class Receitas implements Serializable {
         this.dataReceita = dataReceita;
     }
      
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     public List<Medicamentos> getMedicamentos() {
         return medicamentos;
     }
@@ -116,7 +116,7 @@ public class Receitas implements Serializable {
     }
     
     
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     public List<Exames> getExames() {
         return exames;
     }

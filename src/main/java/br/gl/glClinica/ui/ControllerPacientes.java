@@ -96,7 +96,7 @@ public class ControllerPacientes {
     public Pacientes filtrarPacientesUsuarioAndSenha(@RequestParam String usuario, @RequestParam String senha) {
         Pacientes paciente = null;
         try {
-            paciente = this.fachada.filtrarPacientesLoginNomeAndSenha(senha, senha);
+            paciente = this.fachada.filtrarPacientesLoginNomeAndSenha(usuario, senha);
         } catch (ExceptionPacientesLeitura ex) {
             Logger.getLogger(ControllerPacientes.class.getName()).log(Level.SEVERE, null, ex);
         }

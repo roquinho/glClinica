@@ -88,15 +88,6 @@ public class RegraNegocioConsultas implements InterfaceRegraNegocioConsultas {
         if(consulta.getCodigoConsulta()<=0) {
             throw new ExceptionConsultasEscrita();
         }
-        if(consulta.getMedico() == null) {
-            throw new ExceptionConsultasEscrita();
-        }
-        if(consulta.getPaciente() == null) {
-            throw new ExceptionConsultasEscrita();
-        }
-        if(consulta.getTipoConsulta() == null) {
-            throw new ExceptionConsultasEscrita();
-        }
         if(consulta.getDataConsulta() == null) {
             throw new ExceptionConsultasEscrita();
         }

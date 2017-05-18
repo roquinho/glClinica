@@ -52,9 +52,9 @@ public class ControllerFuncionarios {
     }
     
     @RequestMapping("/deletar")
-    public ResponseEntity<?> deletarFuncionario(@RequestParam Long cnpj) {
+    public ResponseEntity<?> deletarFuncionario(@RequestParam Long cpf) {
         try {
-            this.fachada.deletarFuncionario(cnpj);
+            this.fachada.deletarFuncionario(cpf);
         } catch (Exception e) {
             return new ResponseEntity<>(e, HttpStatus.BAD_REQUEST);
         }

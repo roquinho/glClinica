@@ -77,12 +77,6 @@ public class RegraNegocioLaudos implements InterfaceRegraNegocioLaudos {
         if(laudo.getCodigoLaudo()<=0) {
             throw new ExceptionLaudosEscrita();
         }
-        if(laudo.getMedico() == null) {
-            throw new ExceptionLaudosEscrita();
-        }
-        if(laudo.getPaciente() == null) {
-            throw new ExceptionLaudosEscrita();
-        }
         if(laudo.getDataLaudo() == null) {
             throw new ExceptionLaudosEscrita();
         }
@@ -134,7 +128,7 @@ public class RegraNegocioLaudos implements InterfaceRegraNegocioLaudos {
             throw new ExceptionLaudosLeitura();
         }
         else {
-            return this.filtrarLaudoCodigo(codigoLaudo);
+            return this.repositorioLaudos.findByCodigoLaudo(codigoLaudo);
         }
     }
 

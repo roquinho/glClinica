@@ -304,7 +304,7 @@ public class Pacientes implements Serializable{
         this.quantidadeAcessos = quantidadeAcessos;
     }
     
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     public List<Medicamentos> getMedicamentos() {
         return medicamentos;
     }
@@ -313,7 +313,7 @@ public class Pacientes implements Serializable{
         this.medicamentos = medicamentos;
     }
     
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     public List<Convenios> getConvenios() {
         return convenios;
     }
@@ -322,7 +322,7 @@ public class Pacientes implements Serializable{
         this.convenios = convenios;
     }
     
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     public List<Exames> getExames() {
         return exames;
     }

@@ -120,6 +120,7 @@ public class RegraNegocioPacientes implements InterfaceRegraNegocioPacientes {
               novoPaciente.setSexo(paciente.getSexo());
               novoPaciente.setTelefoneCelular(paciente.getTelefoneCelular());
               novoPaciente.setTelefoneFixo(paciente.getTelefoneFixo());
+              novoPaciente.setQuantidadeAcessos(paciente.getQuantidadeAcessos());
               
                   this.repositorioPacientes.save(novoPaciente);
         }

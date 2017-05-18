@@ -2,13 +2,10 @@
 package br.gl.glClinica.regraNegocio;
 
 import br.gl.glClinica.entidades.Funcionarios;
-import br.gl.glClinica.entidades.LogAcesso;
 import br.gl.glClinica.persistencia.InterfaceRepositorioCargos;
 import br.gl.glClinica.persistencia.InterfaceRepositorioFuncionarios;
 import br.gl.glClinica.regraNegocioException.ExceptionFuncionariosEscrita;
 import br.gl.glClinica.regraNegocioException.ExceptionFuncionariosLeitura;
-import br.gl.glClinica.regraNegocioException.ExceptionLogAcessoEscrita;
-import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -80,9 +77,6 @@ public class RegraNegocioFuncionarios implements InterfaceRegraNegocioFuncionari
     public void atualizarFuncionario(Funcionarios funcionario) throws ExceptionFuncionariosEscrita {
         
         
-        if(funcionario.getCargo() == null) {
-            throw new ExceptionFuncionariosEscrita();
-        }
         if(funcionario == null) {
             throw new ExceptionFuncionariosEscrita();
         }
@@ -109,7 +103,7 @@ public class RegraNegocioFuncionarios implements InterfaceRegraNegocioFuncionari
         }
         if(this.repositorioFuncionarios.exists(funcionario.getCpf())==false) {
             throw new ExceptionFuncionariosEscrita();
-        }
+        }        
         else {
             
             Funcionarios novoFuncionario = this.repositorioFuncionarios.findByCpf(funcionario.getCpf());
@@ -123,7 +117,7 @@ public class RegraNegocioFuncionarios implements InterfaceRegraNegocioFuncionari
                novoFuncionario.setTelefoneCelular(funcionario.getTelefoneCelular());
                novoFuncionario.setTelefoneFixo(funcionario.getTelefoneFixo());
                
-                    this.repositorioFuncionarios.save(funcionario);
+                    this.repositorioFuncionarios.save(novoFuncionario);
         }
         
     }
