@@ -84,15 +84,6 @@ public class RegraNegocioProntuarios implements InterfaceRegraNegocioProntuarios
         if(prontuarios.getCodigoProntuario()<=0) {
             throw new ExceptionProntuariosEscrita();
         }
-        if(prontuarios.getExame() == null) {
-            throw new ExceptionProntuariosEscrita();
-        }
-        if(prontuarios.getMedicamento() == null) {
-            throw new ExceptionProntuariosEscrita();
-        }
-        if(prontuarios.getPaciente() == null) {
-            throw new ExceptionProntuariosEscrita();
-        }
         if(prontuarios.getDataExame() == null) {
             throw new ExceptionProntuariosEscrita();
         }
@@ -111,8 +102,9 @@ public class RegraNegocioProntuarios implements InterfaceRegraNegocioProntuarios
                 novoProntuario.setDataExame(prontuarios.getDataExame());
                 novoProntuario.setDataFimTratamento(prontuarios.getDataFimTratamento());
                 novoProntuario.setDataInicioTratamento(prontuarios.getDataInicioTratamento());
-                novoProntuario.setPosologiaReceitada(prontuarios.getObservacoes());
+                novoProntuario.setPosologiaReceitada(prontuarios.getPosologiaReceitada());
                 novoProntuario.setResultadoExame(prontuarios.getResultadoExame());
+                novoProntuario.setObservacoes(prontuarios.getObservacoes());
                 
                    this.repositorioProntuarios.save(novoProntuario);
                 
