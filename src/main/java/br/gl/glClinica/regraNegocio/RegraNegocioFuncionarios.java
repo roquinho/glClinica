@@ -115,7 +115,7 @@ public class RegraNegocioFuncionarios implements InterfaceRegraNegocioFuncionari
                novoFuncionario.setRg(funcionario.getRg());
                novoFuncionario.setSenha(funcionario.getSenha());
                novoFuncionario.setTelefoneCelular(funcionario.getTelefoneCelular());
-               novoFuncionario.setTelefoneFixo(funcionario.getTelefoneFixo());
+               novoFuncionario.setTelefoneFixo(funcionario.getTelefoneFixo());               
                
                     this.repositorioFuncionarios.save(novoFuncionario);
         }
