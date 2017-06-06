@@ -11,6 +11,7 @@ import br.gl.glClinica.persistencia.InterfaceRepositorioMedicamentos;
 import br.gl.glClinica.persistencia.InterfaceRepositorioPacientes;
 import br.gl.glClinica.regraNegocioException.ExceptionPacientesEscrita;
 import br.gl.glClinica.regraNegocioException.ExceptionPacientesLeitura;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -238,8 +239,8 @@ public class RegraNegocioPacientes implements InterfaceRegraNegocioPacientes {
             throw new ExceptionPacientesEscrita();
         }                                
         else {
-            paciente.getMedicamentos().add(medicamento);
-              this.atualizarPacientes(paciente);              
+              paciente.getMedicamentos().add(medicamento);
+              this.repositorioPacientes.save(paciente);
         }
     }
 
@@ -270,7 +271,7 @@ public class RegraNegocioPacientes implements InterfaceRegraNegocioPacientes {
         }
         else {
            paciente.getExames().add(exame);
-             this.atualizarPacientes(paciente);
+           this.repositorioPacientes.save(paciente);
         } 
     }
 
@@ -301,7 +302,7 @@ public class RegraNegocioPacientes implements InterfaceRegraNegocioPacientes {
         }
         else {
            paciente.getConvenios().add(convenio);            
-              this.atualizarPacientes(paciente);
+           this.repositorioPacientes.save(paciente);
         }
     }
 

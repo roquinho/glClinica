@@ -147,7 +147,7 @@ public class RegraNegocioReceitas implements InterfaceRegraNegocioReceitas {
         }        
         else {
              receita.getExames().add(exame);
-               this.atualizarReceita(receita);
+             this.repositorioReceitas.save(receita);
         }
     }
 
@@ -175,7 +175,7 @@ public class RegraNegocioReceitas implements InterfaceRegraNegocioReceitas {
         }
         else {
             receita.getMedicamentos().add(medicamento);                 
-               this.repositorioReceitas.save(receita);
+            this.repositorioReceitas.save(receita);
         }        
     }
 
