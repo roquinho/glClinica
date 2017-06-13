@@ -15,6 +15,8 @@ import br.gl.glClinica.entidades.Pacientes;
 import br.gl.glClinica.entidades.Prontuarios;
 import br.gl.glClinica.entidades.Receitas;
 import br.gl.glClinica.entidades.TiposConsultas;
+import br.gl.glClinica.listarEntidades.ListarCargos;
+import br.gl.glClinica.listarEntidades.ListarFuncionarios;
 import br.gl.glClinica.regraNegocioException.ExceptionCargosEscrita;
 import br.gl.glClinica.regraNegocioException.ExceptionCargosLeitura;
 import br.gl.glClinica.regraNegocioException.ExceptionClinicaEscrita;
@@ -59,11 +61,11 @@ public interface Fachada extends Serializable {
     
     public void deletarCargo(int codigoCargo)throws ExceptionCargosEscrita;
     
-    public List<Cargos> listarCargos()throws ExceptionCargosLeitura;
+    public List<ListarCargos> listarCargos()throws ExceptionCargosLeitura;
     
-    public Cargos filtrarCargoCodigo(int codigoCargo)throws ExceptionCargosLeitura;
+    public ListarCargos filtrarCargoCodigo(int codigoCargo)throws ExceptionCargosLeitura;
     
-    public List<Cargos> filtrarCargoNome(String nomeCargo)throws ExceptionCargosLeitura;
+    public List<ListarCargos> filtrarCargoNome(String nomeCargo)throws ExceptionCargosLeitura;
     
     
     
@@ -131,13 +133,13 @@ public interface Fachada extends Serializable {
   
     public void deletarFuncionario(Long cpf)throws ExceptionFuncionariosEscrita;
   
-    public List<Funcionarios> listarFuncionarios()throws ExceptionFuncionariosLeitura;
+    public List<ListarFuncionarios> listarFuncionarios()throws ExceptionFuncionariosLeitura;
   
-    public List<Funcionarios> filtrarFuncionariosNome(String nome)throws ExceptionFuncionariosLeitura;
+    public List<ListarFuncionarios> filtrarFuncionariosNome(String nome)throws ExceptionFuncionariosLeitura;
   
-    public Funcionarios filtrarFuncionarioCpf(Long cpf)throws ExceptionFuncionariosLeitura;
+    public ListarFuncionarios filtrarFuncionarioCpf(Long cpf)throws ExceptionFuncionariosLeitura;
   
-    public Funcionarios filtrarFuncionarioNomeUsuarioAndSenha(String nomeUsuario, String senha)throws ExceptionFuncionariosLeitura;
+    public ListarFuncionarios filtrarFuncionarioNomeUsuarioAndSenha(String nomeUsuario, String senha)throws ExceptionFuncionariosLeitura;
   
     
     

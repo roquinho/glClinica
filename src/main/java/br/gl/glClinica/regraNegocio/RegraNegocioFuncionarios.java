@@ -2,10 +2,12 @@
 package br.gl.glClinica.regraNegocio;
 
 import br.gl.glClinica.entidades.Funcionarios;
+import br.gl.glClinica.listarEntidades.ListarFuncionarios;
 import br.gl.glClinica.persistencia.InterfaceRepositorioCargos;
 import br.gl.glClinica.persistencia.InterfaceRepositorioFuncionarios;
 import br.gl.glClinica.regraNegocioException.ExceptionFuncionariosEscrita;
 import br.gl.glClinica.regraNegocioException.ExceptionFuncionariosLeitura;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -140,25 +142,43 @@ public class RegraNegocioFuncionarios implements InterfaceRegraNegocioFuncionari
     }
 
     @Override
-    public List<Funcionarios> listarFuncionarios() throws ExceptionFuncionariosLeitura {
-         
-        return this.repositorioFuncionarios.findAll();
+    public List<ListarFuncionarios> listarFuncionarios() throws ExceptionFuncionariosLeitura {
+       List<ListarFuncionarios> listaListaFuncionarios = null;  
+        List<Funcionarios> listaFuncionariosBD = this.repositorioFuncionarios.findAll();
+         if(listaFuncionariosBD!=null) {
+          listaListaFuncionarios = new ArrayList<>();
+            for(int i=0; i<listaFuncionariosBD.size(); i++) {
+              ListarFuncionarios listarFuncionarios = new ListarFuncionarios(listaFuncionariosBD.get(i));
+                listaListaFuncionarios.add(listarFuncionarios);
+            }
+      } 
+      return listaListaFuncionarios;
     }
 
     @Override
-    public List<Funcionarios> filtrarFuncionariosNome(String nome) throws ExceptionFuncionariosLeitura {
-        
+    public List<ListarFuncionarios> filtrarFuncionariosNome(String nome) throws ExceptionFuncionariosLeitura {
+      List<ListarFuncionarios> listaListaFuncionarios = null;
+      
         if(nome == null) {
             throw new ExceptionFuncionariosLeitura();
         }
         else {
-           return this.repositorioFuncionarios.findByNomeStartingWith(nome);
+           List<Funcionarios> listaFuncionariosDB = this.repositorioFuncionarios.findByNomeStartingWith(nome);
+        if(listaFuncionariosDB!=null) {
+            listaListaFuncionarios = new ArrayList<>();
+              for(int i=0; i<listaFuncionariosDB.size(); i++) {
+              ListarFuncionarios listaFuncionarios = new ListarFuncionarios(listaFuncionariosDB.get(i));
+                listaListaFuncionarios.add(listaFuncionarios);
+                      }
+        }   
         }
+        return listaListaFuncionarios;
     }
 
     @Override
-    public Funcionarios filtrarFuncionarioCpf(Long cpf) throws ExceptionFuncionariosLeitura {
-        
+    public ListarFuncionarios filtrarFuncionarioCpf(Long cpf) throws ExceptionFuncionariosLeitura {
+      ListarFuncionarios listaFuncionarios = null;
+      
         if(cpf == null) {
             throw new ExceptionFuncionariosLeitura();
         }
@@ -166,14 +186,18 @@ public class RegraNegocioFuncionarios implements InterfaceRegraNegocioFuncionari
             throw new ExceptionFuncionariosLeitura();
         }
         else {
-            return this.repositorioFuncionarios.findByCpf(cpf);
+            Funcionarios funcionario = this.repositorioFuncionarios.findByCpf(cpf);
+        if(funcionario!=null) {    
+            listaFuncionarios = new ListarFuncionarios(funcionario);
         }
+        }
+        return listaFuncionarios;
         
     }
 
     @Override
-    public Funcionarios filtrarFuncionarioNomeUsuarioAndSenha(String nomeUsuario, String senha) throws ExceptionFuncionariosLeitura {
-       
+    public ListarFuncionarios filtrarFuncionarioNomeUsuarioAndSenha(String nomeUsuario, String senha) throws ExceptionFuncionariosLeitura {
+        ListarFuncionarios listaFuncionarios = null;
         Funcionarios funcionario;
         
         if(nomeUsuario == null) {
@@ -184,10 +208,9 @@ public class RegraNegocioFuncionarios implements InterfaceRegraNegocioFuncionari
         }
         else {
            funcionario = this.repositorioFuncionarios.findByNomeUsuarioAndSenha(nomeUsuario, senha);
-             if(funcionario != null) {
-                 
-               funcionario.setContadorAcesso(funcionario.getContadorAcesso()+1);
-               
+             if(funcionario != null) {                 
+               funcionario.setContadorAcesso(funcionario.getContadorAcesso()+1);                
+                  listaFuncionarios = new ListarFuncionarios(funcionario);
                  try {                   
                      this.atualizarFuncionario(funcionario);
                } catch (ExceptionFuncionariosEscrita ex) {
@@ -205,7 +228,7 @@ public class RegraNegocioFuncionarios implements InterfaceRegraNegocioFuncionari
              }
               
         }
-        return funcionario;        
+        return listaFuncionarios;        
     }
 
     public InterfaceRepositorioFuncionarios getRepositorioFuncionarios() {

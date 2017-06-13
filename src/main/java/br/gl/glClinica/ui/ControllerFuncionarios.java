@@ -2,6 +2,7 @@
 package br.gl.glClinica.ui;
 
 import br.gl.glClinica.entidades.Funcionarios;
+import br.gl.glClinica.listarEntidades.ListarFuncionarios;
 import br.gl.glClinica.regraNegocio.Fachada;
 import br.gl.glClinica.regraNegocioException.ExceptionFuncionariosLeitura;
 import java.util.List;
@@ -62,8 +63,8 @@ public class ControllerFuncionarios {
     }
 
     @RequestMapping(value = "/listar", produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<Funcionarios> listarFuncionarios() {
-        List<Funcionarios> funcionarios = null;
+    public List<ListarFuncionarios> listarFuncionarios() {
+        List<ListarFuncionarios> funcionarios = null;
         try {
             funcionarios = this.fachada.listarFuncionarios();
         } catch (ExceptionFuncionariosLeitura ex) {
@@ -73,8 +74,8 @@ public class ControllerFuncionarios {
     }
     
     @RequestMapping(value = "/filtrarNome", produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<Funcionarios> filtrarFuncionarioNome(@RequestParam String nomeFuncionario) {
-        List<Funcionarios> funcionarios = null;
+    public List<ListarFuncionarios> filtrarFuncionarioNome(@RequestParam String nomeFuncionario) {
+        List<ListarFuncionarios> funcionarios = null;
         try {
             funcionarios = this.fachada.filtrarFuncionariosNome(nomeFuncionario);
         } catch (ExceptionFuncionariosLeitura ex) {
@@ -84,8 +85,8 @@ public class ControllerFuncionarios {
     }
     
     @RequestMapping(value = "/filtrarCpf", produces = MediaType.APPLICATION_JSON_VALUE)
-    public Funcionarios filtrarFuncionarioCpf(@RequestParam Long cpf) {
-        Funcionarios funcionarios = null;
+    public ListarFuncionarios filtrarFuncionarioCpf(@RequestParam Long cpf) {
+        ListarFuncionarios funcionarios = null;
         try {
             funcionarios = this.fachada.filtrarFuncionarioCpf(cpf);
         } catch (ExceptionFuncionariosLeitura ex) {
@@ -95,8 +96,8 @@ public class ControllerFuncionarios {
     }
     
     @RequestMapping(value = "/filtrarLogin", produces = MediaType.APPLICATION_JSON_VALUE)
-    public Funcionarios filtrarNomeUsuarioAndSenha(@RequestParam String nomeUsuario, @RequestParam String senha) {
-        Funcionarios funcionarios = null;
+    public ListarFuncionarios filtrarNomeUsuarioAndSenha(@RequestParam String nomeUsuario, @RequestParam String senha) {
+        ListarFuncionarios funcionarios = null;
         try {
             funcionarios = this.fachada.filtrarFuncionarioNomeUsuarioAndSenha(nomeUsuario, senha);
         } catch (ExceptionFuncionariosLeitura ex) {

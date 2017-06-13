@@ -2,9 +2,11 @@
 package br.gl.glClinica.regraNegocio;
 
 import br.gl.glClinica.entidades.Cargos;
+import br.gl.glClinica.listarEntidades.ListarCargos;
 import br.gl.glClinica.persistencia.InterfaceRepositorioCargos;
 import br.gl.glClinica.regraNegocioException.ExceptionCargosEscrita;
 import br.gl.glClinica.regraNegocioException.ExceptionCargosLeitura;
+import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -82,33 +84,53 @@ public class RegraNegocioCargos implements InterfaceRegraNegocioCargos {
     }
 
     @Override
-    public List<Cargos> listarCargos() throws ExceptionCargosLeitura {
-        
-       return this.repositorioCargos.findAll();
+    public List<ListarCargos> listarCargos() throws ExceptionCargosLeitura {
+      List<ListarCargos> listaListaCargos = null;
+        List<Cargos> listaCargosBD = this.repositorioCargos.findAll();
+          if(listaCargosBD!=null) {
+            listaListaCargos = new ArrayList<>();
+             for(int i=0; i<listaCargosBD.size(); i++) {
+                 ListarCargos listaCargos = new ListarCargos(listaCargosBD.get(i));
+                   listaListaCargos.add(listaCargos);
+             }
+         }
+         return listaListaCargos;
     }
 
     @Override
-    public Cargos filtrarCargoCodigo(int codigoCargo) throws ExceptionCargosLeitura {
-       
+    public ListarCargos filtrarCargoCodigo(int codigoCargo) throws ExceptionCargosLeitura {
+      ListarCargos listaCargos = null;
+      
         if(codigoCargo <= 0) {
             throw new ExceptionCargosLeitura();
         }
-        else {
-          return this.repositorioCargos.findByCodigoCargo(codigoCargo);
+        else {           
+            Cargos cargo = this.repositorioCargos.findByCodigoCargo(codigoCargo);
+        if(cargo !=null) {
+            listaCargos = new ListarCargos(cargo);  
+              }
         }
-        
+       return listaCargos;        
     }
 
     @Override
-    public List<Cargos> filtrarCargoNome(String nomeCargo) throws ExceptionCargosLeitura {
+    public List<ListarCargos> filtrarCargoNome(String nomeCargo) throws ExceptionCargosLeitura {
+      List<ListarCargos> listaListaCargos = null;
         
         if(nomeCargo == null) {
             throw new ExceptionCargosLeitura();
         }
         else {
-            return this.repositorioCargos.findByNomeCargoStartingWith(nomeCargo);
+            List<Cargos> listaCargosDB = this.repositorioCargos.findByNomeCargoStartingWith(nomeCargo);
+        if(listaCargosDB!=null) {    
+            listaListaCargos = new ArrayList<>();
+              for(int i=0; i<listaCargosDB.size(); i++) {              
+               ListarCargos listaCargos = new ListarCargos(listaCargosDB.get(i));
+                 listaListaCargos.add(listaCargos);
+                    }
         }
-        
+        }
+        return listaListaCargos;
     }
 
     public InterfaceRepositorioCargos getRepositorioCargos() {

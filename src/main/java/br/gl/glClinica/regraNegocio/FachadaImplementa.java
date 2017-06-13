@@ -15,6 +15,8 @@ import br.gl.glClinica.entidades.Pacientes;
 import br.gl.glClinica.entidades.Prontuarios;
 import br.gl.glClinica.entidades.Receitas;
 import br.gl.glClinica.entidades.TiposConsultas;
+import br.gl.glClinica.listarEntidades.ListarCargos;
+import br.gl.glClinica.listarEntidades.ListarFuncionarios;
 import br.gl.glClinica.regraNegocioException.ExceptionCargosEscrita;
 import br.gl.glClinica.regraNegocioException.ExceptionCargosLeitura;
 import br.gl.glClinica.regraNegocioException.ExceptionClinicaEscrita;
@@ -102,17 +104,17 @@ public class FachadaImplementa implements Fachada {
     }
 
     @Override
-    public List<Cargos> listarCargos() throws ExceptionCargosLeitura {
+    public List<ListarCargos> listarCargos() throws ExceptionCargosLeitura {
       return this.regraNegocioCargos.listarCargos();
     }
 
     @Override
-    public Cargos filtrarCargoCodigo(int codigoCargo) throws ExceptionCargosLeitura {
+    public ListarCargos filtrarCargoCodigo(int codigoCargo) throws ExceptionCargosLeitura {
       return this.regraNegocioCargos.filtrarCargoCodigo(codigoCargo);
     }
 
     @Override
-    public List<Cargos> filtrarCargoNome(String nomeCargo) throws ExceptionCargosLeitura {
+    public List<ListarCargos> filtrarCargoNome(String nomeCargo) throws ExceptionCargosLeitura {
       return this.regraNegocioCargos.filtrarCargoNome(nomeCargo);
     }
 
@@ -162,22 +164,22 @@ public class FachadaImplementa implements Fachada {
     }
 
     @Override
-    public List<Funcionarios> listarFuncionarios() throws ExceptionFuncionariosLeitura {
+    public List<ListarFuncionarios> listarFuncionarios() throws ExceptionFuncionariosLeitura {
         return this.regraNegocioFuncionarios.listarFuncionarios();
     }
 
     @Override
-    public List<Funcionarios> filtrarFuncionariosNome(String nome) throws ExceptionFuncionariosLeitura {
+    public List<ListarFuncionarios> filtrarFuncionariosNome(String nome) throws ExceptionFuncionariosLeitura {
         return this.regraNegocioFuncionarios.filtrarFuncionariosNome(nome);
     }
 
     @Override
-    public Funcionarios filtrarFuncionarioCpf(Long cpf) throws ExceptionFuncionariosLeitura {
+    public ListarFuncionarios filtrarFuncionarioCpf(Long cpf) throws ExceptionFuncionariosLeitura {
         return this.regraNegocioFuncionarios.filtrarFuncionarioCpf(cpf);
     }
 
     @Override
-    public Funcionarios filtrarFuncionarioNomeUsuarioAndSenha(String nomeUsuario, String senha) throws ExceptionFuncionariosLeitura {
+    public ListarFuncionarios filtrarFuncionarioNomeUsuarioAndSenha(String nomeUsuario, String senha) throws ExceptionFuncionariosLeitura {
         return this.regraNegocioFuncionarios.filtrarFuncionarioNomeUsuarioAndSenha(nomeUsuario, senha);
     }
 

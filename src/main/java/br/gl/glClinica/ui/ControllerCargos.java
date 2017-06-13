@@ -2,6 +2,7 @@
 package br.gl.glClinica.ui;
 
 import br.gl.glClinica.entidades.Cargos;
+import br.gl.glClinica.listarEntidades.ListarCargos;
 import br.gl.glClinica.regraNegocio.Fachada;
 import br.gl.glClinica.regraNegocioException.ExceptionCargosLeitura;
 import java.util.List;
@@ -61,8 +62,8 @@ public class ControllerCargos {
     
     
     @RequestMapping(value = "/listar", produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<Cargos> listarCargos() {
-        List<Cargos> cargos = null;
+    public List<ListarCargos> listarCargos() {
+        List<ListarCargos> cargos = null;
         try {
             cargos = this.fachada.listarCargos();
         } catch (ExceptionCargosLeitura ex) {
@@ -72,8 +73,8 @@ public class ControllerCargos {
     }
  
     @RequestMapping(value = "/filtrarCodigo", produces = MediaType.APPLICATION_JSON_VALUE)
-    public Cargos filtrarCargosCodigo(@RequestParam int codigoCargo) {
-        Cargos cargos = null;
+    public ListarCargos filtrarCargosCodigo(@RequestParam int codigoCargo) {
+        ListarCargos cargos = null;
         try {
             cargos = this.fachada.filtrarCargoCodigo(codigoCargo);
         } catch (ExceptionCargosLeitura ex) {
@@ -83,8 +84,8 @@ public class ControllerCargos {
     }
     
      @RequestMapping(value = "/filtrarNome",produces = MediaType.APPLICATION_JSON_VALUE)
-     public List<Cargos> filtrarCargoNome(@RequestParam String nomeCargo) {
-       List<Cargos> cargos = null;
+     public List<ListarCargos> filtrarCargoNome(@RequestParam String nomeCargo) {
+       List<ListarCargos> cargos = null;
         try {
             cargos = this.fachada.filtrarCargoNome(nomeCargo);
         } catch (ExceptionCargosLeitura ex) {
