@@ -16,7 +16,11 @@ import br.gl.glClinica.entidades.Prontuarios;
 import br.gl.glClinica.entidades.Receitas;
 import br.gl.glClinica.entidades.TiposConsultas;
 import br.gl.glClinica.listarEntidades.ListarCargos;
+import br.gl.glClinica.listarEntidades.ListarConsultas;
 import br.gl.glClinica.listarEntidades.ListarFuncionarios;
+import br.gl.glClinica.listarEntidades.ListarMedicos;
+import br.gl.glClinica.listarEntidades.ListarPacientes;
+import br.gl.glClinica.listarEntidades.ListarTiposConsultas;
 import br.gl.glClinica.regraNegocioException.ExceptionCargosEscrita;
 import br.gl.glClinica.regraNegocioException.ExceptionCargosLeitura;
 import br.gl.glClinica.regraNegocioException.ExceptionClinicaEscrita;
@@ -271,17 +275,17 @@ public class FachadaImplementa implements Fachada {
     }
 
     @Override
-    public List<TiposConsultas> listarTiposConsulta() throws ExceptionTiposConsultasLeitura {
+    public List<ListarTiposConsultas> listarTiposConsulta() throws ExceptionTiposConsultasLeitura {
         return this.regraNegocioTiposConsultas.listarTiposConsulta();
     }
 
     @Override
-    public List<TiposConsultas> filtrarTipoConsultaNome(String nome) throws ExceptionTiposConsultasLeitura {
+    public List<ListarTiposConsultas> filtrarTipoConsultaNome(String nome) throws ExceptionTiposConsultasLeitura {
         return this.regraNegocioTiposConsultas.filtrarTipoConsultaNome(nome);
     }
 
     @Override
-    public TiposConsultas filtrarTipoConsultaCodigo(int codigoTipoConsulta) throws ExceptionTiposConsultasLeitura {
+    public ListarTiposConsultas filtrarTipoConsultaCodigo(int codigoTipoConsulta) throws ExceptionTiposConsultasLeitura {
         return this.regraNegocioTiposConsultas.filtrarTipoConsultaCodigo(codigoTipoConsulta);
     }
 
@@ -331,22 +335,22 @@ public class FachadaImplementa implements Fachada {
     }
 
     @Override
-    public List<Consultas> listarConsultas() throws ExceptionConsultasLeitura {
+    public List<ListarConsultas> listarConsultas() throws ExceptionConsultasLeitura {
         return this.regraNegocioConsultas.listarConsultas();
     }
 
     @Override
-    public List<Consultas> filtrarConsultaDataConsulta(Date dataConsulta) throws ExceptionConsultasLeitura {
+    public List<ListarConsultas> filtrarConsultaDataConsulta(Date dataConsulta) throws ExceptionConsultasLeitura {
         return this.regraNegocioConsultas.filtrarConsultaDataConsulta(dataConsulta);
     }
 
     @Override
-    public Consultas filtrarConsultaCodigo(int codigoConsulta) throws ExceptionConsultasLeitura {
+    public ListarConsultas filtrarConsultaCodigo(int codigoConsulta) throws ExceptionConsultasLeitura {
         return this.regraNegocioConsultas.filtrarConsultaCodigo(codigoConsulta);
     }
 
     @Override
-    public Consultas filtrarConsultaDataAndHoraConsulta(Date dataConsulta, Date horaConsulta) throws ExceptionConsultasLeitura {
+    public ListarConsultas filtrarConsultaDataAndHoraConsulta(Date dataConsulta, Date horaConsulta) throws ExceptionConsultasLeitura {
         return this.regraNegocioConsultas.filtrarConsultaDataAndHoraConsulta(dataConsulta, horaConsulta);
     }
 
@@ -421,27 +425,27 @@ public class FachadaImplementa implements Fachada {
     }
 
     @Override
-    public List<Medicos> listarMedicos() throws ExceptionMedicosLeitura {
+    public List<ListarMedicos> listarMedicos() throws ExceptionMedicosLeitura {
        return this.regraNegocioMedicos.listarMedicos();
     }
 
     @Override
-    public List<Medicos> filtrarMedicoNome(String nome) throws ExceptionMedicosLeitura {
+    public List<ListarMedicos> filtrarMedicoNome(String nome) throws ExceptionMedicosLeitura {
       return this.regraNegocioMedicos.filtrarMedicoNome(nome);
     }
 
     @Override
-    public List<Medicos> filtrarMedicoEspecialidade(String especialidade) throws ExceptionMedicosLeitura {
+    public List<ListarMedicos> filtrarMedicoEspecialidade(String especialidade) throws ExceptionMedicosLeitura {
        return this.regraNegocioMedicos.filtrarMedicoEspecialidade(especialidade);
     }
 
     @Override
-    public Medicos filtrarMedicoCpf(Long cpf) throws ExceptionMedicosLeitura {
+    public ListarMedicos filtrarMedicoCpf(Long cpf) throws ExceptionMedicosLeitura {
         return this.regraNegocioMedicos.filtrarMedicoCpf(cpf);
     }
 
     @Override
-    public Medicos filtrarMedicoUsuarioSenha(String usuario, String senha) throws ExceptionMedicosLeitura {
+    public ListarMedicos filtrarMedicoUsuarioSenha(String usuario, String senha) throws ExceptionMedicosLeitura {
        return this.regraNegocioMedicos.filtrarMedicoUsuarioSenha(usuario, senha);
     }
 
@@ -461,22 +465,22 @@ public class FachadaImplementa implements Fachada {
     }
 
     @Override
-    public List<Pacientes> listarPacientes() throws ExceptionPacientesLeitura {
+    public List<ListarPacientes> listarPacientes() throws ExceptionPacientesLeitura {
         return this.regraNegocioPacientes.listarPacientes();
     }
 
     @Override
-    public List<Pacientes> filtrarPacientesNome(String nome) throws ExceptionPacientesLeitura {
+    public List<ListarPacientes> filtrarPacientesNome(String nome) throws ExceptionPacientesLeitura {
       return this.regraNegocioPacientes.filtrarPacientesNome(nome);
     }
 
     @Override
-    public Pacientes filtrarPacientesLoginNomeAndSenha(String loginNome, String senha) throws ExceptionPacientesLeitura {
+    public ListarPacientes filtrarPacientesLoginNomeAndSenha(String loginNome, String senha) throws ExceptionPacientesLeitura {
        return this.regraNegocioPacientes.filtrarPacientesLoginNomeAndSenha(loginNome, senha);
     }
 
     @Override
-    public Pacientes filtrarPacientesCpf(Long cpf) throws ExceptionPacientesLeitura {
+    public ListarPacientes filtrarPacientesCpf(Long cpf) throws ExceptionPacientesLeitura {
        return this.regraNegocioPacientes.filtrarPacientesCpf(cpf);
     }
 

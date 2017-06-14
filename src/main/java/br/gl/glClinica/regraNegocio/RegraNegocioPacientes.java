@@ -5,6 +5,7 @@ import br.gl.glClinica.entidades.Convenios;
 import br.gl.glClinica.entidades.Exames;
 import br.gl.glClinica.entidades.Medicamentos;
 import br.gl.glClinica.entidades.Pacientes;
+import br.gl.glClinica.listarEntidades.ListarPacientes;
 import br.gl.glClinica.persistencia.InterfaceRepositorioConvenios;
 import br.gl.glClinica.persistencia.InterfaceRepositorioExames;
 import br.gl.glClinica.persistencia.InterfaceRepositorioMedicamentos;
@@ -146,25 +147,41 @@ public class RegraNegocioPacientes implements InterfaceRegraNegocioPacientes {
     }
 
     @Override
-    public List<Pacientes> listarPacientes() throws ExceptionPacientesLeitura {
-        
-        return this.repositorioPacientes.findAll();
+    public List<ListarPacientes> listarPacientes() throws ExceptionPacientesLeitura {
+      List<ListarPacientes> listaListarPacientes = null;  
+        List<Pacientes> listaPacientesBD = this.repositorioPacientes.findAll();
+         if(listaPacientesBD!=null) {
+             listaListarPacientes = new ArrayList<>();
+              for(int i=0; i<listaPacientesBD.size(); i++) {
+                  ListarPacientes listaPacientes = new ListarPacientes(listaPacientesBD.get(i));
+                    listaListarPacientes.add(listaPacientes);
+              }
+         }
+       return listaListarPacientes;  
     }
 
     @Override
-    public List<Pacientes> filtrarPacientesNome(String nome) throws ExceptionPacientesLeitura {
-        
+    public List<ListarPacientes> filtrarPacientesNome(String nome) throws ExceptionPacientesLeitura {
+     List<ListarPacientes> listaListarPacientes = null;   
        if(nome == null) {
            throw new ExceptionPacientesLeitura();
        } 
        else {
-           return this.repositorioPacientes.findByNomeStartingWith(nome);
+           List<Pacientes> listaPacientesBD = this.repositorioPacientes.findByNomeStartingWith(nome);
+        if(listaPacientesBD!=null) {
+             listaListarPacientes = new ArrayList<>();
+               for(int i=0; i<listaPacientesBD.size(); i++) {
+                   ListarPacientes listaPacientes = new ListarPacientes(listaPacientesBD.get(i));
+                     listaListarPacientes.add(listaPacientes);
+               }
+        }     
        }
+       return listaListarPacientes;
     }
 
     @Override
-    public Pacientes filtrarPacientesLoginNomeAndSenha(String loginNome, String senha) throws ExceptionPacientesLeitura {
-         
+    public ListarPacientes filtrarPacientesLoginNomeAndSenha(String loginNome, String senha) throws ExceptionPacientesLeitura {
+      ListarPacientes listaPacientes = null;   
         Pacientes paciente;
         
          if(loginNome == null) {
@@ -194,14 +211,16 @@ public class RegraNegocioPacientes implements InterfaceRegraNegocioPacientes {
                 } catch (ExceptionLogAcessoEscrita ex) {
                     Logger.getLogger(RegraNegocioPacientes.class.getName()).log(Level.SEVERE, null, ex);
                 }*/
+                listaPacientes = new ListarPacientes(paciente);
              }
          }
-         return paciente;
+         return listaPacientes;
     }
 
     @Override
-    public Pacientes filtrarPacientesCpf(Long cpf) throws ExceptionPacientesLeitura {
-        
+    public ListarPacientes filtrarPacientesCpf(Long cpf) throws ExceptionPacientesLeitura {
+      ListarPacientes listaPacientes = null;
+      
         if(cpf == null) {
             throw new ExceptionPacientesLeitura();
         }
@@ -209,8 +228,12 @@ public class RegraNegocioPacientes implements InterfaceRegraNegocioPacientes {
             throw new ExceptionPacientesLeitura();
         }
         else {
-            return this.repositorioPacientes.findByCpf(cpf);
+            Pacientes paciente = this.repositorioPacientes.findByCpf(cpf);
+        if(paciente!=null) {
+            listaPacientes = new ListarPacientes(paciente);
+        }    
         }
+        return listaPacientes;
     }
 
     @Override

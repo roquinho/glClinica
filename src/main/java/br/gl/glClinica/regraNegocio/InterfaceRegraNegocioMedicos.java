@@ -2,6 +2,7 @@
 package br.gl.glClinica.regraNegocio;
 
 import br.gl.glClinica.entidades.Medicos;
+import br.gl.glClinica.listarEntidades.ListarMedicos;
 import br.gl.glClinica.regraNegocioException.ExceptionMedicosEscrita;
 import br.gl.glClinica.regraNegocioException.ExceptionMedicosLeitura;
 import java.io.Serializable;
@@ -19,14 +20,14 @@ public interface InterfaceRegraNegocioMedicos extends Serializable {
     
     public void deletarMedico(Long cpf)throws ExceptionMedicosEscrita;
     
-    public List<Medicos> listarMedicos()throws ExceptionMedicosLeitura;
+    public List<ListarMedicos> listarMedicos()throws ExceptionMedicosLeitura;
     
-    public List<Medicos> filtrarMedicoNome(String nome)throws ExceptionMedicosLeitura;
+    public List<ListarMedicos> filtrarMedicoNome(String nome)throws ExceptionMedicosLeitura;
     
-    public List<Medicos> filtrarMedicoEspecialidade(String especialidade)throws ExceptionMedicosLeitura;
+    public List<ListarMedicos> filtrarMedicoEspecialidade(String especialidade)throws ExceptionMedicosLeitura;
     
-    public Medicos filtrarMedicoCpf(Long cpf)throws ExceptionMedicosLeitura;
+    public ListarMedicos filtrarMedicoCpf(Long cpf)throws ExceptionMedicosLeitura;
     
-    public Medicos filtrarMedicoUsuarioSenha(String usuario, String senha)throws ExceptionMedicosLeitura;
+    public ListarMedicos filtrarMedicoUsuarioSenha(String usuario, String senha)throws ExceptionMedicosLeitura;
 
 }

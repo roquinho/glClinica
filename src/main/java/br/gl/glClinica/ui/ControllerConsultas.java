@@ -2,6 +2,7 @@
 package br.gl.glClinica.ui;
 
 import br.gl.glClinica.entidades.Consultas;
+import br.gl.glClinica.listarEntidades.ListarConsultas;
 import br.gl.glClinica.regraNegocio.Fachada;
 import br.gl.glClinica.regraNegocioException.ExceptionConsultasLeitura;
 import java.util.Date;
@@ -62,8 +63,8 @@ public class ControllerConsultas {
     
     
     @RequestMapping(value = "/listar", produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<Consultas> listarConsultas() {
-        List<Consultas> consulta = null;
+    public List<ListarConsultas> listarConsultas() {
+        List<ListarConsultas> consulta = null;
         try {
             consulta = this.fachada.listarConsultas();
         } catch (ExceptionConsultasLeitura ex) {
@@ -73,8 +74,8 @@ public class ControllerConsultas {
     }
  
     @RequestMapping(value = "/filtrarCodigo", produces = MediaType.APPLICATION_JSON_VALUE)
-    public Consultas filtrarConsultaCodigo(@RequestParam int codigoConsulta) {
-        Consultas consulta = null;
+    public ListarConsultas filtrarConsultaCodigo(@RequestParam int codigoConsulta) {
+        ListarConsultas consulta = null;
         try {
             consulta = this.fachada.filtrarConsultaCodigo(codigoConsulta);
         } catch (ExceptionConsultasLeitura ex) {
@@ -84,8 +85,8 @@ public class ControllerConsultas {
     }
     
     @RequestMapping(value = "/filtrarData", produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<Consultas> filtrarConsultaDataConsulta(@RequestParam Date dataConsulta) {
-        List<Consultas> consulta = null;
+    public List<ListarConsultas> filtrarConsultaDataConsulta(@RequestParam Date dataConsulta) {
+        List<ListarConsultas> consulta = null;
         try {
             consulta = this.fachada.filtrarConsultaDataConsulta(dataConsulta);
         } catch (ExceptionConsultasLeitura ex) {
@@ -95,8 +96,8 @@ public class ControllerConsultas {
     }
  
     @RequestMapping(value = "/filtrarDataAndHora", produces = MediaType.APPLICATION_JSON_VALUE)
-    public Consultas filtrarConsultaDataAndHora(@RequestParam Date dataConsulta, @RequestParam Date horaConsulta) {
-        Consultas consulta = null;
+    public ListarConsultas filtrarConsultaDataAndHora(@RequestParam Date dataConsulta, @RequestParam Date horaConsulta) {
+        ListarConsultas consulta = null;
         try {
             consulta = this.fachada.filtrarConsultaDataAndHoraConsulta(dataConsulta, horaConsulta);
         } catch (ExceptionConsultasLeitura ex) {

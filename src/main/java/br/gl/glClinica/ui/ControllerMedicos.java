@@ -2,6 +2,7 @@
 package br.gl.glClinica.ui;
 
 import br.gl.glClinica.entidades.Medicos;
+import br.gl.glClinica.listarEntidades.ListarMedicos;
 import br.gl.glClinica.regraNegocio.Fachada;
 import br.gl.glClinica.regraNegocioException.ExceptionMedicosLeitura;
 import java.util.List;
@@ -60,8 +61,8 @@ public class ControllerMedicos {
     }
     
     @RequestMapping(value = "/listar", produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<Medicos> listarMedicos() {
-        List<Medicos> medicos = null;
+    public List<ListarMedicos> listarMedicos() {
+        List<ListarMedicos> medicos = null;
         try {
             medicos = this.fachada.listarMedicos();
         } catch (ExceptionMedicosLeitura ex) {
@@ -71,8 +72,8 @@ public class ControllerMedicos {
     }
     
     @RequestMapping(value = "/filtrarNome", produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<Medicos> filtrarMedicoNome(@RequestParam String nomeMedico) {
-        List<Medicos> medicos = null;
+    public List<ListarMedicos> filtrarMedicoNome(@RequestParam String nomeMedico) {
+        List<ListarMedicos> medicos = null;
         try {
             medicos = this.fachada.filtrarMedicoNome(nomeMedico);
         } catch (ExceptionMedicosLeitura ex) {
@@ -82,8 +83,8 @@ public class ControllerMedicos {
     }
  
     @RequestMapping(value = "/filtrarEspecialidade", produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<Medicos> filtrarMedicoEspecialidade(@RequestParam String especialidade) {
-        List<Medicos> medicos = null;
+    public List<ListarMedicos> filtrarMedicoEspecialidade(@RequestParam String especialidade) {
+        List<ListarMedicos> medicos = null;
         try {
             medicos = this.fachada.filtrarMedicoEspecialidade(especialidade);
         } catch (ExceptionMedicosLeitura ex) {
@@ -93,8 +94,8 @@ public class ControllerMedicos {
     }
     
     @RequestMapping(value = "/filtrarCpf", produces = MediaType.APPLICATION_JSON_VALUE)
-    public Medicos filtrarMedicoCpf(@RequestParam Long cpf) {
-        Medicos medicos = null;
+    public ListarMedicos filtrarMedicoCpf(@RequestParam Long cpf) {
+        ListarMedicos medicos = null;
         try {
             medicos = this.fachada.filtrarMedicoCpf(cpf);
         } catch (ExceptionMedicosLeitura ex) {
@@ -104,8 +105,8 @@ public class ControllerMedicos {
     }
     
     @RequestMapping(value = "/filtrarLogin", produces = MediaType.APPLICATION_JSON_VALUE)
-    public Medicos filtrarMedicoUsuarioAndSenha(@RequestParam String nomeUsuario, @RequestParam String senha) {
-        Medicos medicos = null;
+    public ListarMedicos filtrarMedicoUsuarioAndSenha(@RequestParam String nomeUsuario, @RequestParam String senha) {
+        ListarMedicos medicos = null;
         try {
             medicos = this.fachada.filtrarMedicoUsuarioSenha(nomeUsuario, senha);
         } catch (ExceptionMedicosLeitura ex) {

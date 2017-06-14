@@ -2,9 +2,11 @@
 package br.gl.glClinica.regraNegocio;
 
 import br.gl.glClinica.entidades.TiposConsultas;
+import br.gl.glClinica.listarEntidades.ListarTiposConsultas;
 import br.gl.glClinica.persistencia.InterfaceRepositorioTiposConsultas;
 import br.gl.glClinica.regraNegocioException.ExceptionTiposConsultasEscrita;
 import br.gl.glClinica.regraNegocioException.ExceptionTiposConsultasLeitura;
+import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -82,31 +84,54 @@ public class RegraNegocioTiposConsultas implements InterfaceRegraNegocioTiposCon
     }
 
     @Override
-    public List<TiposConsultas> listarTiposConsulta() throws ExceptionTiposConsultasLeitura {
-      
-        return this.repositorioTiposConsultas.findAll();
+    public List<ListarTiposConsultas> listarTiposConsulta() throws ExceptionTiposConsultasLeitura {
+      List<ListarTiposConsultas> listaListarTiposConsultas = null;        
+        List<TiposConsultas> listaTiposConsultasBD = this.repositorioTiposConsultas.findAll();
+          if(listaTiposConsultasBD!=null) {
+              listaListarTiposConsultas = new ArrayList<>();
+                for(int i=0; i<listaTiposConsultasBD.size(); i++) {
+                    ListarTiposConsultas listaTiposConsultas = new ListarTiposConsultas(listaTiposConsultasBD.get(i));
+                     listaListarTiposConsultas.add(listaTiposConsultas);
+                }
+          } 
+          return listaListarTiposConsultas;
     }
 
     @Override
-    public List<TiposConsultas> filtrarTipoConsultaNome(String nome) throws ExceptionTiposConsultasLeitura {
-       
+    public List<ListarTiposConsultas> filtrarTipoConsultaNome(String nome) throws ExceptionTiposConsultasLeitura {
+     List<ListarTiposConsultas> listaListarTiposConsultas = null;
+     
         if(nome == null) {
             throw new ExceptionTiposConsultasLeitura();
         }
         else {
-            return this.repositorioTiposConsultas.findByNomeTipoConsultaStartingWith(nome);
+          List<TiposConsultas> listaTiposConsultasBD = this.repositorioTiposConsultas.findByNomeTipoConsultaStartingWith(nome);
+        if(listaTiposConsultasBD!=null) {
+            listaListarTiposConsultas = new ArrayList<>();
+             for(int i=0; i<listaTiposConsultasBD.size();i++) {
+               ListarTiposConsultas listaConsultas = new ListarTiposConsultas(listaTiposConsultasBD.get(i));
+                 listaListarTiposConsultas.add(listaConsultas);
+             }
+        }   
+          
         }
+        return listaListarTiposConsultas;
     }
 
     @Override
-    public TiposConsultas filtrarTipoConsultaCodigo(int codigoTipoConsulta) throws ExceptionTiposConsultasLeitura {
-      
+    public ListarTiposConsultas filtrarTipoConsultaCodigo(int codigoTipoConsulta) throws ExceptionTiposConsultasLeitura {
+     ListarTiposConsultas listaTiposConsultas = null;
+     
         if(codigoTipoConsulta <= 0) {
             throw new ExceptionTiposConsultasLeitura();
         }
         else {
-           return this.repositorioTiposConsultas.findByCodigoTipoConsulta(codigoTipoConsulta);
+           TiposConsultas tipoConsultas = this.repositorioTiposConsultas.findByCodigoTipoConsulta(codigoTipoConsulta);
+        if(tipoConsultas!=null) {
+             listaTiposConsultas = new ListarTiposConsultas(tipoConsultas);
+        }    
         }
+        return listaTiposConsultas;
     }
 
     

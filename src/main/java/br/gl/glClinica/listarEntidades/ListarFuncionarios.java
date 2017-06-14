@@ -38,7 +38,7 @@ public class ListarFuncionarios {
         this.dataCriacao = funcionario.getDataCriacao();
         
           if(funcionario.getCargo()!=null) {
-              this.cargo = new ListarCargos();
+            this.cargo = new ListarCargos();
               this.cargo.setCodigoCargo(funcionario.getCargo().getCodigoCargo());
               this.cargo.setDescricaoCargo(funcionario.getCargo().getDescricaoCargo());
               this.cargo.setNomeCargo(funcionario.getCargo().getNomeCargo());

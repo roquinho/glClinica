@@ -2,6 +2,7 @@
 package br.gl.glClinica.ui;
 
 import br.gl.glClinica.entidades.TiposConsultas;
+import br.gl.glClinica.listarEntidades.ListarTiposConsultas;
 import br.gl.glClinica.regraNegocio.Fachada;
 import br.gl.glClinica.regraNegocioException.ExceptionTiposConsultasLeitura;
 import java.util.List;
@@ -61,8 +62,8 @@ public class ControllerTiposConsultas {
     }
     
     @RequestMapping(value = "/listar", produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<TiposConsultas> listarTiposConsultas() {
-        List<TiposConsultas> tiposConsultas = null;
+    public List<ListarTiposConsultas> listarTiposConsultas() {
+        List<ListarTiposConsultas> tiposConsultas = null;
         try {
             tiposConsultas = this.fachada.listarTiposConsulta();
         } catch (ExceptionTiposConsultasLeitura ex) {
@@ -73,8 +74,8 @@ public class ControllerTiposConsultas {
     
         
     @RequestMapping(value = "/filtrarNome", produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<TiposConsultas> filtrarTiposConsultasNome(@RequestParam String nomeTipoConsulta) {
-        List<TiposConsultas> tiposConsultas = null;
+    public List<ListarTiposConsultas> filtrarTiposConsultasNome(@RequestParam String nomeTipoConsulta) {
+        List<ListarTiposConsultas> tiposConsultas = null;
         try {
             tiposConsultas = this.fachada.filtrarTipoConsultaNome(nomeTipoConsulta);
         } catch (ExceptionTiposConsultasLeitura ex) {
@@ -85,8 +86,8 @@ public class ControllerTiposConsultas {
     
         
     @RequestMapping(value = "/filtrarCodigo", produces = MediaType.APPLICATION_JSON_VALUE)
-    public TiposConsultas filtrarTiposConsultasCodigo(@RequestParam int codigoTipoConsulta) {
-        TiposConsultas tiposConsultas = null;
+    public ListarTiposConsultas filtrarTiposConsultasCodigo(@RequestParam int codigoTipoConsulta) {
+        ListarTiposConsultas tiposConsultas = null;
         try {
             tiposConsultas = this.fachada.filtrarTipoConsultaCodigo(codigoTipoConsulta);
         } catch (ExceptionTiposConsultasLeitura ex) {

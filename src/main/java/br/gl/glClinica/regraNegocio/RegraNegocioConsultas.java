@@ -2,12 +2,14 @@
 package br.gl.glClinica.regraNegocio;
 
 import br.gl.glClinica.entidades.Consultas;
+import br.gl.glClinica.listarEntidades.ListarConsultas;
 import br.gl.glClinica.persistencia.InterfaceRepositorioConsultas;
 import br.gl.glClinica.persistencia.InterfaceRepositorioMedicos;
 import br.gl.glClinica.persistencia.InterfaceRepositorioPacientes;
 import br.gl.glClinica.persistencia.InterfaceRepositorioTiposConsultas;
 import br.gl.glClinica.regraNegocioException.ExceptionConsultasEscrita;
 import br.gl.glClinica.regraNegocioException.ExceptionConsultasLeitura;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -123,36 +125,57 @@ public class RegraNegocioConsultas implements InterfaceRegraNegocioConsultas {
     }
 
     @Override
-    public List<Consultas> listarConsultas() throws ExceptionConsultasLeitura {
-        
-        return this.repositorioConsultas.findAll();
+    public List<ListarConsultas> listarConsultas() throws ExceptionConsultasLeitura {
+        List<ListarConsultas> listaListaConsultas = null;       
+         List<Consultas> listaConsultasBD = this.repositorioConsultas.findAll();
+          if(listaConsultasBD!=null) {
+              listaListaConsultas = new ArrayList<>();
+                for(int i=0; i<listaConsultasBD.size();i++) {
+                    ListarConsultas listaConsultas = new ListarConsultas(listaConsultasBD.get(i));
+                      listaListaConsultas.add(listaConsultas);
+                }
+          }
+          return listaListaConsultas;
     }
 
     @Override
-    public List<Consultas> filtrarConsultaDataConsulta(Date dataConsulta) throws ExceptionConsultasLeitura {
-       
+    public List<ListarConsultas> filtrarConsultaDataConsulta(Date dataConsulta) throws ExceptionConsultasLeitura {
+       List<ListarConsultas> listaListarConsultas = null;
         if(dataConsulta == null) {
             throw new ExceptionConsultasLeitura();
         }
         else {
-            return this.repositorioConsultas.findByDataConsultaStartingWithOrderByDataConsulta(dataConsulta);
+              List<Consultas> listaConsultasesBD = this.repositorioConsultas.findByDataConsultaStartingWithOrderByDataConsulta(dataConsulta);
+        if(listaConsultasesBD!=null) {
+                 listaListarConsultas = new ArrayList<>();
+                   for(int i=0; i<listaConsultasesBD.size(); i++) {
+                    ListarConsultas listaConsultas =  new ListarConsultas(listaConsultasesBD.get(i));
+                      listaListarConsultas.add(listaConsultas);
+               }
+                }
         }
+        return listaListarConsultas;
     }
 
     @Override
-    public Consultas filtrarConsultaCodigo(int codigoConsulta) throws ExceptionConsultasLeitura {
-        
+    public ListarConsultas filtrarConsultaCodigo(int codigoConsulta) throws ExceptionConsultasLeitura {
+      ListarConsultas listaConsultas = null;  
         if(codigoConsulta<=0) {
             throw new ExceptionConsultasLeitura();
         }
         else {
-            return this.repositorioConsultas.findByCodigoConsulta(codigoConsulta);
+            Consultas Consultas = this.repositorioConsultas.findByCodigoConsulta(codigoConsulta);
+        if(Consultas!=null) {
+              listaConsultas = new ListarConsultas(Consultas);
+        }    
         }
+        return listaConsultas;
     }
 
     @Override
-    public Consultas filtrarConsultaDataAndHoraConsulta(Date dataConsulta, Date horaConsulta) throws ExceptionConsultasLeitura {
-        
+    public ListarConsultas filtrarConsultaDataAndHoraConsulta(Date dataConsulta, Date horaConsulta) throws ExceptionConsultasLeitura {
+      ListarConsultas listaConsultas = null;
+      
         if(dataConsulta == null) {
             throw new ExceptionConsultasLeitura();
         }  
@@ -160,8 +183,12 @@ public class RegraNegocioConsultas implements InterfaceRegraNegocioConsultas {
             throw new ExceptionConsultasLeitura();
         }
         else {
-            return this.repositorioConsultas.findByDataConsultaAndHoraConsultaStartingWithOrderByDataConsulta(dataConsulta, horaConsulta);
+            Consultas consulta = this.repositorioConsultas.findByDataConsultaAndHoraConsultaStartingWithOrderByDataConsulta(dataConsulta, horaConsulta);
+        if(consulta!=null) {
+              listaConsultas = new ListarConsultas(consulta);
+        }      
         }
+        return listaConsultas;
     }
 
     

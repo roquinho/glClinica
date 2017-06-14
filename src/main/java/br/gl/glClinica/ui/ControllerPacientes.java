@@ -2,6 +2,7 @@
 package br.gl.glClinica.ui;
 
 import br.gl.glClinica.entidades.Pacientes;
+import br.gl.glClinica.listarEntidades.ListarPacientes;
 import br.gl.glClinica.regraNegocio.Fachada;
 import br.gl.glClinica.regraNegocioException.ExceptionPacientesLeitura;
 import java.util.List;
@@ -60,8 +61,8 @@ public class ControllerPacientes {
     }
     
     @RequestMapping(value = "/listar", produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<Pacientes> listarPacientes() {
-        List<Pacientes> pacientes = null;
+    public List<ListarPacientes> listarPacientes() {
+        List<ListarPacientes> pacientes = null;
         try {
             pacientes = this.fachada.listarPacientes();
         } catch (ExceptionPacientesLeitura ex) {
@@ -71,8 +72,8 @@ public class ControllerPacientes {
     }
  
     @RequestMapping(value = "/filtrarNome", produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<Pacientes> filtrarPacientesNome(@RequestParam String nome) {
-        List<Pacientes> pacientes = null;
+    public List<ListarPacientes> filtrarPacientesNome(@RequestParam String nome) {
+        List<ListarPacientes> pacientes = null;
         try {
             pacientes = this.fachada.filtrarPacientesNome(nome);
         } catch (ExceptionPacientesLeitura ex) {
@@ -82,8 +83,8 @@ public class ControllerPacientes {
     }
     
     @RequestMapping(value = "/filtrarCpf", produces = MediaType.APPLICATION_JSON_VALUE)
-    public Pacientes filtrarPacienteCpf(@RequestParam Long cpf) {
-        Pacientes paciente = null;
+    public ListarPacientes filtrarPacienteCpf(@RequestParam Long cpf) {
+        ListarPacientes paciente = null;
         try {
             paciente = this.fachada.filtrarPacientesCpf(cpf);
         } catch (ExceptionPacientesLeitura ex) {
@@ -93,8 +94,8 @@ public class ControllerPacientes {
     }
     
     @RequestMapping(value = "/filtrarLogin", produces = MediaType.APPLICATION_JSON_VALUE)
-    public Pacientes filtrarPacientesUsuarioAndSenha(@RequestParam String usuario, @RequestParam String senha) {
-        Pacientes paciente = null;
+    public ListarPacientes filtrarPacientesUsuarioAndSenha(@RequestParam String usuario, @RequestParam String senha) {
+        ListarPacientes paciente = null;
         try {
             paciente = this.fachada.filtrarPacientesLoginNomeAndSenha(usuario, senha);
         } catch (ExceptionPacientesLeitura ex) {

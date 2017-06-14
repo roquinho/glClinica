@@ -2,6 +2,7 @@
 package br.gl.glClinica.regraNegocio;
 
 import br.gl.glClinica.entidades.Consultas;
+import br.gl.glClinica.listarEntidades.ListarConsultas;
 import br.gl.glClinica.regraNegocioException.ExceptionConsultasEscrita;
 import br.gl.glClinica.regraNegocioException.ExceptionConsultasLeitura;
 import java.io.Serializable;
@@ -20,13 +21,13 @@ public interface InterfaceRegraNegocioConsultas extends Serializable {
   
   public void desmarcarConsulta(int codigoConsulta)throws ExceptionConsultasEscrita;;
   
-  public List<Consultas> listarConsultas()throws ExceptionConsultasLeitura;
+  public List<ListarConsultas> listarConsultas()throws ExceptionConsultasLeitura;
   
-  public List<Consultas> filtrarConsultaDataConsulta(Date dataConsulta)throws ExceptionConsultasLeitura;
+  public List<ListarConsultas> filtrarConsultaDataConsulta(Date dataConsulta)throws ExceptionConsultasLeitura;
   
-  public Consultas filtrarConsultaCodigo(int codigoConsulta)throws ExceptionConsultasLeitura;
+  public ListarConsultas filtrarConsultaCodigo(int codigoConsulta)throws ExceptionConsultasLeitura;
   
-  public Consultas filtrarConsultaDataAndHoraConsulta(Date dataConsulta, Date horaConsulta)throws ExceptionConsultasLeitura;
+  public ListarConsultas filtrarConsultaDataAndHoraConsulta(Date dataConsulta, Date horaConsulta)throws ExceptionConsultasLeitura;
   
   
 }

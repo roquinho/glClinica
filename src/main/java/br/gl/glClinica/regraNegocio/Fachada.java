@@ -16,7 +16,11 @@ import br.gl.glClinica.entidades.Prontuarios;
 import br.gl.glClinica.entidades.Receitas;
 import br.gl.glClinica.entidades.TiposConsultas;
 import br.gl.glClinica.listarEntidades.ListarCargos;
+import br.gl.glClinica.listarEntidades.ListarConsultas;
 import br.gl.glClinica.listarEntidades.ListarFuncionarios;
+import br.gl.glClinica.listarEntidades.ListarMedicos;
+import br.gl.glClinica.listarEntidades.ListarPacientes;
+import br.gl.glClinica.listarEntidades.ListarTiposConsultas;
 import br.gl.glClinica.regraNegocioException.ExceptionCargosEscrita;
 import br.gl.glClinica.regraNegocioException.ExceptionCargosLeitura;
 import br.gl.glClinica.regraNegocioException.ExceptionClinicaEscrita;
@@ -89,13 +93,13 @@ public interface Fachada extends Serializable {
   
     public void desmarcarConsulta(int codigoConsulta)throws ExceptionConsultasEscrita;;
   
-    public List<Consultas> listarConsultas()throws ExceptionConsultasLeitura;
+    public List<ListarConsultas> listarConsultas()throws ExceptionConsultasLeitura;
   
-    public List<Consultas> filtrarConsultaDataConsulta(Date dataConsulta)throws ExceptionConsultasLeitura;
+    public List<ListarConsultas> filtrarConsultaDataConsulta(Date dataConsulta)throws ExceptionConsultasLeitura;
   
-    public Consultas filtrarConsultaCodigo(int codigoConsulta)throws ExceptionConsultasLeitura;
+    public ListarConsultas filtrarConsultaCodigo(int codigoConsulta)throws ExceptionConsultasLeitura;
   
-    public Consultas filtrarConsultaDataAndHoraConsulta(Date dataConsulta, Date horaConsulta)throws ExceptionConsultasLeitura;
+    public ListarConsultas filtrarConsultaDataAndHoraConsulta(Date dataConsulta, Date horaConsulta)throws ExceptionConsultasLeitura;
   
     
     
@@ -181,11 +185,11 @@ public interface Fachada extends Serializable {
     
     public void deletarTipoConsulta(int codigoTipoConsulta)throws ExceptionTiposConsultasEscrita;
     
-    public List<TiposConsultas> listarTiposConsulta()throws ExceptionTiposConsultasLeitura;
+    public List<ListarTiposConsultas> listarTiposConsulta()throws ExceptionTiposConsultasLeitura;
     
-    public List<TiposConsultas> filtrarTipoConsultaNome(String nome)throws ExceptionTiposConsultasLeitura;
+    public List<ListarTiposConsultas> filtrarTipoConsultaNome(String nome)throws ExceptionTiposConsultasLeitura;
     
-    public TiposConsultas filtrarTipoConsultaCodigo(int codigoTipoConsulta)throws ExceptionTiposConsultasLeitura;
+    public ListarTiposConsultas filtrarTipoConsultaCodigo(int codigoTipoConsulta)throws ExceptionTiposConsultasLeitura;
 
     
         
@@ -210,15 +214,15 @@ public interface Fachada extends Serializable {
     
     public void deletarMedico(Long cpf)throws ExceptionMedicosEscrita;
     
-    public List<Medicos> listarMedicos()throws ExceptionMedicosLeitura;
+    public List<ListarMedicos> listarMedicos()throws ExceptionMedicosLeitura;
     
-    public List<Medicos> filtrarMedicoNome(String nome)throws ExceptionMedicosLeitura;
+    public List<ListarMedicos> filtrarMedicoNome(String nome)throws ExceptionMedicosLeitura;
     
-    public List<Medicos> filtrarMedicoEspecialidade(String especialidade)throws ExceptionMedicosLeitura;
+    public List<ListarMedicos> filtrarMedicoEspecialidade(String especialidade)throws ExceptionMedicosLeitura;
     
-    public Medicos filtrarMedicoCpf(Long cpf)throws ExceptionMedicosLeitura;
+    public ListarMedicos filtrarMedicoCpf(Long cpf)throws ExceptionMedicosLeitura;
     
-    public Medicos filtrarMedicoUsuarioSenha(String usuario, String senha)throws ExceptionMedicosLeitura;
+    public ListarMedicos filtrarMedicoUsuarioSenha(String usuario, String senha)throws ExceptionMedicosLeitura;
 
 
     
@@ -229,13 +233,13 @@ public interface Fachada extends Serializable {
      
     public void deletarPaciente(Long cpf)throws ExceptionPacientesEscrita;
     
-    public List<Pacientes> listarPacientes()throws ExceptionPacientesLeitura;
+    public List<ListarPacientes> listarPacientes()throws ExceptionPacientesLeitura;
      
-    public List<Pacientes> filtrarPacientesNome(String nome)throws ExceptionPacientesLeitura;
+    public List<ListarPacientes> filtrarPacientesNome(String nome)throws ExceptionPacientesLeitura;
      
-    public Pacientes filtrarPacientesLoginNomeAndSenha(String loginNome, String senha)throws ExceptionPacientesLeitura;
+    public ListarPacientes filtrarPacientesLoginNomeAndSenha(String loginNome, String senha)throws ExceptionPacientesLeitura;
      
-    public Pacientes filtrarPacientesCpf(Long cpf)throws ExceptionPacientesLeitura;
+    public ListarPacientes filtrarPacientesCpf(Long cpf)throws ExceptionPacientesLeitura;
      
     public void receitarMedicamentoPaciente(Long cpfPaciente,int codigoMedcicamento)throws ExceptionPacientesEscrita;
      
