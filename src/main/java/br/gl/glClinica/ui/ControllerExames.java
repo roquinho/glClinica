@@ -2,6 +2,7 @@
 package br.gl.glClinica.ui;
 
 import br.gl.glClinica.entidades.Exames;
+import br.gl.glClinica.listarEntidades.ListarExames;
 import br.gl.glClinica.regraNegocio.Fachada;
 import br.gl.glClinica.regraNegocioException.ExceptionExamesLeitura;
 import java.util.List;
@@ -61,8 +62,8 @@ public class ControllerExames {
     }
     
     @RequestMapping(value = "/listar", produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<Exames> listarExames() {
-        List<Exames> exames = null;
+    public List<ListarExames> listarExames() {
+        List<ListarExames> exames = null;
         try {
             exames = this.fachada.listarExame();
         } catch (ExceptionExamesLeitura ex) {
@@ -72,8 +73,8 @@ public class ControllerExames {
     }
      
     @RequestMapping(value = "/filtrarNome", produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<Exames> filtrarExameNome(@RequestParam String nomeExame) {
-        List<Exames> exames = null;
+    public List<ListarExames> filtrarExameNome(@RequestParam String nomeExame) {
+        List<ListarExames> exames = null;
         try {
             exames = this.fachada.filtrarExameNome(nomeExame);
         } catch (ExceptionExamesLeitura ex) {
@@ -82,8 +83,8 @@ public class ControllerExames {
         return exames;
     }
     @RequestMapping(value = "/filtrarCodigo", produces = MediaType.APPLICATION_JSON_VALUE)
-    public Exames filtarExameCodigo(@RequestParam int codigoExame) {
-        Exames exames = null;
+    public ListarExames filtarExameCodigo(@RequestParam int codigoExame) {
+        ListarExames exames = null;
         try {
             exames = this.fachada.filtrarExameCodigo(codigoExame);
         } catch (ExceptionExamesLeitura ex) {

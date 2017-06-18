@@ -17,9 +17,13 @@ import br.gl.glClinica.entidades.Receitas;
 import br.gl.glClinica.entidades.TiposConsultas;
 import br.gl.glClinica.listarEntidades.ListarCargos;
 import br.gl.glClinica.listarEntidades.ListarConsultas;
+import br.gl.glClinica.listarEntidades.ListarConvenios;
+import br.gl.glClinica.listarEntidades.ListarExames;
 import br.gl.glClinica.listarEntidades.ListarFuncionarios;
 import br.gl.glClinica.listarEntidades.ListarMedicos;
 import br.gl.glClinica.listarEntidades.ListarPacientes;
+import br.gl.glClinica.listarEntidades.ListarProntuarios;
+import br.gl.glClinica.listarEntidades.ListarReceitas;
 import br.gl.glClinica.listarEntidades.ListarTiposConsultas;
 import br.gl.glClinica.regraNegocioException.ExceptionCargosEscrita;
 import br.gl.glClinica.regraNegocioException.ExceptionCargosLeitura;
@@ -110,11 +114,11 @@ public interface Fachada extends Serializable {
     
     public void deletarConvenio(int codigoConvenio)throws ExceptionConveniosEscrita;
     
-    public List<Convenios> listarConvenios()throws ExceptionConveniosLeitura;
+    public List<ListarConvenios> listarConvenios()throws ExceptionConveniosLeitura;
     
-    public List<Convenios> filtrarConvenioNome(String nomeConvenio)throws ExceptionConveniosLeitura;
+    public List<ListarConvenios> filtrarConvenioNome(String nomeConvenio)throws ExceptionConveniosLeitura;
     
-    public Convenios filtrarConvenioCodigo(int codigoConvenio)throws ExceptionConveniosLeitura;
+    public ListarConvenios filtrarConvenioCodigo(int codigoConvenio)throws ExceptionConveniosLeitura;
 
     
     
@@ -199,11 +203,11 @@ public interface Fachada extends Serializable {
     
     public void deletarExame(int codigoExame)throws ExceptionExamesEscrita;
     
-    public List<Exames> listarExame()throws ExceptionExamesLeitura;
+    public List<ListarExames> listarExame()throws ExceptionExamesLeitura;
     
-    public List<Exames> filtrarExameNome(String nomeExame)throws ExceptionExamesLeitura;
+    public List<ListarExames> filtrarExameNome(String nomeExame)throws ExceptionExamesLeitura;
     
-    public Exames filtrarExameCodigo(int codigoExame)throws ExceptionExamesLeitura;
+    public ListarExames filtrarExameCodigo(int codigoExame)throws ExceptionExamesLeitura;
 
     
     
@@ -247,15 +251,14 @@ public interface Fachada extends Serializable {
      
     public void InserirConvenioPaciente(Long cpfPaciente, int codigoConvenio)throws ExceptionPacientesEscrita;
       
+    
     public void gerarProntuario(Prontuarios prontuario, int codigoExame, Long cpfPaciente, int codigoMedicamento)throws ExceptionProntuariosEscrita;
-
-   
     
     public void atualizarProntuario(Prontuarios prontuarios)throws ExceptionProntuariosEscrita;
   
     public void deletarProntuario(int codigoProntuario)throws ExceptionProntuariosEscrita;
   
-    public Prontuarios filtrarProntuarioCodigo(int codigoProntuario)throws ExceptionProntuariosLeitura;
+    public ListarProntuarios filtrarProntuarioCodigo(int codigoProntuario)throws ExceptionProntuariosLeitura;
 
     public void gerarReceita(Receitas receita, Long cpfMedico, Long cpfPaciente)throws ExceptionReceitasEscrita;
  
@@ -265,7 +268,7 @@ public interface Fachada extends Serializable {
  
     public void deletarReceita(int codigoReceita)throws ExceptionReceitasEscrita;
  
-    public Receitas filtrarReceitaCodigo(int codigoReceita)throws ExceptionReceitasLeitura;
+    public ListarReceitas filtrarReceitaCodigo(int codigoReceita)throws ExceptionReceitasLeitura;
  
     public void inserirExameReceita(int codigoReceita, int codigoExame)throws ExceptionReceitasEscrita;
  

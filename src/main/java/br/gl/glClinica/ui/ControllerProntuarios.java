@@ -2,6 +2,7 @@
 package br.gl.glClinica.ui;
 
 import br.gl.glClinica.entidades.Prontuarios;
+import br.gl.glClinica.listarEntidades.ListarProntuarios;
 import br.gl.glClinica.regraNegocio.Fachada;
 import br.gl.glClinica.regraNegocioException.ExceptionProntuariosLeitura;
 import java.util.logging.Level;
@@ -61,8 +62,8 @@ public class ControllerProntuarios {
     }
     
     @RequestMapping(value = "/filtrarCodigo", produces = MediaType.APPLICATION_JSON_VALUE)
-    public Prontuarios filtrarProntuarioCodigo(@RequestParam int codigoProntuario) {
-        Prontuarios prontuario = null;
+    public ListarProntuarios filtrarProntuarioCodigo(@RequestParam int codigoProntuario) {
+        ListarProntuarios prontuario = null;
         try {
             prontuario = this.fachada.filtrarProntuarioCodigo(codigoProntuario);
         } catch (ExceptionProntuariosLeitura ex) {

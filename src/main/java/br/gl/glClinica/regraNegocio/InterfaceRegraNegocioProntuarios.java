@@ -2,6 +2,7 @@
 package br.gl.glClinica.regraNegocio;
 
 import br.gl.glClinica.entidades.Prontuarios;
+import br.gl.glClinica.listarEntidades.ListarProntuarios;
 import br.gl.glClinica.regraNegocioException.ExceptionProntuariosEscrita;
 import br.gl.glClinica.regraNegocioException.ExceptionProntuariosLeitura;
 import java.io.Serializable;
@@ -18,7 +19,7 @@ public interface InterfaceRegraNegocioProntuarios extends Serializable {
   
   public void deletarProntuario(int codigoProntuario)throws ExceptionProntuariosEscrita;
   
-  public Prontuarios filtrarProntuarioCodigo(int codigoProntuario)throws ExceptionProntuariosLeitura;
+  public ListarProntuarios filtrarProntuarioCodigo(int codigoProntuario)throws ExceptionProntuariosLeitura;
 
 }
 

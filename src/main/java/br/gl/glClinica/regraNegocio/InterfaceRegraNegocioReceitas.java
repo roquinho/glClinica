@@ -2,6 +2,7 @@
 package br.gl.glClinica.regraNegocio;
 
 import br.gl.glClinica.entidades.Receitas;
+import br.gl.glClinica.listarEntidades.ListarReceitas;
 import br.gl.glClinica.regraNegocioException.ExceptionReceitasEscrita;
 import br.gl.glClinica.regraNegocioException.ExceptionReceitasLeitura;
 import java.io.Serializable;
@@ -18,7 +19,7 @@ public interface InterfaceRegraNegocioReceitas extends Serializable {
  
  public void deletarReceita(int codigoReceita)throws ExceptionReceitasEscrita;
  
- public Receitas filtrarReceitaCodigo(int codigoReceita)throws ExceptionReceitasLeitura;
+ public ListarReceitas filtrarReceitaCodigo(int codigoReceita)throws ExceptionReceitasLeitura;
  
  public void inserirExameReceita(int codigoReceita, int codigoExame)throws ExceptionReceitasEscrita;
  

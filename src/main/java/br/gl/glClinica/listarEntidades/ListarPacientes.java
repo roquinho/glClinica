@@ -64,6 +64,20 @@ public class ListarPacientes {
                      this.consultas.add(listaConsultas);
              }
         }
+             if(paciente.getConvenios()!=null) {
+                 this.convenios = new ArrayList<>();
+                   for(int i=0; i<paciente.getConvenios().size();i++) {
+                       ListarConvenios listaConvenios = new ListarConvenios(paciente.getConvenios().get(i));
+                         this.convenios.add(listaConvenios);
+                   }
+             }
+             if(paciente.getExames()!=null) {
+                 this.exames = new ArrayList<>();
+                   for(int i=0; i<paciente.getExames().size(); i++) {
+                       ListarExames listaExames = new ListarExames(paciente.getExames().get(i));
+                         this.exames.add(listaExames);
+                   }
+             }
         }
     public String getNome() {
         return nome;

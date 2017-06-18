@@ -2,6 +2,7 @@
 package br.gl.glClinica.regraNegocio;
 
 import br.gl.glClinica.entidades.Prontuarios;
+import br.gl.glClinica.listarEntidades.ListarProntuarios;
 import br.gl.glClinica.persistencia.InterfaceRepositorioExames;
 import br.gl.glClinica.persistencia.InterfaceRepositorioMedicamentos;
 import br.gl.glClinica.persistencia.InterfaceRepositorioPacientes;
@@ -126,14 +127,18 @@ public class RegraNegocioProntuarios implements InterfaceRegraNegocioProntuarios
         }
     }
     @Override
-    public Prontuarios filtrarProntuarioCodigo(int codigoProntuario) throws ExceptionProntuariosLeitura {
-         
+    public ListarProntuarios filtrarProntuarioCodigo(int codigoProntuario) throws ExceptionProntuariosLeitura {
+      ListarProntuarios listaProntuarios = null;    
         if(codigoProntuario <= 0 ){
             throw new ExceptionProntuariosLeitura();
         }
         else {
-            return this.repositorioProntuarios.findByCodigoProntuario(codigoProntuario);
+            Prontuarios prontuario = this.repositorioProntuarios.findByCodigoProntuario(codigoProntuario);
+        if(prontuario!=null) {
+              listaProntuarios = new ListarProntuarios(prontuario);
+        }    
         }
+        return listaProntuarios;
     }
     
     

@@ -2,6 +2,7 @@
 package br.gl.glClinica.ui;
 
 import br.gl.glClinica.entidades.Receitas;
+import br.gl.glClinica.listarEntidades.ListarReceitas;
 import br.gl.glClinica.regraNegocio.Fachada;
 import br.gl.glClinica.regraNegocioException.ExceptionReceitasLeitura;
 import java.util.logging.Level;
@@ -59,13 +60,14 @@ public class ControllerReceitas {
     }
     
     @RequestMapping(value = "/filtrarCodigo", produces = MediaType.APPLICATION_JSON_VALUE)
-    public Receitas filtrarReceitaCodigo(@RequestParam int codigoReceita) {
-        Receitas receita = null;
+    public ListarReceitas filtrarReceitaCodigo(@RequestParam int codigoReceita) {
+        ListarReceitas receita = null;
         try {
             receita = this.fachada.filtrarReceitaCodigo(codigoReceita);
         } catch (ExceptionReceitasLeitura ex) {
             Logger.getLogger(ControllerReceitas.class.getName()).log(Level.SEVERE, null, ex);
         }
+       
         return receita;
     }
     

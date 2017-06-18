@@ -2,6 +2,7 @@
 package br.gl.glClinica.regraNegocio;
 
 import br.gl.glClinica.entidades.Convenios;
+import br.gl.glClinica.listarEntidades.ListarConvenios;
 import br.gl.glClinica.regraNegocioException.ExceptionConveniosEscrita;
 import br.gl.glClinica.regraNegocioException.ExceptionConveniosLeitura;
 import java.io.Serializable;
@@ -19,10 +20,10 @@ public interface InterfaceRegraNegocioConvenios extends Serializable {
     
     public void deletarConvenio(int codigoConvenio)throws ExceptionConveniosEscrita;
     
-    public List<Convenios> listarConvenios()throws ExceptionConveniosLeitura;
+    public List<ListarConvenios> listarConvenios()throws ExceptionConveniosLeitura;
     
-    public List<Convenios> filtrarConvenioNome(String nomeConvenio)throws ExceptionConveniosLeitura;
+    public List<ListarConvenios> filtrarConvenioNome(String nomeConvenio)throws ExceptionConveniosLeitura;
     
-    public Convenios filtrarConvenioCodigo(int codigoConvenio)throws ExceptionConveniosLeitura;
+    public ListarConvenios filtrarConvenioCodigo(int codigoConvenio)throws ExceptionConveniosLeitura;
 
 }

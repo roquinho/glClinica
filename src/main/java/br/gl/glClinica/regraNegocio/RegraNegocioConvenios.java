@@ -2,9 +2,11 @@
 package br.gl.glClinica.regraNegocio;
 
 import br.gl.glClinica.entidades.Convenios;
+import br.gl.glClinica.listarEntidades.ListarConvenios;
 import br.gl.glClinica.persistencia.InterfaceRepositorioConvenios;
 import br.gl.glClinica.regraNegocioException.ExceptionConveniosEscrita;
 import br.gl.glClinica.regraNegocioException.ExceptionConveniosLeitura;
+import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -82,31 +84,52 @@ public class RegraNegocioConvenios implements InterfaceRegraNegocioConvenios {
     }
 
     @Override
-    public List<Convenios> listarConvenios() throws ExceptionConveniosLeitura {
-        
-        return this.repositorioConvenios.findAll();
+    public List<ListarConvenios> listarConvenios() throws ExceptionConveniosLeitura {
+      List<ListarConvenios> listaListarConvenios = null;  
+        List<Convenios> listaConveniosBD = this.repositorioConvenios.findAll();
+         if(listaConveniosBD != null) {
+             listaListarConvenios = new ArrayList<>();
+               for(int i=0; i<listaConveniosBD.size(); i++) {
+                   ListarConvenios listaConvenios = new ListarConvenios(listaConveniosBD.get(i));
+                     listaListarConvenios.add(listaConvenios);
+               }
+         }
+         return listaListarConvenios;
     }
 
     @Override
-    public List<Convenios> filtrarConvenioNome(String nomeConvenio) throws ExceptionConveniosLeitura {
-       
+    public List<ListarConvenios> filtrarConvenioNome(String nomeConvenio) throws ExceptionConveniosLeitura {
+      List<ListarConvenios> listaListarConvenios = null; 
+        
         if(nomeConvenio == null) {
             throw new ExceptionConveniosLeitura();
         }
         else {
-            return this.repositorioConvenios.findByNomeConvenioStartingWith(nomeConvenio);
+            List<Convenios> listaConveniosBD = this.repositorioConvenios.findByNomeConvenioStartingWith(nomeConvenio);
+        if(listaConveniosBD!=null) {
+              listaListarConvenios = new ArrayList<>();
+                for(int i=0; i<listaConveniosBD.size(); i++) {
+                   ListarConvenios listarConvenios = new ListarConvenios(listaConveniosBD.get(i));
+                     listaListarConvenios.add(listarConvenios);
+                }
         }
+        }
+        return listaListarConvenios;
     }
 
     @Override
-    public Convenios filtrarConvenioCodigo(int codigoConvenio) throws ExceptionConveniosLeitura {
-        
+    public ListarConvenios filtrarConvenioCodigo(int codigoConvenio) throws ExceptionConveniosLeitura {
+      ListarConvenios listaConvenios = null;  
         if(codigoConvenio <= 0) {
             throw new ExceptionConveniosLeitura();
         }
         else {
-            return this.repositorioConvenios.findByCodigoConvenio(codigoConvenio);
+            Convenios convenio = this.repositorioConvenios.findByCodigoConvenio(codigoConvenio);
+        if(convenio!=null) {
+              listaConvenios = new ListarConvenios(convenio);
+        }    
         }
+        return listaConvenios;
     }
 
     

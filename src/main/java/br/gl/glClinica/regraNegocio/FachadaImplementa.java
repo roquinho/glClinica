@@ -17,9 +17,13 @@ import br.gl.glClinica.entidades.Receitas;
 import br.gl.glClinica.entidades.TiposConsultas;
 import br.gl.glClinica.listarEntidades.ListarCargos;
 import br.gl.glClinica.listarEntidades.ListarConsultas;
+import br.gl.glClinica.listarEntidades.ListarConvenios;
+import br.gl.glClinica.listarEntidades.ListarExames;
 import br.gl.glClinica.listarEntidades.ListarFuncionarios;
 import br.gl.glClinica.listarEntidades.ListarMedicos;
 import br.gl.glClinica.listarEntidades.ListarPacientes;
+import br.gl.glClinica.listarEntidades.ListarProntuarios;
+import br.gl.glClinica.listarEntidades.ListarReceitas;
 import br.gl.glClinica.listarEntidades.ListarTiposConsultas;
 import br.gl.glClinica.regraNegocioException.ExceptionCargosEscrita;
 import br.gl.glClinica.regraNegocioException.ExceptionCargosLeitura;
@@ -206,17 +210,17 @@ public class FachadaImplementa implements Fachada {
     }
 
     @Override
-    public List<Convenios> listarConvenios() throws ExceptionConveniosLeitura {
+    public List<ListarConvenios> listarConvenios() throws ExceptionConveniosLeitura {
         return this.regraNegocioConvenios.listarConvenios();
     }
 
     @Override
-    public List<Convenios> filtrarConvenioNome(String nomeConvenio) throws ExceptionConveniosLeitura {
+    public List<ListarConvenios> filtrarConvenioNome(String nomeConvenio) throws ExceptionConveniosLeitura {
         return this.regraNegocioConvenios.filtrarConvenioNome(nomeConvenio);
     }
 
     @Override
-    public Convenios filtrarConvenioCodigo(int codigoConvenio) throws ExceptionConveniosLeitura {
+    public ListarConvenios filtrarConvenioCodigo(int codigoConvenio) throws ExceptionConveniosLeitura {
         return this.regraNegocioConvenios.filtrarConvenioCodigo(codigoConvenio);
     }
 
@@ -305,17 +309,17 @@ public class FachadaImplementa implements Fachada {
     }
 
     @Override
-    public List<Exames> listarExame() throws ExceptionExamesLeitura {
+    public List<ListarExames> listarExame() throws ExceptionExamesLeitura {
        return this.regraNegocioExames.listarExame();
     }
 
     @Override
-    public List<Exames> filtrarExameNome(String nomeExame) throws ExceptionExamesLeitura {
+    public List<ListarExames> filtrarExameNome(String nomeExame) throws ExceptionExamesLeitura {
         return this.regraNegocioExames.filtrarExameNome(nomeExame);
     }
 
     @Override
-    public Exames filtrarExameCodigo(int codigoExame) throws ExceptionExamesLeitura {
+    public ListarExames filtrarExameCodigo(int codigoExame) throws ExceptionExamesLeitura {
         return this.regraNegocioExames.filtrarExameCodigo(codigoExame);
     }
 
@@ -515,7 +519,7 @@ public class FachadaImplementa implements Fachada {
     }
 
     @Override
-    public Prontuarios filtrarProntuarioCodigo(int codigoProntuario) throws ExceptionProntuariosLeitura {
+    public ListarProntuarios filtrarProntuarioCodigo(int codigoProntuario) throws ExceptionProntuariosLeitura {
        return this.regraNegocioProntuarios.filtrarProntuarioCodigo(codigoProntuario);
     }
 
@@ -535,7 +539,7 @@ public class FachadaImplementa implements Fachada {
     }
 
     @Override
-    public Receitas filtrarReceitaCodigo(int codigoReceita) throws ExceptionReceitasLeitura {
+    public ListarReceitas filtrarReceitaCodigo(int codigoReceita) throws ExceptionReceitasLeitura {
        return this.regraNegocioReceitas.filtrarReceitaCodigo(codigoReceita);
     }
 

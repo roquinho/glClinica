@@ -2,6 +2,7 @@
 package br.gl.glClinica.ui;
 
 import br.gl.glClinica.entidades.Convenios;
+import br.gl.glClinica.listarEntidades.ListarConvenios;
 import br.gl.glClinica.regraNegocio.Fachada;
 import br.gl.glClinica.regraNegocioException.ExceptionConveniosLeitura;
 import java.util.List;
@@ -63,8 +64,8 @@ public class ControllerConvenios {
     }
     
     @RequestMapping(value = "/listar", produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<Convenios> listarConvenios() {
-        List<Convenios> convenios = null;
+    public List<ListarConvenios> listarConvenios() {
+        List<ListarConvenios> convenios = null;
         try {
             convenios = this.fachada.listarConvenios();
         } catch (ExceptionConveniosLeitura ex) {
@@ -74,8 +75,8 @@ public class ControllerConvenios {
     }
  
     @RequestMapping(value = "/filtrarCodigo", produces = MediaType.APPLICATION_JSON_VALUE)
-    public Convenios filtrarConvenioCodigo(@RequestParam int codigoConvenio) {
-        Convenios convenio = null;
+    public ListarConvenios filtrarConvenioCodigo(@RequestParam int codigoConvenio) {
+        ListarConvenios convenio = null;
         try {
             convenio = this.fachada.filtrarConvenioCodigo(codigoConvenio);
         } catch (ExceptionConveniosLeitura ex) {
@@ -85,8 +86,8 @@ public class ControllerConvenios {
     }
     
      @RequestMapping(value = "/filtrarNome",produces = MediaType.APPLICATION_JSON_VALUE)
-     public List<Convenios> filtrarConvenioNome(@RequestParam String nomeConvenio) {
-       List<Convenios> convenios = null;
+     public List<ListarConvenios> filtrarConvenioNome(@RequestParam String nomeConvenio) {
+       List<ListarConvenios> convenios = null;
         try {
             convenios = this.fachada.filtrarConvenioNome(nomeConvenio);
         } catch (ExceptionConveniosLeitura ex) {

@@ -223,7 +223,7 @@ public class Medicos implements Serializable{
     public void setEndereco(String endereco) {
         this.endereco = endereco;
     }
-    @OneToMany(fetch = FetchType.EAGER,mappedBy="medico",cascade = CascadeType.REMOVE)
+    @OneToMany(fetch = FetchType.EAGER,mappedBy="medico",cascade = CascadeType.REMOVE)//lazy
     public List<Receitas> getReceitas() {
         return receitas;
     }
@@ -231,7 +231,7 @@ public class Medicos implements Serializable{
     public void setReceitas(List<Receitas> receitas) {
         this.receitas = receitas;
     }
-    @OneToMany(fetch = FetchType.EAGER,mappedBy="medico",cascade = CascadeType.REMOVE)
+    @OneToMany(fetch = FetchType.EAGER,mappedBy="medico",cascade = CascadeType.REMOVE)//lazy
     public List<Laudos> getLaudos() {
         return laudos;
     }
@@ -239,7 +239,7 @@ public class Medicos implements Serializable{
     public void setLaudos(List<Laudos> laudos) {
         this.laudos = laudos;
     }
-    @OneToMany(fetch = FetchType.EAGER,mappedBy="medico",cascade = CascadeType.REMOVE)
+    @OneToMany(fetch = FetchType.EAGER,mappedBy="medico",cascade = CascadeType.REMOVE)//lazy
     public List<Consultas> getConsultas() {
         return consultas;
     }

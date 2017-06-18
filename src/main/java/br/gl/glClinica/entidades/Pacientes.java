@@ -330,7 +330,7 @@ public class Pacientes implements Serializable{
     public void setExames(List<Exames> exames) {
         this.exames = exames;
     }
-    @OneToMany(fetch = FetchType.EAGER,mappedBy="paciente",cascade = CascadeType.REMOVE)
+    @OneToMany(fetch = FetchType.EAGER,mappedBy="paciente",cascade = CascadeType.REMOVE)//lazy
     public List<Prontuarios> getProntuarios() {
         return prontuarios;
     }
@@ -338,7 +338,7 @@ public class Pacientes implements Serializable{
     public void setProntuarios(List<Prontuarios> prontuarios) {
         this.prontuarios = prontuarios;
     }
-    @OneToMany(fetch = FetchType.EAGER,mappedBy="paciente",cascade = CascadeType.REMOVE)
+    @OneToMany(fetch = FetchType.EAGER,mappedBy="paciente",cascade = CascadeType.REMOVE)//lazy
     public List<Receitas> getReceitas() {
         return receitas;
     }
@@ -346,7 +346,7 @@ public class Pacientes implements Serializable{
     public void setReceitas(List<Receitas> receitas) {
         this.receitas = receitas;
     }
-    @OneToMany(fetch = FetchType.EAGER,mappedBy="paciente",cascade = CascadeType.REMOVE)
+    @OneToMany(fetch = FetchType.EAGER,mappedBy="paciente",cascade = CascadeType.REMOVE)//lazy
     public List<Laudos> getLaudos() {
         return laudos;
     }
@@ -354,7 +354,7 @@ public class Pacientes implements Serializable{
     public void setLaudos(List<Laudos> laudos) {
         this.laudos = laudos;
     }
-    @OneToMany(fetch = FetchType.EAGER,mappedBy="paciente",cascade = CascadeType.REMOVE)
+    @OneToMany(fetch = FetchType.EAGER,mappedBy="paciente",cascade = CascadeType.REMOVE)//lazy
     public List<Consultas> getConsultas() {
         return consultas;
     }

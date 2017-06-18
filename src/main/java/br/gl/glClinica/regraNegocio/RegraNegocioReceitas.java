@@ -4,6 +4,7 @@ package br.gl.glClinica.regraNegocio;
 import br.gl.glClinica.entidades.Exames;
 import br.gl.glClinica.entidades.Medicamentos;
 import br.gl.glClinica.entidades.Receitas;
+import br.gl.glClinica.listarEntidades.ListarReceitas;
 import br.gl.glClinica.persistencia.InterfaceRepositorioExames;
 import br.gl.glClinica.persistencia.InterfaceRepositorioMedicamentos;
 import br.gl.glClinica.persistencia.InterfaceRepositorioMedicos;
@@ -113,14 +114,18 @@ public class RegraNegocioReceitas implements InterfaceRegraNegocioReceitas {
     }
 
     @Override
-    public Receitas filtrarReceitaCodigo(int codigoReceita) throws ExceptionReceitasLeitura {
-        
+    public ListarReceitas filtrarReceitaCodigo(int codigoReceita) throws ExceptionReceitasLeitura {
+      ListarReceitas listaReceitas = null;   
        if(codigoReceita <= 0 ) {
            throw new ExceptionReceitasLeitura();
        }
        else {
-           return this.repositorioReceitas.findByCodigoReceita(codigoReceita);
+           Receitas receitas = this.repositorioReceitas.findByCodigoReceita(codigoReceita);
+       if(receitas!=null) {
+             listaReceitas = new ListarReceitas(receitas);
+       }   
        }
+       return listaReceitas;
     }
 
     @Override
