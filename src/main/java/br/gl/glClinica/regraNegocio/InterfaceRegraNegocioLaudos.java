@@ -2,6 +2,7 @@
 package br.gl.glClinica.regraNegocio;
 
 import br.gl.glClinica.entidades.Laudos;
+import br.gl.glClinica.listarEntidades.ListarLaudos;
 import br.gl.glClinica.regraNegocioException.ExceptionLaudosEscrita;
 import br.gl.glClinica.regraNegocioException.ExceptionLaudosLeitura;
 import java.io.Serializable;
@@ -20,8 +21,8 @@ public interface InterfaceRegraNegocioLaudos extends Serializable {
    
    public void deletarLaudo(int codigoLaudo)throws ExceptionLaudosEscrita;
    
-   public List<Laudos> filtrarLaudoData(Date dataLaudo)throws ExceptionLaudosLeitura;
+   public List<ListarLaudos> filtrarLaudoData(Date dataLaudo)throws ExceptionLaudosLeitura;
    
-   public Laudos filtrarLaudoCodigo(int codigoLaudo)throws ExceptionLaudosLeitura;
+   public ListarLaudos filtrarLaudoCodigo(int codigoLaudo)throws ExceptionLaudosLeitura;
 
 }

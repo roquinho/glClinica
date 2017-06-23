@@ -2,11 +2,13 @@
 package br.gl.glClinica.regraNegocio;
 
 import br.gl.glClinica.entidades.Laudos;
+import br.gl.glClinica.listarEntidades.ListarLaudos;
 import br.gl.glClinica.persistencia.InterfaceRepositorioLaudos;
 import br.gl.glClinica.persistencia.InterfaceRepositorioMedicos;
 import br.gl.glClinica.persistencia.InterfaceRepositorioPacientes;
 import br.gl.glClinica.regraNegocioException.ExceptionLaudosEscrita;
 import br.gl.glClinica.regraNegocioException.ExceptionLaudosLeitura;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -111,25 +113,39 @@ public class RegraNegocioLaudos implements InterfaceRegraNegocioLaudos {
     }
 
     @Override
-    public List<Laudos> filtrarLaudoData(Date dataLaudo) throws ExceptionLaudosLeitura {
-        
+    public List<ListarLaudos> filtrarLaudoData(Date dataLaudo) throws ExceptionLaudosLeitura {
+      List<ListarLaudos> listaListarLaudos = null;
+      
         if(dataLaudo == null) {
             throw new ExceptionLaudosLeitura();
         }
         else {
-            return this.repositorioLaudos.findByDataLaudo(dataLaudo);
+            List<Laudos> listaLaudosBD = this.repositorioLaudos.findByDataLaudo(dataLaudo);
+        if(listaLaudosBD!=null) {
+            listaListarLaudos = new ArrayList<>();
+              for(int i=0; i<listaLaudosBD.size(); i++) {
+                 ListarLaudos listaLaudos = new ListarLaudos(listaLaudosBD.get(i));
+                   listaListarLaudos.add(listaLaudos);
+              }
+        }    
         }
+        return listaListarLaudos;
     }
 
     @Override
-    public Laudos filtrarLaudoCodigo(int codigoLaudo) throws ExceptionLaudosLeitura {
-        
+    public ListarLaudos filtrarLaudoCodigo(int codigoLaudo) throws ExceptionLaudosLeitura {
+      ListarLaudos listaLaudos = null;  
+      
         if(codigoLaudo <= 0) {
             throw new ExceptionLaudosLeitura();
         }
         else {
-            return this.repositorioLaudos.findByCodigoLaudo(codigoLaudo);
+            Laudos laudo = this.repositorioLaudos.findByCodigoLaudo(codigoLaudo);
+        if(laudo!= null) {
+              listaLaudos = new ListarLaudos(laudo);
+        }    
         }
+        return listaLaudos;
     }
 
     public InterfaceRepositorioLaudos getRepositorioLaudos() {

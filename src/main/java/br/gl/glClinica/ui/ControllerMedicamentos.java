@@ -2,6 +2,7 @@
 package br.gl.glClinica.ui;
 
 import br.gl.glClinica.entidades.Medicamentos;
+import br.gl.glClinica.listarEntidades.ListarMedicamentos;
 import br.gl.glClinica.regraNegocio.Fachada;
 import br.gl.glClinica.regraNegocioException.ExceptionMedicamentosLeitura;
 import java.util.List;
@@ -61,8 +62,8 @@ public class ControllerMedicamentos {
     }
     
     @RequestMapping(value = "/listar", produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<Medicamentos> listarMedicamentos() {
-        List<Medicamentos> medicamentos = null;
+    public List<ListarMedicamentos> listarMedicamentos() {
+        List<ListarMedicamentos> medicamentos = null;
         try {
             medicamentos = this.fachada.listarMedicamentos();
         } catch (ExceptionMedicamentosLeitura ex) {
@@ -72,8 +73,8 @@ public class ControllerMedicamentos {
     }
     
     @RequestMapping(value = "/filtrarNome", produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<Medicamentos> filtrarMedicamentosNome(@RequestParam String nomeMedicamento) {
-        List<Medicamentos> medicamentos = null;
+    public List<ListarMedicamentos> filtrarMedicamentosNome(@RequestParam String nomeMedicamento) {
+        List<ListarMedicamentos> medicamentos = null;
         try {
             medicamentos = this.fachada.filtrarMedicamentoNome(nomeMedicamento);
         } catch (ExceptionMedicamentosLeitura ex) {
@@ -83,8 +84,8 @@ public class ControllerMedicamentos {
     }
     
     @RequestMapping(value = "/filtrarLaboratorio", produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<Medicamentos> filtrarMedicamentosLaboratorio(@RequestParam String nomeLaboratorio) {
-        List<Medicamentos> medicamentos = null;
+    public List<ListarMedicamentos> filtrarMedicamentosLaboratorio(@RequestParam String nomeLaboratorio) {
+        List<ListarMedicamentos> medicamentos = null;
         try {
             medicamentos = this.fachada.filtrarMedicamentosLaboratorio(nomeLaboratorio);
         } catch (ExceptionMedicamentosLeitura ex) {
@@ -94,8 +95,8 @@ public class ControllerMedicamentos {
     }
     
     @RequestMapping(value = "/filtrarCodigo", produces = MediaType.APPLICATION_JSON_VALUE)
-    public Medicamentos filtrarMedicamentosCodigo(@RequestParam int codigoMedicamento) {
-        Medicamentos medicamentos = null;
+    public ListarMedicamentos filtrarMedicamentosCodigo(@RequestParam int codigoMedicamento) {
+        ListarMedicamentos medicamentos = null;
         try {
             medicamentos = this.fachada.filtrarMedicamentoCodigo(codigoMedicamento);
         } catch (ExceptionMedicamentosLeitura ex) {

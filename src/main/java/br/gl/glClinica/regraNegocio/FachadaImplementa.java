@@ -20,6 +20,8 @@ import br.gl.glClinica.listarEntidades.ListarConsultas;
 import br.gl.glClinica.listarEntidades.ListarConvenios;
 import br.gl.glClinica.listarEntidades.ListarExames;
 import br.gl.glClinica.listarEntidades.ListarFuncionarios;
+import br.gl.glClinica.listarEntidades.ListarLaudos;
+import br.gl.glClinica.listarEntidades.ListarMedicamentos;
 import br.gl.glClinica.listarEntidades.ListarMedicos;
 import br.gl.glClinica.listarEntidades.ListarPacientes;
 import br.gl.glClinica.listarEntidades.ListarProntuarios;
@@ -242,22 +244,22 @@ public class FachadaImplementa implements Fachada {
     }
 
     @Override
-    public List<Medicamentos> listarMedicamentos() throws ExceptionMedicamentosLeitura {
+    public List<ListarMedicamentos> listarMedicamentos() throws ExceptionMedicamentosLeitura {
         return this.regraNegocioMedicamentos.listarMedicamentos();
     }
 
     @Override
-    public List<Medicamentos> filtrarMedicamentoNome(String nomeMedicamento) throws ExceptionMedicamentosLeitura {
+    public List<ListarMedicamentos> filtrarMedicamentoNome(String nomeMedicamento) throws ExceptionMedicamentosLeitura {
         return this.regraNegocioMedicamentos.filtrarMedicamentoNome(nomeMedicamento);
     }
 
     @Override
-    public List<Medicamentos> filtrarMedicamentosLaboratorio(String nomeLaboratorio) throws ExceptionMedicamentosLeitura {
+    public List<ListarMedicamentos> filtrarMedicamentosLaboratorio(String nomeLaboratorio) throws ExceptionMedicamentosLeitura {
         return this.regraNegocioMedicamentos.filtrarMedicamentosLaboratorio(nomeLaboratorio);
     }
 
     @Override
-    public Medicamentos filtrarMedicamentoCodigo(int codigoMedicamento) throws ExceptionMedicamentosLeitura {
+    public ListarMedicamentos filtrarMedicamentoCodigo(int codigoMedicamento) throws ExceptionMedicamentosLeitura {
         return this.regraNegocioMedicamentos.filtrarMedicamentoCodigo(codigoMedicamento);
     }
 
@@ -374,12 +376,12 @@ public class FachadaImplementa implements Fachada {
     }
 
     @Override
-    public List<Laudos> filtrarLaudoData(Date dataLaudo) throws ExceptionLaudosLeitura {
+    public List<ListarLaudos> filtrarLaudoData(Date dataLaudo) throws ExceptionLaudosLeitura {
         return this.regraNegocioLaudos.filtrarLaudoData(dataLaudo);
     }
 
     @Override
-    public Laudos filtrarLaudoCodigo(int codigoLaudo) throws ExceptionLaudosLeitura {
+    public ListarLaudos filtrarLaudoCodigo(int codigoLaudo) throws ExceptionLaudosLeitura {
         return this.regraNegocioLaudos.filtrarLaudoCodigo(codigoLaudo);
     }
 

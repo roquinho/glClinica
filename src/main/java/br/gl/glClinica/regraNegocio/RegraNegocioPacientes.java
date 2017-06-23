@@ -314,8 +314,8 @@ public class RegraNegocioPacientes implements InterfaceRegraNegocioPacientes {
             throw new ExceptionPacientesEscrita();
         }
         else {
-          paciente = this.repositorioPacientes.findByCpf(cpfPaciente);
-          convenio = this.repositorioConvenios.findByCodigoConvenio(codigoConvenio);
+          paciente = this.repositorioPacientes.findByCpf(cpfPaciente);          
+          convenio = this.repositorioConvenios.findByCodigoConvenio(codigoConvenio);     
         }
         if(paciente == null) {
             throw new ExceptionPacientesEscrita();
@@ -323,13 +323,11 @@ public class RegraNegocioPacientes implements InterfaceRegraNegocioPacientes {
         if(convenio == null) {
             throw new ExceptionPacientesEscrita();
         }
-        else {
+        else {           
            paciente.getConvenios().add(convenio);            
            this.repositorioPacientes.save(paciente);
         }
-    }
-
-    
+    }    
     
     public InterfaceRepositorioPacientes getRepositorioPacientes() {
         return repositorioPacientes;

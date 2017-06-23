@@ -50,6 +50,13 @@ public class ListarMedicos {
                    this.consultas.add(listaConsultas);
              }
           }
+          if(medico.getLaudos()!=null) {
+              this.laudos = new ArrayList<>();
+                for(int i=0; i<medico.getLaudos().size(); i++) {
+                   ListarLaudos listaLaudos = new ListarLaudos(medico.getLaudos().get(i));
+                     this.laudos.add(listaLaudos);
+                }
+          }
     }
     public Long getCpf() {
         return cpf;

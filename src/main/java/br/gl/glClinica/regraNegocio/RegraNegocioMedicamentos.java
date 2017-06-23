@@ -2,9 +2,11 @@
 package br.gl.glClinica.regraNegocio;
 
 import br.gl.glClinica.entidades.Medicamentos;
+import br.gl.glClinica.listarEntidades.ListarMedicamentos;
 import br.gl.glClinica.persistencia.InterfaceRepositorioMedicamentos;
 import br.gl.glClinica.regraNegocioException.ExceptionMedicamentosEscrita;
 import br.gl.glClinica.regraNegocioException.ExceptionMedicamentosLeitura;
+import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -105,42 +107,75 @@ public class RegraNegocioMedicamentos implements InterfaceRegraNegocioMedicament
     }
 
     @Override
-    public List<Medicamentos> listarMedicamentos() throws ExceptionMedicamentosLeitura {
-       
-        return this.repositorioMedicamentos.findAll();
+    public List<ListarMedicamentos> listarMedicamentos() throws ExceptionMedicamentosLeitura {
+      List<ListarMedicamentos> listaListarMedicamentos = null;     
+        List<Medicamentos> listaMedicamentosBD = this.repositorioMedicamentos.findAll();
+           if(listaMedicamentosBD!=null) {
+               listaListarMedicamentos = new ArrayList<>();
+                 for(int i=0; i<listaMedicamentosBD.size(); i++) {
+                     ListarMedicamentos listaMedicamentos = new ListarMedicamentos(listaMedicamentosBD.get(i));
+                       listaListarMedicamentos.add(listaMedicamentos);
+        
+           }
+           }
+           return listaListarMedicamentos;  
     }
 
     @Override
-    public List<Medicamentos> filtrarMedicamentoNome(String nomeMedicamento) throws ExceptionMedicamentosLeitura {
-       
+    public List<ListarMedicamentos> filtrarMedicamentoNome(String nomeMedicamento) throws ExceptionMedicamentosLeitura {
+      List<ListarMedicamentos> listaListarMedicamentos =null;
+      
         if(nomeMedicamento == null) {
             throw new ExceptionMedicamentosLeitura();
         }
         else {
-            return this.repositorioMedicamentos.findByNomeMedicamentoStartingWith(nomeMedicamento);
+            List<Medicamentos> listaMedicamentosBD = this.repositorioMedicamentos.findByNomeMedicamentoStartingWith(nomeMedicamento);
+         if(listaMedicamentosBD!=null) {
+               listaListarMedicamentos = new ArrayList<>();
+                 for(int i=0; i<listaMedicamentosBD.size(); i++) {
+                     ListarMedicamentos listaMedicamentos = new ListarMedicamentos(listaMedicamentosBD.get(i));
+                       listaListarMedicamentos.add(listaMedicamentos);
+           
         }
+         }
+    }
+        return listaListarMedicamentos;
     }
 
     @Override
-    public List<Medicamentos> filtrarMedicamentosLaboratorio(String nomeLaboratorio) throws ExceptionMedicamentosLeitura {
-       
+    public List<ListarMedicamentos> filtrarMedicamentosLaboratorio(String nomeLaboratorio) throws ExceptionMedicamentosLeitura {
+      List<ListarMedicamentos> listaListarMedicamentos = null;
+      
         if(nomeLaboratorio == null) {
             throw new ExceptionMedicamentosLeitura();
         }
         else {
-            return this.repositorioMedicamentos.findByNomeLaboratorioStartingWith(nomeLaboratorio);
+            List<Medicamentos> listaMedicamentosBD =this.repositorioMedicamentos.findByNomeLaboratorioStartingWith(nomeLaboratorio);
+        if(listaMedicamentosBD!=null) {
+               listaListarMedicamentos = new ArrayList<>();
+                 for(int i=0; i<listaMedicamentosBD.size(); i++) {
+                     ListarMedicamentos listaMedicamentos = new ListarMedicamentos(listaMedicamentosBD.get(i));
+                       listaListarMedicamentos.add(listaMedicamentos);
+                 }
+        }    
         }
+        return listaListarMedicamentos;
     }
 
     @Override
-    public Medicamentos filtrarMedicamentoCodigo(int codigoMedicamento) throws ExceptionMedicamentosLeitura {
-        
+    public ListarMedicamentos filtrarMedicamentoCodigo(int codigoMedicamento) throws ExceptionMedicamentosLeitura {
+       ListarMedicamentos listaMedicamentos = null;
+       
         if(codigoMedicamento <= 0) {
             throw new ExceptionMedicamentosLeitura();
         }
         else {
-            return this.repositorioMedicamentos.findByCodigoMedicamento(codigoMedicamento);
+            Medicamentos medicamento = this.repositorioMedicamentos.findByCodigoMedicamento(codigoMedicamento);
+        if(medicamento!=null) {
+               listaMedicamentos = new ListarMedicamentos(medicamento);
+        }    
         }
+        return listaMedicamentos;
     }
 
     

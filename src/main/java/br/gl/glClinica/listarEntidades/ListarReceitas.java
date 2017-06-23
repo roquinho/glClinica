@@ -33,6 +33,14 @@ public class ListarReceitas {
                   this.exames.add(listaExames);
              }
           }
+          if(receitas.getMedicamentos()!=null) {
+              this.medicamentos = new ArrayList<>();
+               for(int i=0;i<receitas.getMedicamentos().size(); i++) {
+                   ListarMedicamentos listaMedicamentos = new ListarMedicamentos(receitas.getMedicamentos().get(i));
+                     this.medicamentos.add(listaMedicamentos);
+               } 
+          }
+          
     }
 
     public int getCodigoReceita() {

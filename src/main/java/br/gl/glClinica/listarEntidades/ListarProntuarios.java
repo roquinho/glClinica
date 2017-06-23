@@ -40,6 +40,17 @@ public class ListarProntuarios {
                 this.exame.setNomeExame(prontuarios.getExame().getNomeExame());
                 this.exame.setObservacoesExame(prontuarios.getExame().getObservacoesExame());
            }
+           if(prontuarios.getMedicamento()!=null) {
+               this.medicamento = new ListarMedicamentos();
+               
+                 this.medicamento.setCodigoMedicamento(prontuarios.getMedicamento().getCodigoMedicamento());
+                 this.medicamento.setContraIndicacoes(prontuarios.getMedicamento().getContraIndicacoes());
+                 this.medicamento.setGenerico(prontuarios.getMedicamento().getGenerico());
+                 this.medicamento.setNomeLaboratorio(prontuarios.getMedicamento().getNomeLaboratorio());
+                 this.medicamento.setNomeMedicamento(prontuarios.getMedicamento().getNomeMedicamento());
+                 this.medicamento.setPosologiaIndicada(prontuarios.getMedicamento().getPosologiaIndicada());
+                 this.medicamento.setSubstanciaAtiva(prontuarios.getMedicamento().getSubstanciaAtiva());
+           }
     }
 
     public int getCodigoProntuario() {

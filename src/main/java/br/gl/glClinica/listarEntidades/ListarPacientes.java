@@ -78,6 +78,20 @@ public class ListarPacientes {
                          this.exames.add(listaExames);
                    }
              }
+             if(paciente.getLaudos()!=null) {
+                 this.laudos = new ArrayList<>();
+                   for(int i=0; i<paciente.getLaudos().size(); i++) {
+                       ListarLaudos listarLaudos = new ListarLaudos(paciente.getLaudos().get(i));
+                         this.laudos.add(listarLaudos);
+                   }
+             }
+             if(paciente.getMedicamentos()!=null) {
+                 this.medicamentos = new ArrayList<>();
+                   for(int i=0; i<paciente.getMedicamentos().size(); i++) {
+                       ListarMedicamentos listaMedicamentos = new ListarMedicamentos(paciente.getMedicamentos().get(i));
+                         this.medicamentos.add(listaMedicamentos);
+                   }
+             }
         }
     public String getNome() {
         return nome;

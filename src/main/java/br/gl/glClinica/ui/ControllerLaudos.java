@@ -2,6 +2,7 @@
 package br.gl.glClinica.ui;
 
 import br.gl.glClinica.entidades.Laudos;
+import br.gl.glClinica.listarEntidades.ListarLaudos;
 import br.gl.glClinica.regraNegocio.Fachada;
 import br.gl.glClinica.regraNegocioException.ExceptionLaudosLeitura;
 import java.util.Date;
@@ -62,8 +63,8 @@ public class ControllerLaudos {
     }
     
     @RequestMapping(value = "/filtrarData", produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<Laudos> filtrarLaudoData(@RequestParam Date dataLaudo) {
-        List<Laudos> laudos = null;
+    public List<ListarLaudos> filtrarLaudoData(@RequestParam Date dataLaudo) {
+        List<ListarLaudos> laudos = null;
         try {
             laudos = this.fachada.filtrarLaudoData(dataLaudo);
         } catch (ExceptionLaudosLeitura ex) {
@@ -73,8 +74,8 @@ public class ControllerLaudos {
     }
 
     @RequestMapping(value = "/filtrarCodigo", produces = MediaType.APPLICATION_JSON_VALUE)
-    public Laudos filtrarLaudoCodigo(@RequestParam int codigoLaudo) {
-        Laudos laudo = null;
+    public ListarLaudos filtrarLaudoCodigo(@RequestParam int codigoLaudo) {
+        ListarLaudos laudo = null;
         try {
             laudo = this.fachada.filtrarLaudoCodigo(codigoLaudo);
         } catch (ExceptionLaudosLeitura ex) {
