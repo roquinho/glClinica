@@ -57,6 +57,13 @@ public class ListarMedicos {
                      this.laudos.add(listaLaudos);
                 }
           }
+          if(medico.getReceitas()!=null) {
+             this.receitas = new ArrayList<>();
+               for(int i=0; i<medico.getReceitas().size(); i++) {
+                   ListarReceitas listaReceitas = new ListarReceitas(medico.getReceitas().get(i));
+                     this.receitas.add(listaReceitas);
+               }
+          }
     }
     public Long getCpf() {
         return cpf;

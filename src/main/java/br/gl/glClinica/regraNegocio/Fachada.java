@@ -254,6 +254,8 @@ public interface Fachada extends Serializable {
     public void InserirConvenioPaciente(Long cpfPaciente, int codigoConvenio)throws ExceptionPacientesEscrita;
       
     
+    
+    
     public void gerarProntuario(Prontuarios prontuario, int codigoExame, Long cpfPaciente, int codigoMedicamento)throws ExceptionProntuariosEscrita;
     
     public void atualizarProntuario(Prontuarios prontuarios)throws ExceptionProntuariosEscrita;

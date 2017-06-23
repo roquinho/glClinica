@@ -2,7 +2,6 @@
 package br.gl.glClinica.listarEntidades;
 
 import br.gl.glClinica.entidades.Laudos;
-import java.util.ArrayList;
 import java.util.Date;
 
 /**

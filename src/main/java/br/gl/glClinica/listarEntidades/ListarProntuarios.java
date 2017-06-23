@@ -51,6 +51,26 @@ public class ListarProntuarios {
                  this.medicamento.setPosologiaIndicada(prontuarios.getMedicamento().getPosologiaIndicada());
                  this.medicamento.setSubstanciaAtiva(prontuarios.getMedicamento().getSubstanciaAtiva());
            }
+           if(prontuarios.getPaciente()!=null) {
+               this.paciente = new ListarPacientes();
+               
+              this.paciente.setCpf(prontuarios.getPaciente().getCpf());
+              this.paciente.setDataNascimento(prontuarios.getPaciente().getDataNascimento());
+              this.paciente.setEmail(prontuarios.getPaciente().getEmail());
+              this.paciente.setEndereco(prontuarios.getPaciente().getEndereco());
+              this.paciente.setLoginNome(prontuarios.getPaciente().getLoginNome());
+              this.paciente.setNome(prontuarios.getPaciente().getNome());
+              this.paciente.setNomeMae(prontuarios.getPaciente().getNomeMae());
+              this.paciente.setNomePai(prontuarios.getPaciente().getNomePai());
+              this.paciente.setNumeroCarteira(prontuarios.getPaciente().getNumeroCarteira());
+              this.paciente.setQuantidadeAcessos(prontuarios.getPaciente().getQuantidadeAcessos());
+              this.paciente.setRg(prontuarios.getPaciente().getRg());
+              this.paciente.setSenha(prontuarios.getPaciente().getSenha());
+              this.paciente.setSexo(prontuarios.getPaciente().getSexo());
+              this.paciente.setTelefoneCelular(prontuarios.getPaciente().getTelefoneCelular());
+              this.paciente.setTelefoneFixo(prontuarios.getPaciente().getTelefoneFixo());
+    
+           }
     }
 
     public int getCodigoProntuario() {

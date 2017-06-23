@@ -40,6 +40,41 @@ public class ListarReceitas {
                      this.medicamentos.add(listaMedicamentos);
                } 
           }
+          if(receitas.getMedico()!=null) {
+              this.medico = new ListarMedicos();
+              
+                  this.medico.setContadorAcessos(receitas.getMedico().getContadorAcessos());
+                  this.medico.setCpf(receitas.getMedico().getCpf());
+                  this.medico.setCrm(receitas.getMedico().getCrm());
+                  this.medico.setEndereco(receitas.getMedico().getEndereco());
+                  this.medico.setEspecialidades(receitas.getMedico().getEspecialidades());
+                  this.medico.setNome(receitas.getMedico().getNome());
+                  this.medico.setNomeUsuario(receitas.getMedico().getNomeUsuario());
+                  this.medico.setRg(receitas.getMedico().getRg());
+                  this.medico.setSenhaAcesso(receitas.getMedico().getSenhaAcesso());
+                  this.medico.setTelefone(receitas.getMedico().getTelefone());
+                  this.medico.setTelefoneResidencial(receitas.getMedico().getTelefoneResidencial());   
+          }
+          if(receitas.getPaciente()!=null) {
+               this.paciente = new ListarPacientes();
+               
+              this.paciente.setCpf(receitas.getPaciente().getCpf());
+              this.paciente.setDataNascimento(receitas.getPaciente().getDataNascimento());
+              this.paciente.setEmail(receitas.getPaciente().getEmail());
+              this.paciente.setEndereco(receitas.getPaciente().getEndereco());
+              this.paciente.setLoginNome(receitas.getPaciente().getLoginNome());
+              this.paciente.setNome(receitas.getPaciente().getNome());
+              this.paciente.setNomeMae(receitas.getPaciente().getNomeMae());
+              this.paciente.setNomePai(receitas.getPaciente().getNomePai());
+              this.paciente.setNumeroCarteira(receitas.getPaciente().getNumeroCarteira());
+              this.paciente.setQuantidadeAcessos(receitas.getPaciente().getQuantidadeAcessos());
+              this.paciente.setRg(receitas.getPaciente().getRg());
+              this.paciente.setSenha(receitas.getPaciente().getSenha());
+              this.paciente.setSexo(receitas.getPaciente().getSexo());
+              this.paciente.setTelefoneCelular(receitas.getPaciente().getTelefoneCelular());
+              this.paciente.setTelefoneFixo(receitas.getPaciente().getTelefoneFixo());
+                 
+          }
           
     }
 

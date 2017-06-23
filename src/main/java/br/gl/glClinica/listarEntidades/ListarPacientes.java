@@ -92,6 +92,20 @@ public class ListarPacientes {
                          this.medicamentos.add(listaMedicamentos);
                    }
              }
+             if(paciente.getProntuarios()!=null) {
+                 this.prontuarios = new ArrayList<>();
+                   for(int i=0; i<paciente.getProntuarios().size(); i++) {
+                       ListarProntuarios listaPronturios = new ListarProntuarios(paciente.getProntuarios().get(i));
+                         this.prontuarios.add(listaPronturios);
+                   }
+             }
+             if(paciente.getReceitas()!=null) {
+                 this.receitas = new ArrayList<>();
+                   for(int i=0; i<paciente.getReceitas().size(); i++) {
+                       ListarReceitas listaReceitas = new ListarReceitas(paciente.getReceitas().get(i));
+                         this.receitas.add(listaReceitas);
+                   }
+             }
         }
     public String getNome() {
         return nome;
