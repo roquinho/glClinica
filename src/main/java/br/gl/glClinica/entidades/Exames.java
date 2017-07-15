@@ -124,7 +124,7 @@ public class Exames implements Serializable{
     public void setProntuarios(List<Prontuarios> prontuarios) {
         this.prontuarios = prontuarios;
     }
-    @ManyToMany(fetch = FetchType.EAGER,mappedBy = "exames",cascade = CascadeType.REMOVE)
+    @ManyToMany(fetch = FetchType.EAGER,mappedBy = "exames")
     public List<Pacientes> getPacientes() {
         return pacientes;
     }
@@ -132,7 +132,7 @@ public class Exames implements Serializable{
     public void setPacientes(List<Pacientes> pacientes) {
         this.pacientes = pacientes;
     }
-    @ManyToMany(fetch = FetchType.EAGER,mappedBy="exames",cascade = CascadeType.REMOVE)
+    @ManyToMany(fetch = FetchType.EAGER,mappedBy="exames")
     public List<Receitas> getReceitas() {
         return receitas;
     }

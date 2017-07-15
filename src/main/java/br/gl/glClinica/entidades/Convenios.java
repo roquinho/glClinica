@@ -5,7 +5,6 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -124,7 +123,7 @@ public class Convenios implements Serializable {
         this.regioesCobertas = regioesCobertas;
     }
 
-    @ManyToMany(fetch = FetchType.EAGER,mappedBy = "convenios",cascade = CascadeType.REMOVE)
+    @ManyToMany(fetch = FetchType.EAGER,mappedBy = "convenios")
     public List<Pacientes> getPacientes() {
         return pacientes;
     }

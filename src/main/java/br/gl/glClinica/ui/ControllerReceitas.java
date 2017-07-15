@@ -74,7 +74,7 @@ public class ControllerReceitas {
     @RequestMapping("/inserir_Exame")
     public ResponseEntity<?> inserirExameReceita(@RequestParam int codigoReceita, @RequestParam int codigoExame) {
         try {
-            this.fachada.inserirExameReceita(codigoReceita, codigoReceita);
+            this.fachada.inserirExameReceita(codigoReceita, codigoExame);
         } catch (Exception e) {
             return new ResponseEntity<>(e, HttpStatus.BAD_REQUEST);
         }

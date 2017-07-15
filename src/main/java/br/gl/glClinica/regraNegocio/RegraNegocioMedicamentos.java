@@ -3,7 +3,10 @@ package br.gl.glClinica.regraNegocio;
 
 import br.gl.glClinica.entidades.Medicamentos;
 import br.gl.glClinica.listarEntidades.ListarMedicamentos;
+import br.gl.glClinica.persistencia.InterfaceRepositorioExames;
 import br.gl.glClinica.persistencia.InterfaceRepositorioMedicamentos;
+import br.gl.glClinica.persistencia.InterfaceRepositorioPacientes;
+import br.gl.glClinica.persistencia.InterfaceRepositorioReceitas;
 import br.gl.glClinica.regraNegocioException.ExceptionMedicamentosEscrita;
 import br.gl.glClinica.regraNegocioException.ExceptionMedicamentosLeitura;
 import java.util.ArrayList;
@@ -20,6 +23,10 @@ public class RegraNegocioMedicamentos implements InterfaceRegraNegocioMedicament
 
     @Autowired
     private InterfaceRepositorioMedicamentos repositorioMedicamentos;
+    @Autowired
+    private InterfaceRepositorioReceitas repositorioReceitas;
+    @Autowired
+    private InterfaceRepositorioPacientes RepositorioPacientes;
    
     
     
@@ -102,6 +109,32 @@ public class RegraNegocioMedicamentos implements InterfaceRegraNegocioMedicament
             throw new ExceptionMedicamentosEscrita();
         }
         else {
+            Medicamentos medicamentos = this.repositorioMedicamentos.findByCodigoMedicamento(codigoMedicamento);
+                          
+               for(int i=0; i<medicamentos.getReceitas().size(); i ++) {
+                 List<Medicamentos> listaMedicamentos = new ArrayList<>();  
+                   for(int ii= 0; ii<medicamentos.getReceitas().get(i).getMedicamentos().size(); ii++) {
+                       listaMedicamentos.add(medicamentos.getReceitas().get(i).getMedicamentos().get(ii));
+                         if(listaMedicamentos.get(ii).equals(medicamentos)) {
+                           listaMedicamentos.remove(ii);
+                         }
+                             medicamentos.getReceitas().get(i).setMedicamentos(listaMedicamentos);
+                               this.repositorioReceitas.save(medicamentos.getReceitas().get(i));                                                                       
+                   }
+               }
+                          
+               for(int i=0; i<medicamentos.getPacientes().size(); i ++) {
+                 List<Medicamentos> listaMedicamentos = new ArrayList<>();  
+                   for(int ii= 0; ii<medicamentos.getPacientes().get(i).getMedicamentos().size(); ii++) {
+                       listaMedicamentos.add(medicamentos.getPacientes().get(i).getMedicamentos().get(ii));
+                         if(listaMedicamentos.get(ii).equals(medicamentos)) {
+                           listaMedicamentos.remove(ii);
+                         }
+                             medicamentos.getPacientes().get(i).setMedicamentos(listaMedicamentos);
+                               this.RepositorioPacientes.save(medicamentos.getPacientes().get(i));                                                                       
+                   }
+               }
+                     
             this.repositorioMedicamentos.delete(codigoMedicamento);
         }
     }

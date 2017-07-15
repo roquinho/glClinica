@@ -186,7 +186,7 @@ public class Medicamentos implements Serializable{
         this.prontuarios = prontuarios;
     }
 
-    @ManyToMany(fetch = FetchType.EAGER,mappedBy="medicamentos",cascade = CascadeType.REMOVE)
+    @ManyToMany(fetch = FetchType.EAGER,mappedBy="medicamentos")
     public List<Receitas> getReceitas() {
         return receitas;
     }
@@ -195,7 +195,7 @@ public class Medicamentos implements Serializable{
         this.receitas = receitas;
     }
 
-    @ManyToMany(fetch = FetchType.EAGER,mappedBy = "medicamentos", cascade = CascadeType.REMOVE)
+    @ManyToMany(fetch = FetchType.EAGER,mappedBy = "medicamentos")
     public List<Pacientes> getPacientes() {
         return pacientes;
     }

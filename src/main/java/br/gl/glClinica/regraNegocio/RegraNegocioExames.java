@@ -4,6 +4,8 @@ package br.gl.glClinica.regraNegocio;
 import br.gl.glClinica.entidades.Exames;
 import br.gl.glClinica.listarEntidades.ListarExames;
 import br.gl.glClinica.persistencia.InterfaceRepositorioExames;
+import br.gl.glClinica.persistencia.InterfaceRepositorioPacientes;
+import br.gl.glClinica.persistencia.InterfaceRepositorioReceitas;
 import br.gl.glClinica.regraNegocioException.ExceptionExamesEscrita;
 import br.gl.glClinica.regraNegocioException.ExceptionExamesLeitura;
 import java.util.ArrayList;
@@ -20,6 +22,11 @@ public class RegraNegocioExames implements InterfaceRegraNegocioExames {
 
     @Autowired
     private InterfaceRepositorioExames repositorioExames;
+    @Autowired
+    private InterfaceRepositorioPacientes reposstorioPacientes;
+    @Autowired
+    private InterfaceRepositorioReceitas reposstorioReceitas;
+    
     
     
     
@@ -73,6 +80,30 @@ public class RegraNegocioExames implements InterfaceRegraNegocioExames {
             throw new ExceptionExamesEscrita();
         }
         else {
+            Exames exame = this.repositorioExames.findByCodigoExame(codigoExame);
+                          
+               for(int i=0; i<exame.getPacientes().size(); i ++) {
+                 List<Exames> listaExames = new ArrayList<>();  
+                   for(int ii= 0; ii<exame.getPacientes().get(i).getExames().size(); ii++) {
+                       listaExames.add(exame.getPacientes().get(i).getExames().get(ii));
+                         if(listaExames.get(ii).equals(exame)) {
+                           listaExames.remove(ii);
+                         }
+                             exame.getPacientes().get(i).setExames(listaExames);
+                               this.reposstorioPacientes.save(exame.getPacientes().get(i));                                                                       
+                   }
+               }
+               for(int i=0; i<exame.getReceitas().size(); i ++) {
+                 List<Exames> listaExames = new ArrayList<>();  
+                   for(int ii= 0; ii<exame.getReceitas().get(i).getExames().size(); ii++) {
+                       listaExames.add(exame.getReceitas().get(i).getExames().get(ii));
+                         if(listaExames.get(ii).equals(exame)) {
+                           listaExames.remove(ii);
+                         }
+                             exame.getReceitas().get(i).setExames(listaExames);
+                               this.reposstorioReceitas.save(exame.getReceitas().get(i));                                                                       
+                   }
+               }
             this.repositorioExames.delete(codigoExame);
         }
     }

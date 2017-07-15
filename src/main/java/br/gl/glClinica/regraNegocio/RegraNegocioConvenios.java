@@ -4,6 +4,7 @@ package br.gl.glClinica.regraNegocio;
 import br.gl.glClinica.entidades.Convenios;
 import br.gl.glClinica.listarEntidades.ListarConvenios;
 import br.gl.glClinica.persistencia.InterfaceRepositorioConvenios;
+import br.gl.glClinica.persistencia.InterfaceRepositorioPacientes;
 import br.gl.glClinica.regraNegocioException.ExceptionConveniosEscrita;
 import br.gl.glClinica.regraNegocioException.ExceptionConveniosLeitura;
 import java.util.ArrayList;
@@ -20,6 +21,8 @@ public class RegraNegocioConvenios implements InterfaceRegraNegocioConvenios {
 
     @Autowired
     private InterfaceRepositorioConvenios repositorioConvenios;
+    @Autowired
+    private InterfaceRepositorioPacientes repositorioPacientes;
 
 
     
@@ -79,10 +82,24 @@ public class RegraNegocioConvenios implements InterfaceRegraNegocioConvenios {
             throw new ExceptionConveniosEscrita();
         }
         else {
-            this.repositorioConvenios.delete(codigoConvenio);
-        }
+            Convenios convenio = this.repositorioConvenios.findByCodigoConvenio(codigoConvenio);
+                          
+               for(int i=0; i<convenio.getPacientes().size(); i ++) {
+                 List<Convenios> listaConvenios = new ArrayList<>();  
+                   for(int ii= 0; ii<convenio.getPacientes().get(i).getConvenios().size(); ii++) {
+                       listaConvenios.add(convenio.getPacientes().get(i).getConvenios().get(ii));
+                         if(listaConvenios.get(ii).equals(convenio)) {
+                           listaConvenios.remove(ii);
+                         }
+                             convenio.getPacientes().get(i).setConvenios(listaConvenios);
+                               this.repositorioPacientes.save(convenio.getPacientes().get(i));                                                                       
+                   }
+               }
+           
+           this.repositorioConvenios.delete(codigoConvenio);   
+        }                
     }
-
+    
     @Override
     public List<ListarConvenios> listarConvenios() throws ExceptionConveniosLeitura {
       List<ListarConvenios> listaListarConvenios = null;  
