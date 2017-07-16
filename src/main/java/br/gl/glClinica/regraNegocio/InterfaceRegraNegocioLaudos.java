@@ -15,7 +15,7 @@ import java.util.List;
  */
 public interface InterfaceRegraNegocioLaudos extends Serializable {
  
-   public void gerarLaudo(Laudos laudo, Long cpfMedico, Long cpfPaciente)throws ExceptionLaudosEscrita;
+   public void gerarLaudo(Laudos laudo, Long cpfMedico, Long cpfPaciente,int codigoExame)throws ExceptionLaudosEscrita;
    
    public void atualizarLaudo(Laudos laudo)throws ExceptionLaudosEscrita;
    

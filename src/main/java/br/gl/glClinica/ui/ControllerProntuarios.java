@@ -31,9 +31,9 @@ public class ControllerProntuarios {
 
     
      @RequestMapping("/gerar")
-    public ResponseEntity<?> gerarProntuario(@RequestBody Prontuarios prontuario,@RequestParam int codigoExame, @RequestParam Long cpfPaciente, @RequestParam int codigoMedicamento) {
+    public ResponseEntity<?> gerarProntuario(@RequestBody Prontuarios prontuario, @RequestParam Long cpfPaciente) {
         try {
-            this.fachada.gerarProntuario(prontuario, codigoExame, cpfPaciente, codigoMedicamento);
+            this.fachada.gerarProntuario(prontuario,cpfPaciente);
         } catch (Exception e) {
             return new ResponseEntity<>(e, HttpStatus.BAD_REQUEST);
         }

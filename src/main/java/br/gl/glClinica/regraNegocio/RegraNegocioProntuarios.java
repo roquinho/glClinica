@@ -23,20 +23,12 @@ public class RegraNegocioProntuarios implements InterfaceRegraNegocioProntuarios
     private InterfaceRepositorioProntuarios repositorioProntuarios;
     @Autowired
     private InterfaceRepositorioPacientes repositorioPacientes;
-    @Autowired
-    private InterfaceRepositorioExames repositorioExames;
-    @Autowired
-    private InterfaceRepositorioMedicamentos repositorioMedicamentos;
-    
     
     
     @Override
-    public void gerarProntuario(Prontuarios prontuario, int codigoExame, Long cpfPaciente, int codigoMedicamento) throws ExceptionProntuariosEscrita {
+    public void gerarProntuario(Prontuarios prontuario, Long cpfPaciente) throws ExceptionProntuariosEscrita {
        
         if(prontuario == null) {
-            throw new ExceptionProntuariosEscrita();
-        }
-        if(codigoExame <=0) {
             throw new ExceptionProntuariosEscrita();
         }
         if(cpfPaciente == null) {
@@ -45,30 +37,13 @@ public class RegraNegocioProntuarios implements InterfaceRegraNegocioProntuarios
         if(cpfPaciente <= 0) {
             throw new ExceptionProntuariosEscrita();
         }
-        if(codigoMedicamento <= 0 ) {
-            throw new ExceptionProntuariosEscrita();
-        }
         else {
-            prontuario.setExame(this.repositorioExames.findByCodigoExame(codigoExame));
-            prontuario.setMedicamento(this.repositorioMedicamentos.findByCodigoMedicamento(codigoMedicamento));
             prontuario.setPaciente(this.repositorioPacientes.findByCpf(cpfPaciente));
-        }
-        if(prontuario.getExame() == null) {
-            throw new ExceptionProntuariosEscrita();
-        }
-        if(prontuario.getMedicamento() == null) {
-            throw new ExceptionProntuariosEscrita();
         }
         if(prontuario.getPaciente() == null) {
             throw new ExceptionProntuariosEscrita();
         }
-        if(prontuario.getDataExame() == null) {
-            throw new ExceptionProntuariosEscrita();
-        }
         if(prontuario.getDataInicioTratamento() == null) {
-            throw new ExceptionProntuariosEscrita();
-        }
-        if(prontuario.getPosologiaReceitada() == null) {
             throw new ExceptionProntuariosEscrita();
         }
         else {
@@ -85,13 +60,7 @@ public class RegraNegocioProntuarios implements InterfaceRegraNegocioProntuarios
         if(prontuarios.getCodigoProntuario()<=0) {
             throw new ExceptionProntuariosEscrita();
         }
-        if(prontuarios.getDataExame() == null) {
-            throw new ExceptionProntuariosEscrita();
-        }
         if(prontuarios.getDataInicioTratamento() == null) {
-            throw new ExceptionProntuariosEscrita();
-        }
-        if(prontuarios.getPosologiaReceitada() == null) {
             throw new ExceptionProntuariosEscrita();
         }
         if(this.repositorioProntuarios.exists(prontuarios.getCodigoProntuario())==false) {
@@ -99,12 +68,9 @@ public class RegraNegocioProntuarios implements InterfaceRegraNegocioProntuarios
         }
         else {
             Prontuarios novoProntuario = this.repositorioProntuarios.findByCodigoProntuario(prontuarios.getCodigoProntuario());
-              
-                novoProntuario.setDataExame(prontuarios.getDataExame());
+                
                 novoProntuario.setDataFimTratamento(prontuarios.getDataFimTratamento());
-                novoProntuario.setDataInicioTratamento(prontuarios.getDataInicioTratamento());
-                novoProntuario.setPosologiaReceitada(prontuarios.getPosologiaReceitada());
-                novoProntuario.setResultadoExame(prontuarios.getResultadoExame());
+                novoProntuario.setDataInicioTratamento(prontuarios.getDataInicioTratamento());               
                 novoProntuario.setObservacoes(prontuarios.getObservacoes());
                 
                    this.repositorioProntuarios.save(novoProntuario);
@@ -159,24 +125,5 @@ public class RegraNegocioProntuarios implements InterfaceRegraNegocioProntuarios
         this.repositorioPacientes = repositorioPacientes;
     }
 
-    public InterfaceRepositorioExames getRepositorioExames() {
-        return repositorioExames;
-    }
-
-    public void setRepositorioExames(InterfaceRepositorioExames repositorioExames) {
-        this.repositorioExames = repositorioExames;
-    }
-
-    public InterfaceRepositorioMedicamentos getRepositorioMedicamentos() {
-        return repositorioMedicamentos;
-    }
-
-    public void setRepositorioMedicamentos(InterfaceRepositorioMedicamentos repositorioMedicamentos) {
-        this.repositorioMedicamentos = repositorioMedicamentos;
-    }
-
-    
-
-    
     
 }

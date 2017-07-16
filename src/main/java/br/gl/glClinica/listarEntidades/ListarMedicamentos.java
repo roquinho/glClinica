@@ -18,7 +18,6 @@ public class ListarMedicamentos {
     private String nomeLaboratorio;
     private String contraIndicacoes;
     private String generico;
-    private List<ListarProntuarios> prontuarios;
     private List<ListarReceitas> receitas;
     private List<ListarPacientes> pacientes;
     
@@ -34,13 +33,6 @@ public class ListarMedicamentos {
         this.posologiaIndicada = medicamentos.getPosologiaIndicada();
         this.substanciaAtiva = medicamentos.getSubstanciaAtiva();
         
-        if(medicamentos.getProntuarios()!=null) {
-           this.prontuarios = new ArrayList<>();
-             for(int i=0; i<medicamentos.getProntuarios().size(); i++) {
-                ListarProntuarios listaProntuarios = new ListarProntuarios(medicamentos.getProntuarios().get(i));
-                 this.prontuarios.add(listaProntuarios);
-             }
-        }
         if(medicamentos.getReceitas()!=null) {
             this.receitas = new ArrayList<>();
               for(int i=0; i<medicamentos.getReceitas().size(); i++) {
@@ -132,15 +124,6 @@ public class ListarMedicamentos {
     public void setGenerico(String generico) {
         this.generico = generico;
     }
-
-    public List<ListarProntuarios> getProntuarios() {
-        return prontuarios;
-    }
-
-    public void setProntuarios(List<ListarProntuarios> prontuarios) {
-        this.prontuarios = prontuarios;
-    }
-
     public List<ListarReceitas> getReceitas() {
         return receitas;
     }

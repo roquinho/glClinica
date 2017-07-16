@@ -14,9 +14,9 @@ public class ListarExames {
     private int codigoExame;
     private String nomeExame;
     private String observacoesExame;
-    private List<ListarProntuarios> prontuarios;
     private List<ListarPacientes> pacientes;
     private List<ListarReceitas> receitas;
+    private List<ListarLaudos> laudos;
     
     public ListarExames() {
     }
@@ -26,13 +26,6 @@ public class ListarExames {
         this.nomeExame = exames.getNomeExame();
         this.observacoesExame = exames.getObservacoesExame();
         
-          if(exames.getProntuarios()!=null) {
-              this.prontuarios = new ArrayList<>();
-                for(int i=0; i<exames.getProntuarios().size(); i++) {
-                    ListarProntuarios listaProntuarios = new ListarProntuarios(exames.getProntuarios().get(i));
-                      this.prontuarios.add(listaProntuarios);
-                }
-          }
           if(exames.getPacientes()!=null) {
               this.pacientes = new ArrayList<>();
                 for(int i=0; i<exames.getPacientes().size(); i++) {
@@ -67,6 +60,13 @@ public class ListarExames {
                         this.receitas.get(i).setDataReceita(exames.getReceitas().get(i).getDataReceita());
                 }
           }
+          if(exames.getLaudos()!=null) {
+              this.laudos = new ArrayList<>();
+                for(int i=0; i<exames.getLaudos().size(); i++) {
+                    ListarLaudos listaLaudos = new ListarLaudos(exames.getLaudos().get(i));
+                      this.laudos.add(listaLaudos);
+                }
+          }
     }
 
     public int getCodigoExame() {
@@ -93,14 +93,6 @@ public class ListarExames {
         this.observacoesExame = observacoesExame;
     }
 
-    public List<ListarProntuarios> getProntuarios() {
-        return prontuarios;
-    }
-
-    public void setProntuarios(List<ListarProntuarios> prontuarios) {
-        this.prontuarios = prontuarios;
-    }
-
     public List<ListarPacientes> getPacientes() {
         return pacientes;
     }
@@ -115,6 +107,14 @@ public class ListarExames {
 
     public void setReceitas(List<ListarReceitas> receitas) {
         this.receitas = receitas;
+    }
+
+    public List<ListarLaudos> getLaudos() {
+        return laudos;
+    }
+
+    public void setLaudos(List<ListarLaudos> laudos) {
+        this.laudos = laudos;
     }
     
     

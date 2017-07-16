@@ -13,7 +13,7 @@ import java.io.Serializable;
  */
 public interface InterfaceRegraNegocioProntuarios extends Serializable {
     
-  public void gerarProntuario(Prontuarios prontuario, int codigoExame, Long cpfPaciente, int codigoMedicamento)throws ExceptionProntuariosEscrita;
+  public void gerarProntuario(Prontuarios prontuario, Long cpfPaciente)throws ExceptionProntuariosEscrita;
 
   public void atualizarProntuario(Prontuarios prontuarios)throws ExceptionProntuariosEscrita;
   

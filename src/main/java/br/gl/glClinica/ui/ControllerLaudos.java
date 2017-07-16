@@ -33,9 +33,9 @@ public class ControllerLaudos {
 
     
     @RequestMapping("/gerar")
-    public ResponseEntity<?> gerarLaudo(@RequestBody Laudos laudo, @RequestParam Long cpfMedico,@RequestParam Long cpfPaciente) {
+    public ResponseEntity<?> gerarLaudo(@RequestBody Laudos laudo, @RequestParam Long cpfMedico,@RequestParam Long cpfPaciente,@RequestParam int codigoExame) {
         try {
-            this.fachada.gerarLaudo(laudo, cpfMedico, cpfPaciente);
+            this.fachada.gerarLaudo(laudo, cpfMedico, cpfPaciente,codigoExame);
         } catch (Exception e) {
             return new ResponseEntity<>(e, HttpStatus.BAD_REQUEST);
         }

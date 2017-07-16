@@ -4,14 +4,12 @@ package br.gl.glClinica.entidades;
 import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
 
 /**
  *
@@ -28,7 +26,6 @@ public class Medicamentos implements Serializable{
     private String contraIndicacoes;
     private String generico;
     //private List<Clinica> clinicas;
-    private List<Prontuarios> prontuarios;
     private List<Receitas> receitas;
     private List<Pacientes> pacientes;
     
@@ -48,16 +45,15 @@ public class Medicamentos implements Serializable{
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 53 * hash + this.codigoMedicamento;
-        hash = 53 * hash + Objects.hashCode(this.nomeMedicamento);
-        hash = 53 * hash + Objects.hashCode(this.substanciaAtiva);
-        hash = 53 * hash + Objects.hashCode(this.posologiaIndicada);
-        hash = 53 * hash + Objects.hashCode(this.nomeLaboratorio);
-        hash = 53 * hash + Objects.hashCode(this.contraIndicacoes);
-        hash = 53 * hash + Objects.hashCode(this.generico);
-        hash = 53 * hash + Objects.hashCode(this.prontuarios);
-        hash = 53 * hash + Objects.hashCode(this.receitas);
-        hash = 53 * hash + Objects.hashCode(this.pacientes);
+        hash = 37 * hash + this.codigoMedicamento;
+        hash = 37 * hash + Objects.hashCode(this.nomeMedicamento);
+        hash = 37 * hash + Objects.hashCode(this.substanciaAtiva);
+        hash = 37 * hash + Objects.hashCode(this.posologiaIndicada);
+        hash = 37 * hash + Objects.hashCode(this.nomeLaboratorio);
+        hash = 37 * hash + Objects.hashCode(this.contraIndicacoes);
+        hash = 37 * hash + Objects.hashCode(this.generico);
+        hash = 37 * hash + Objects.hashCode(this.receitas);
+        hash = 37 * hash + Objects.hashCode(this.pacientes);
         return hash;
     }
 
@@ -94,9 +90,6 @@ public class Medicamentos implements Serializable{
         if (!Objects.equals(this.generico, other.generico)) {
             return false;
         }
-        if (!Objects.equals(this.prontuarios, other.prontuarios)) {
-            return false;
-        }
         if (!Objects.equals(this.receitas, other.receitas)) {
             return false;
         }
@@ -106,11 +99,7 @@ public class Medicamentos implements Serializable{
         return true;
     }
 
-    @Override
-    public String toString() {
-        return "Medicamentos{" + "codigoMedicamento=" + codigoMedicamento + ", nomeMedicamento=" + nomeMedicamento + ", substanciaAtiva=" + substanciaAtiva + ", posologiaIndicada=" + posologiaIndicada + ", nomeLaboratorio=" + nomeLaboratorio + ", contraIndicacoes=" + contraIndicacoes + ", generico=" + generico + ", prontuarios=" + prontuarios + ", receitas=" + receitas + ", pacientes=" + pacientes + '}';
-    }
-
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public int getCodigoMedicamento() {
@@ -176,16 +165,6 @@ public class Medicamentos implements Serializable{
     public void setClinicas(List<Clinica> clinicas) {
         this.clinicas = clinicas;
     }*/
-
-    @OneToMany(fetch = FetchType.EAGER,mappedBy="medicamento",cascade = CascadeType.REMOVE)
-    public List<Prontuarios> getProntuarios() {
-        return prontuarios;
-    }
-
-    public void setProntuarios(List<Prontuarios> prontuarios) {
-        this.prontuarios = prontuarios;
-    }
-
     @ManyToMany(fetch = FetchType.EAGER,mappedBy="medicamentos")
     public List<Receitas> getReceitas() {
         return receitas;

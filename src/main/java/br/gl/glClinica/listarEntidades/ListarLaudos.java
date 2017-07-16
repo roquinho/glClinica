@@ -14,8 +14,10 @@ public class ListarLaudos {
     private String descricaoLaudo;
     private Date dataLaudo;
     private Date horaLaudo;
+    private Date dataExame;
     private ListarPacientes paciente;
     private ListarMedicos medico;
+    private ListarExames exames;
     
     public ListarLaudos() {
     }
@@ -25,6 +27,7 @@ public class ListarLaudos {
         this.dataLaudo = laudos.getDataLaudo();
         this.descricaoLaudo = laudos.getDescricaoLaudo();
         this.horaLaudo = laudos.getHoraLaudo();
+        this.dataExame = laudos.getDataExame();
           
            if(laudos.getPaciente()!=null) {
             this.paciente = new ListarPacientes();              
@@ -58,7 +61,13 @@ public class ListarLaudos {
                   this.medico.setTelefone(laudos.getMedico().getTelefone());
                   this.medico.setTelefoneResidencial(laudos.getMedico().getTelefoneResidencial());
            }
-           
+           if(laudos.getExame()!=null) {
+               this.exames = new ListarExames();               
+                 this.exames.setCodigoExame(laudos.getExame().getCodigoExame());
+                 this.exames.setNomeExame(laudos.getExame().getNomeExame());
+                 this.exames.setObservacoesExame(laudos.getExame().getObservacoesExame());
+           }
+    
     }
 
     public int getCodigoLaudo() {
@@ -107,6 +116,22 @@ public class ListarLaudos {
 
     public void setMedico(ListarMedicos medico) {
         this.medico = medico;
+    }
+
+    public ListarExames getExames() {
+        return exames;
+    }
+
+    public void setExames(ListarExames exames) {
+        this.exames = exames;
+    }
+
+    public Date getDataExame() {
+        return dataExame;
+    }
+
+    public void setDataExame(Date dataExame) {
+        this.dataExame = dataExame;
     }
     
     

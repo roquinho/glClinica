@@ -361,8 +361,8 @@ public class FachadaImplementa implements Fachada {
     }
 
     @Override
-    public void gerarLaudo(Laudos laudo, Long cpfMedico, Long cpfPaciente) throws ExceptionLaudosEscrita {
-      this.regraNegocioLaudos.gerarLaudo(laudo, cpfMedico, cpfPaciente);
+    public void gerarLaudo(Laudos laudo, Long cpfMedico, Long cpfPaciente,int codigoExame) throws ExceptionLaudosEscrita {
+      this.regraNegocioLaudos.gerarLaudo(laudo, cpfMedico, cpfPaciente,codigoExame);
     }
 
     @Override
@@ -506,8 +506,8 @@ public class FachadaImplementa implements Fachada {
     }
 
     @Override
-    public void gerarProntuario(Prontuarios prontuario, int codigoExame, Long cpfPaciente, int codigoMedicamento) throws ExceptionProntuariosEscrita {
-      this.regraNegocioProntuarios.gerarProntuario(prontuario, codigoExame, cpfPaciente, codigoMedicamento);
+    public void gerarProntuario(Prontuarios prontuario,Long cpfPaciente) throws ExceptionProntuariosEscrita {
+      this.regraNegocioProntuarios.gerarProntuario(prontuario,cpfPaciente);
     }
 
     @Override

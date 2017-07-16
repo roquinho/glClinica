@@ -3,6 +3,7 @@ package br.gl.glClinica.regraNegocio;
 
 import br.gl.glClinica.entidades.Laudos;
 import br.gl.glClinica.listarEntidades.ListarLaudos;
+import br.gl.glClinica.persistencia.InterfaceRepositorioExames;
 import br.gl.glClinica.persistencia.InterfaceRepositorioLaudos;
 import br.gl.glClinica.persistencia.InterfaceRepositorioMedicos;
 import br.gl.glClinica.persistencia.InterfaceRepositorioPacientes;
@@ -27,11 +28,13 @@ public class RegraNegocioLaudos implements InterfaceRegraNegocioLaudos {
     private InterfaceRepositorioPacientes repositorioPacientes;
     @Autowired
     private InterfaceRepositorioMedicos repositorioMedicos;
+    @Autowired
+    private InterfaceRepositorioExames repositorioExames;
     
     
     
     @Override
-    public void gerarLaudo(Laudos laudo, Long cpfMedico, Long cpfPaciente) throws ExceptionLaudosEscrita {
+    public void gerarLaudo(Laudos laudo, Long cpfMedico, Long cpfPaciente,int codigoExame) throws ExceptionLaudosEscrita {
         
         if(laudo == null) {
             throw new ExceptionLaudosEscrita();
@@ -48,9 +51,13 @@ public class RegraNegocioLaudos implements InterfaceRegraNegocioLaudos {
         if(cpfPaciente<=0) {
             throw new ExceptionLaudosEscrita();
         }
+        if(codigoExame<=0) {
+            throw new ExceptionLaudosEscrita();
+        }
         else {
             laudo.setMedico(this.repositorioMedicos.findByCpf(cpfMedico));
             laudo.setPaciente(this.repositorioPacientes.findByCpf(cpfPaciente));
+            laudo.setExame(this.repositorioExames.findByCodigoExame(codigoExame));
             
         }
         if(laudo.getMedico() == null) {
@@ -59,7 +66,13 @@ public class RegraNegocioLaudos implements InterfaceRegraNegocioLaudos {
         if(laudo.getPaciente() == null) {
             throw new ExceptionLaudosEscrita();
         }
+        if(laudo.getExame() == null) {
+            throw new ExceptionLaudosEscrita();
+        }
         if(laudo.getDataLaudo() == null) {
+            throw new ExceptionLaudosEscrita();
+        }
+        if(laudo.getDataExame() == null) {
             throw new ExceptionLaudosEscrita();
         }
         if(laudo.getDescricaoLaudo() == null) {
@@ -171,5 +184,14 @@ public class RegraNegocioLaudos implements InterfaceRegraNegocioLaudos {
     public void setRepositorioMedicos(InterfaceRepositorioMedicos repositorioMedicos) {
         this.repositorioMedicos = repositorioMedicos;
     }
+
+    public InterfaceRepositorioExames getRepositorioExames() {
+        return repositorioExames;
+    }
+
+    public void setRepositorioExames(InterfaceRepositorioExames repositorioExames) {
+        this.repositorioExames = repositorioExames;
+    }
+    
     
 }

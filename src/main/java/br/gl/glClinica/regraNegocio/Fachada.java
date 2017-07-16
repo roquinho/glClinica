@@ -124,7 +124,7 @@ public interface Fachada extends Serializable {
 
     
     
-    public void gerarLaudo(Laudos laudo, Long cpfMedico, Long cpfPaciente)throws ExceptionLaudosEscrita;
+    public void gerarLaudo(Laudos laudo, Long cpfMedico, Long cpfPaciente,int codigoExame)throws ExceptionLaudosEscrita;
    
     public void atualizarLaudo(Laudos laudo)throws ExceptionLaudosEscrita;
    
@@ -256,7 +256,7 @@ public interface Fachada extends Serializable {
     
     
     
-    public void gerarProntuario(Prontuarios prontuario, int codigoExame, Long cpfPaciente, int codigoMedicamento)throws ExceptionProntuariosEscrita;
+    public void gerarProntuario(Prontuarios prontuario, Long cpfPaciente)throws ExceptionProntuariosEscrita;
     
     public void atualizarProntuario(Prontuarios prontuarios)throws ExceptionProntuariosEscrita;
   

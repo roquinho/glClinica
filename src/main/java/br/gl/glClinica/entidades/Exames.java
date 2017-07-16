@@ -23,9 +23,9 @@ public class Exames implements Serializable{
     private int codigoExame;
     private String nomeExame;
     private String observacoesExame;
-    private List<Prontuarios> prontuarios;
     private List<Pacientes> pacientes;
     private List<Receitas> receitas;
+    private List<Laudos> laudos;
     //private List<Clinica> clinicas;
     
     public Exames() {
@@ -39,14 +39,13 @@ public class Exames implements Serializable{
 
     @Override
     public int hashCode() {
-        int hash = 5;
-        hash = 37 * hash + this.codigoExame;
-        hash = 37 * hash + Objects.hashCode(this.nomeExame);
-        hash = 37 * hash + Objects.hashCode(this.observacoesExame);
-        hash = 37 * hash + Objects.hashCode(this.prontuarios);
-        hash = 37 * hash + Objects.hashCode(this.pacientes);
-        hash = 37 * hash + Objects.hashCode(this.receitas);
-        //hash = 37 * hash + Objects.hashCode(this.clinicas);
+        int hash = 7;
+        hash = 47 * hash + this.codigoExame;
+        hash = 47 * hash + Objects.hashCode(this.nomeExame);
+        hash = 47 * hash + Objects.hashCode(this.observacoesExame);
+        hash = 47 * hash + Objects.hashCode(this.pacientes);
+        hash = 47 * hash + Objects.hashCode(this.receitas);
+        hash = 47 * hash + Objects.hashCode(this.laudos);
         return hash;
     }
 
@@ -71,26 +70,23 @@ public class Exames implements Serializable{
         if (!Objects.equals(this.observacoesExame, other.observacoesExame)) {
             return false;
         }
-        if (!Objects.equals(this.prontuarios, other.prontuarios)) {
-            return false;
-        }
         if (!Objects.equals(this.pacientes, other.pacientes)) {
             return false;
         }
         if (!Objects.equals(this.receitas, other.receitas)) {
             return false;
         }
-       /* if (!Objects.equals(this.clinicas, other.clinicas)) {
+        if (!Objects.equals(this.laudos, other.laudos)) {
             return false;
-        }*/
+        }
         return true;
     }
 
     @Override
     public String toString() {
-        return "Exames{" + "codigoExame=" + codigoExame + ", nomeExame=" + nomeExame + ", observacoesExame=" + observacoesExame + ", prontuarios=" + prontuarios + ", pacientes=" + pacientes + ", receitas=" + receitas + '}';
+        return "Exames{" + "codigoExame=" + codigoExame + ", nomeExame=" + nomeExame + ", observacoesExame=" + observacoesExame + ", pacientes=" + pacientes + ", receitas=" + receitas + ", laudos=" + laudos + '}';
     }
-
+   
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public int getCodigoExame() {
@@ -116,14 +112,7 @@ public class Exames implements Serializable{
     public void setObservacoesExame(String observacoesExame) {
         this.observacoesExame = observacoesExame;
     }
-    @OneToMany(fetch = FetchType.EAGER,mappedBy="exame",cascade = CascadeType.REMOVE)
-    public List<Prontuarios> getProntuarios() {
-        return prontuarios;
-    }
-
-    public void setProntuarios(List<Prontuarios> prontuarios) {
-        this.prontuarios = prontuarios;
-    }
+ 
     @ManyToMany(fetch = FetchType.EAGER,mappedBy = "exames")
     public List<Pacientes> getPacientes() {
         return pacientes;
@@ -140,6 +129,14 @@ public class Exames implements Serializable{
     public void setReceitas(List<Receitas> receitas) {
         this.receitas = receitas;
     }
+    @OneToMany(fetch = FetchType.EAGER,mappedBy = "exame",cascade = CascadeType.REMOVE)
+    public List<Laudos> getLaudos() {
+        return laudos;
+    }
+
+    public void setLaudos(List<Laudos> laudos) {
+        this.laudos = laudos;
+    }
 
    /* public List<Clinica> getClinicas() {
         return clinicas;
@@ -149,4 +146,6 @@ public class Exames implements Serializable{
         this.clinicas = clinicas;
     }
     */
+
+    
 }
