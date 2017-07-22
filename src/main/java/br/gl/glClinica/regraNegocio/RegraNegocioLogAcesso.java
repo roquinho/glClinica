@@ -39,8 +39,8 @@ public class RegraNegocioLogAcesso implements InterfaceRegraNegocioLogAcesso {
         }
         if(logAcesso.getHoraAcesso() == null) {
             throw new ExceptionLogAcessoEscrita();
-        }
-        else {
+        }        
+        else {            
             this.repositorioLogAcesso.save(logAcesso);
         }
     }

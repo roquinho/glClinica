@@ -34,6 +34,7 @@ public class ControllerLogAcesso {
     
     @RequestMapping("/gerar")
     public ResponseEntity<?> gerarLogAcesso(@RequestBody LogAcesso logAcesso) {
+        System.out.println(logAcesso.getDiaAcesso());
         try {
             this.fachada.gerarLogAcesso(logAcesso);
         } catch (Exception e) {
